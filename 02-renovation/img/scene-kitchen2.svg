@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Компактная кухня после ремонта">
+  <defs>
+    <linearGradient id="wallK2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0ece4"/>
+      <stop offset="1" stop-color="#e2dcd1"/>
+    </linearGradient>
+    <linearGradient id="cabK2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9dfcb"/>
+      <stop offset="1" stop-color="#d3c5aa"/>
+    </linearGradient>
+    <linearGradient id="lowK2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f5a6b"/>
+      <stop offset="1" stop-color="#314856"/>
+    </linearGradient>
+    <linearGradient id="floorK2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9b2a6"/>
+      <stop offset="1" stop-color="#9d9689"/>
+    </linearGradient>
+    <clipPath id="cutK2"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutK2)">
+    <rect width="640" height="480" fill="url(#wallK2)"/>
+    <rect width="640" height="36" fill="#f7f4ee"/>
+
+    <!-- фартук: соты -->
+    <rect x="0" y="188" width="640" height="98" fill="#e6efee"/>
+    <g stroke="#c9d8d6" stroke-width="2" fill="none">
+      <path d="M20 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M52 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M84 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M116 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M148 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M180 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M212 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M244 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M276 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M308 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M340 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M372 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M404 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M436 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M468 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M500 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M532 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M564 224 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M596 206 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M20 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M84 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M148 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M212 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M276 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M340 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M404 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M468 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+      <path d="M532 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/><path d="M596 254 l16 -9 16 9 v18 l-16 9 -16 -9z"/>
+    </g>
+
+    <!-- открытые полки вместо верхних шкафов -->
+    <rect x="40" y="86" width="250" height="10" rx="3" fill="#b48f63"/>
+    <rect x="40" y="146" width="250" height="10" rx="3" fill="#b48f63"/>
+    <g>
+      <rect x="60" y="52" width="26" height="34" rx="3" fill="#c1553a"/>
+      <rect x="94" y="58" width="22" height="28" rx="3" fill="#2f6f5e"/>
+      <rect x="124" y="48" width="30" height="38" rx="3" fill="#e0d6c2"/>
+      <ellipse cx="188" cy="80" rx="26" ry="7" fill="#eee7d8"/>
+      <path d="M164 80 q24 -22 48 0" fill="#f5f0e5"/>
+      <rect x="236" y="56" width="24" height="30" rx="3" fill="#c9b47a"/>
+    </g>
+    <g>
+      <rect x="58" y="118" width="30" height="28" rx="3" fill="#3f5a6b"/>
+      <rect x="98" y="112" width="24" height="34" rx="3" fill="#c1553a"/>
+      <ellipse cx="160" cy="140" rx="28" ry="7" fill="#eee7d8"/>
+      <path d="M132 140 q28 -24 56 0" fill="#f5f0e5"/>
+      <rect x="212" y="116" width="26" height="30" rx="3" fill="#2f6f5e"/>
+      <rect x="248" y="124" width="20" height="22" rx="3" fill="#e0d6c2"/>
+    </g>
+
+    <!-- верхние шкафы справа -->
+    <rect x="392" y="62" width="212" height="126" rx="5" fill="url(#cabK2)"/>
+    <line x1="498" y1="62" x2="498" y2="188" stroke="#bfae90" stroke-width="3"/>
+    <rect x="470" y="116" width="8" height="34" rx="4" fill="#3f5a6b"/>
+    <rect x="518" y="116" width="8" height="34" rx="4" fill="#3f5a6b"/>
+
+    <!-- вытяжка-козырёк -->
+    <path d="M296 132 h92 v34 l14 22 h-120 l14 -22z" fill="#c3c9cb"/>
+    <rect x="282" y="180" width="120" height="10" rx="3" fill="#a9b1b3"/>
+    <rect x="330" y="28" width="24" height="106" fill="#c3c9cb"/>
+
+    <!-- столешница -->
+    <rect x="0" y="286" width="640" height="18" rx="3" fill="#efece5"/>
+    <rect x="0" y="286" width="640" height="5" fill="#f8f6f1"/>
+
+    <!-- нижние шкафы -->
+    <rect x="0" y="304" width="640" height="120" fill="url(#lowK2)"/>
+    <g stroke="#2a3f4c" stroke-width="3">
+      <line x1="112" y1="304" x2="112" y2="424"/><line x1="224" y1="304" x2="224" y2="424"/>
+      <line x1="336" y1="304" x2="336" y2="424"/><line x1="448" y1="304" x2="448" y2="424"/>
+      <line x1="560" y1="304" x2="560" y2="424"/>
+      <line x1="0" y1="352" x2="224" y2="352"/><line x1="448" y1="352" x2="640" y2="352"/>
+    </g>
+    <g fill="#c9b47a">
+      <rect x="36" y="320" width="40" height="7" rx="3.5"/><rect x="148" y="320" width="40" height="7" rx="3.5"/>
+      <rect x="36" y="378" width="40" height="7" rx="3.5"/><rect x="148" y="378" width="40" height="7" rx="3.5"/>
+      <rect x="478" y="320" width="40" height="7" rx="3.5"/><rect x="590" y="320" width="40" height="7" rx="3.5"/>
+      <rect x="478" y="378" width="40" height="7" rx="3.5"/><rect x="590" y="378" width="40" height="7" rx="3.5"/>
+    </g>
+
+    <!-- варочная панель и духовка -->
+    <rect x="248" y="286" width="88" height="14" rx="3" fill="#2b3033"/>
+    <g fill="#55636a"><circle cx="270" cy="293" r="5"/><circle cx="314" cy="293" r="5"/></g>
+    <rect x="248" y="312" width="88" height="64" rx="4" fill="#2b3033"/>
+    <rect x="258" y="322" width="68" height="36" rx="3" fill="#8fa0a6" opacity=".7"/>
+    <rect x="258" y="364" width="68" height="6" rx="3" fill="#c9b47a"/>
+
+    <!-- мойка -->
+    <rect x="374" y="290" width="76" height="12" rx="4" fill="#c9c4b8"/>
+    <path d="M394 218 v-20 q0 -12 14 -12 q14 0 14 12 v12" stroke="#8d9296" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="390" y="214" width="8" height="72" fill="#8d9296"/>
+
+    <!-- пол -->
+    <rect y="424" width="640" height="56" fill="url(#floorK2)"/>
+    <g stroke="#87817a" stroke-width="1.6" opacity=".6">
+      <line x1="0" y1="450" x2="640" y2="450"/>
+      <line x1="118" y1="424" x2="106" y2="480"/><line x1="278" y1="424" x2="266" y2="480"/>
+      <line x1="438" y1="424" x2="426" y2="480"/><line x1="598" y1="424" x2="586" y2="480"/>
+    </g>
+    <rect y="418" width="640" height="8" fill="#2a3f4c"/>
+
+    <!-- мелочи на столешнице -->
+    <rect x="486" y="256" width="28" height="30" rx="4" fill="#c1553a"/>
+    <rect x="492" y="248" width="16" height="10" rx="3" fill="#c9b47a"/>
+    <circle cx="546" cy="272" r="14" fill="#2f6f5e"/>
+    <path d="M534 272 q12 -16 24 0" fill="#3f8a72"/>
+    <rect x="580" y="262" width="8" height="24" rx="3" fill="#c9b47a"/>
+    <ellipse cx="96" cy="280" rx="30" ry="7" fill="#e0d6c2"/>
+    <path d="M72 280 q24 -22 48 0" fill="#efe7d6"/>
+  </g>
+</svg>

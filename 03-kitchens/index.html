@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Страница грузит только собственные файлы. frame-ancestors работает
+     лишь из HTTP-заголовка — настройка сервера описана в README -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>ФАСАД — кухни на заказ с 3D-конструктором</title>
+<meta name="description" content="Кухни на заказ по вашим размерам. Соберите кухню в 3D прямо на сайте, узнайте цену за минуту и вызовите замерщика бесплатно.">
+<meta name="theme-color" content="#eef1f0">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ezi234.github.io/03-kitchens/">
+<meta property="og:title" content="ФАСАД — кухни на заказ с 3D-конструктором">
+<meta property="og:description" content="Соберите кухню в 3D, поменяйте фасады и столешницу, узнайте цену сразу.">
+<meta property="og:image" content="https://ezi234.github.io/03-kitchens/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к основному содержанию</a>
+
+<!-- Полоса прогресса чтения страницы -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============ ШАПКА ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="logo" href="#hero" aria-label="ФАСАД — на главную">
+      <svg class="logo__mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+        <rect x="3" y="4" width="28" height="12" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.4"/>
+        <rect x="3" y="19" width="28" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.4"/>
+        <line x1="11" y1="10" x2="17" y2="10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        <line x1="11" y1="24.5" x2="17" y2="24.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      <span class="logo__text">ФАСАД<em>кухни на заказ</em></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#studio">Конструктор</a></li>
+        <li><a class="nav__link" href="#materials">Материалы</a></li>
+        <li><a class="nav__link" href="#process">Как работаем</a></li>
+        <li><a class="nav__link" href="#works">Проекты</a></li>
+        <li><a class="nav__link" href="#faq">Вопросы</a></li>
+      </ul>
+      <a class="btn btn--solid nav__cta" href="#lead">Вызвать замерщика</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+74951234567">+7 (495) 123-45-67</a>
+      <a class="btn btn--solid btn--sm magnetic" href="#lead">Замер бесплатно</a>
+      <button class="burger" type="button" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
+<section class="hero" id="hero">
+  <div class="hero__glow" aria-hidden="true"><span></span><span></span></div>
+  <div class="container hero__inner">
+    <p class="eyebrow eyebrow--line reveal">Своё производство в Подмосковье</p>
+
+    <h1 class="hero__title" id="heroTitle">
+      <span class="line"><span>Соберите кухню</span></span>
+      <span class="line"><span>и <span class="mark">увидьте её сразу</span></span></span>
+    </h1>
+
+    <p class="hero__lead reveal">
+      Крутите модель, меняйте фасады, столешницу и фурнитуру — цена пересчитывается
+      на лету. Никаких «уточним стоимость по телефону».
+    </p>
+
+    <div class="hero__cta reveal">
+      <a class="btn btn--solid btn--lg magnetic" href="#studio">Открыть конструктор</a>
+      <a class="btn btn--outline btn--lg" href="#works">Смотреть проекты</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3D-КОНСТРУКТОР ============ -->
+<section class="studio" id="studio">
+  <div class="container">
+    <header class="section__head section__head--light reveal">
+      <span class="section__num">01</span>
+      <div>
+        <p class="eyebrow">Конструктор</p>
+        <h2 class="section__title">Ваша кухня в объёме</h2>
+      </div>
+      <p class="section__sub">Модель настоящая, а не картинка: тяните мышью, чтобы обойти кухню кругом.</p>
+    </header>
+
+    <div class="studio__grid reveal">
+      <!-- Сцена -->
+      <div class="viewport">
+        <canvas id="scene" tabindex="0"
+                aria-label="Трёхмерная модель кухни. Перетаскивайте мышью или используйте стрелки на клавиатуре, чтобы повернуть."></canvas>
+
+        <!-- Запасной вариант, если WebGL недоступен -->
+        <div class="viewport__fallback" id="sceneFallback" hidden>
+          <img src="img/kitchen-hero.svg" alt="Кухня с островом, светлые фасады и деревянная столешница" width="640" height="480">
+          <p>Ваш браузер не поддерживает трёхмерную графику — показываем изображение.</p>
+        </div>
+
+        <p class="viewport__hint" id="viewHint"><span aria-hidden="true">⟲</span> Потяните, чтобы повернуть</p>
+
+        <div class="viewport__badge">
+          <strong id="tagLength">4,4</strong>
+          <span>погонных метра</span>
+        </div>
+      </div>
+
+      <!-- Панель настроек -->
+      <form class="panel" id="configForm">
+        <div class="panel__row">
+          <div class="panel__label">
+            <span>Материал фасадов</span>
+          </div>
+          <div class="chips" role="radiogroup" aria-label="Материал фасадов">
+            <label class="chip"><input type="radio" name="mat" value="ldsp" data-price="28000"><span>ЛДСП<em>28 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="mat" value="enamel" data-price="46000" checked><span>Эмаль<em>46 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="mat" value="veneer" data-price="62000"><span>Шпон<em>62 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="mat" value="oak" data-price="78000"><span>Массив дуба<em>78 000 ₽/м.п.</em></span></label>
+          </div>
+        </div>
+
+        <div class="panel__row">
+          <div class="panel__label"><span>Цвет фасадов</span><output id="facadeName">Тёплый песок</output></div>
+          <div class="swatches" role="radiogroup" aria-label="Цвет фасадов">
+            <label class="swatch"><input type="radio" name="facade" value="#e6ddcd" data-name="Тёплый песок" checked><span data-sw="#e6ddcd"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#f2f2ef" data-name="Молочно-белый"><span data-sw="#f2f2ef"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#2f4238" data-name="Тёмный мох"><span data-sw="#2f4238"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#1f2a33" data-name="Графит"><span data-sw="#1f2a33"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#7d5a3c" data-name="Орех"><span data-sw="#7d5a3c"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#8a3f34" data-name="Терракота"><span data-sw="#8a3f34"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#4a6b7c" data-name="Пыльная синь"><span data-sw="#4a6b7c"></span></label>
+            <label class="swatch"><input type="radio" name="facade" value="#c9b47a" data-name="Горчица"><span data-sw="#c9b47a"></span></label>
+          </div>
+        </div>
+
+        <div class="panel__row">
+          <div class="panel__label"><span>Столешница</span></div>
+          <div class="chips chips--wide" role="radiogroup" aria-label="Столешница">
+            <label class="chip"><input type="radio" name="top" value="#d9d5cc" data-price="9000" data-name="ЛДСП" checked><span>ЛДСП<em>+9 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="top" value="#eceae4" data-price="26000" data-name="Кварц"><span>Кварц<em>+26 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="top" value="#a9773f" data-price="34000" data-name="Массив"><span>Массив<em>+34 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="top" value="#2b2f33" data-price="41000" data-name="Керамика"><span>Керамика<em>+41 000 ₽/м.п.</em></span></label>
+          </div>
+        </div>
+
+        <div class="panel__row">
+          <div class="panel__label"><span>Фурнитура</span></div>
+          <div class="chips" role="radiogroup" aria-label="Фурнитура">
+            <label class="chip"><input type="radio" name="metal" value="#2a2d30" data-price="4000" data-name="Матовый чёрный" checked><span>Матовый чёрный<em>+4 000 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="metal" value="#b98b4a" data-price="7500" data-name="Латунь"><span>Латунь<em>+7 500 ₽/м.п.</em></span></label>
+            <label class="chip"><input type="radio" name="metal" value="#b9bec2" data-price="5500" data-name="Сталь"><span>Сталь<em>+5 500 ₽/м.п.</em></span></label>
+          </div>
+        </div>
+
+        <div class="panel__row">
+          <div class="panel__label">
+            <label for="length">Длина кухни</label>
+            <output id="lengthOut" for="length">4,4 м.п.</output>
+          </div>
+          <input type="range" id="length" name="length" min="2" max="9" step="0.1" value="4.4" class="range">
+          <div class="range__ticks" aria-hidden="true"><span>2 м</span><span>5,5 м</span><span>9 м</span></div>
+        </div>
+
+        <div class="panel__total" aria-live="polite">
+          <div>
+            <span class="panel__totalLabel">Стоимость кухни</span>
+            <p class="panel__sum"><span id="sum">0</span> <em>₽</em></p>
+            <span class="panel__note" id="sumNote">эмаль · ЛДСП · матовый чёрный</span>
+          </div>
+          <button class="btn btn--solid magnetic" type="button" id="orderBtn" data-open-lead>Заказать эту кухню</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ БЕГУЩАЯ СТРОКА ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>замер</span><i>◆</i><span>проект в 3D</span><i>◆</i><span>распил</span><i>◆</i>
+    <span>кромка</span><i>◆</i><span>покраска</span><i>◆</i><span>сборка</span><i>◆</i>
+    <span>врезка техники</span><i>◆</i><span>подключение</span><i>◆</i><span>гарантия 5 лет</span><i>◆</i>
+    <span>замер</span><i>◆</i><span>проект в 3D</span><i>◆</i><span>распил</span><i>◆</i>
+    <span>кромка</span><i>◆</i><span>покраска</span><i>◆</i><span>сборка</span><i>◆</i>
+    <span>врезка техники</span><i>◆</i><span>подключение</span><i>◆</i><span>гарантия 5 лет</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ============ ЦИФРЫ ============ -->
+<section class="stats">
+  <div class="container stats__grid">
+    <div class="stat reveal"><dd data-count="12">0</dd><dt>лет производству</dt></div>
+    <div class="stat reveal"><dd data-count="2400" data-suffix="+">0</dd><dt>собранных кухонь</dt></div>
+    <div class="stat reveal"><dd data-count="30" data-suffix=" дн.">0</dd><dt>средний срок</dt></div>
+    <div class="stat reveal"><dd data-count="5">0</dd><dt>лет гарантии</dt></div>
+  </div>
+</section>
+
+<!-- ============ МАТЕРИАЛЫ ============ -->
+<section class="section" id="materials">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">02</span>
+      <div>
+        <p class="eyebrow">Из чего делаем</p>
+        <h2 class="section__title">Материалы</h2>
+      </div>
+      <p class="section__sub">Показываем честно: у каждого материала есть и сильные стороны, и ограничения.</p>
+    </header>
+
+    <div class="mats">
+      <article class="mat mat--a reveal">
+        <span class="mat__swatch" data-sw="#e6ddcd"></span>
+        <h3>Эмаль</h3>
+        <p class="mat__price">от 46 000 ₽/м.п.</p>
+        <p>Ровный матовый цвет без текстуры, любой оттенок по палитре. Не боится пара, но боится ударов углом кастрюли.</p>
+        <ul><li>Любой цвет</li><li>Матовая или глянцевая</li><li>Реставрируется локально</li></ul>
+      </article>
+
+      <article class="mat mat--b reveal">
+        <span class="mat__swatch" data-sw="#7d5a3c"></span>
+        <h3>Шпон</h3>
+        <p class="mat__price">от 62 000 ₽/м.п.</p>
+        <p>Настоящий рисунок дерева при разумной цене. Каждая дверца немного отличается — это не брак, а природа.</p>
+        <ul><li>Дуб, орех, ясень</li><li>Тонировка под интерьер</li><li>Стабильнее массива</li></ul>
+      </article>
+
+      <article class="mat mat--c reveal">
+        <span class="mat__swatch" data-sw="#2f4238"></span>
+        <h3>Массив дуба</h3>
+        <p class="mat__price">от 78 000 ₽/м.п.</p>
+        <p>Самый дорогой и самый долговечный вариант. Требует стабильной влажности: рядом с плитой без вытяжки не поставим.</p>
+        <ul><li>Служит десятилетиями</li><li>Шлифуется и обновляется</li><li>Только с хорошей вытяжкой</li></ul>
+      </article>
+
+      <article class="mat mat--d reveal">
+        <span class="mat__swatch" data-sw="#b9bec2"></span>
+        <h3>ЛДСП</h3>
+        <p class="mat__price">от 28 000 ₽/м.п.</p>
+        <p>Рабочая лошадка для съёмных квартир и дач. Кромка ABS по периметру, чтобы не разбухала от воды.</p>
+        <ul><li>Самый доступный</li><li>Много декоров</li><li>Срок службы 7–10 лет</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЭТАПЫ ============ -->
+<section class="section section--dark" id="process">
+  <div class="container">
+    <header class="section__head section__head--light reveal">
+      <span class="section__num">03</span>
+      <div>
+        <p class="eyebrow">Как работаем</p>
+        <h2 class="section__title">От замера до ужина</h2>
+      </div>
+      <p class="section__sub">Пять шагов и один договор. Аванс — только после того, как вы утвердили проект.</p>
+    </header>
+
+    <ol class="timeline" id="timeline">
+      <span class="timeline__rail" aria-hidden="true"><i id="timelineFill"></i></span>
+
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Шаг 01</span>
+        <h3>Замер и обсуждение</h3>
+        <p>Приезжаем со стремянкой и лазерным дальномером. Смотрим розетки, вентиляцию и стояки — от них зависит планировка.</p>
+        <span class="step__time">1 день</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Шаг 02</span>
+        <h3>Проект и смета</h3>
+        <p>Собираем кухню в трёхмерке с вашими размерами и техникой. Правим бесплатно, пока не понравится.</p>
+        <span class="step__time">3–5 дней</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Шаг 03</span>
+        <h3>Производство</h3>
+        <p>Распил, кромка, покраска и сушка на собственном участке. Фото с производства присылаем в чат.</p>
+        <span class="step__time">18–25 дней</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Шаг 04</span>
+        <h3>Доставка и сборка</h3>
+        <p>Привозим утром, собираем за день-два. Подключаем технику и выравниваем фасады по зазору.</p>
+        <span class="step__time">1–2 дня</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Шаг 05</span>
+        <h3>Приёмка и гарантия</h3>
+        <p>Проверяем каждый ящик и петлю вместе с вами. Гарантия пять лет на корпус и фурнитуру.</p>
+        <span class="step__time">1 день</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ПРОЕКТЫ ============ -->
+<section class="section" id="works">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">04</span>
+      <div>
+        <p class="eyebrow">Портфолио</p>
+        <h2 class="section__title">Собранные кухни</h2>
+      </div>
+      <p class="section__sub">Нажмите на карточку, чтобы посмотреть состав проекта и цену.</p>
+    </header>
+
+    <div class="filters reveal" role="group" aria-label="Фильтр проектов">
+      <button class="filter is-active" type="button" data-filter="all">Все</button>
+      <button class="filter" type="button" data-filter="light">Светлые</button>
+      <button class="filter" type="button" data-filter="dark">Тёмные и дерево</button>
+    </div>
+
+    <div class="works" id="worksGrid">
+      <button class="work reveal work--wide" type="button" data-cat="light"
+              data-img="img/kitchen-hero.svg" data-title="Кухня с островом на Пресне"
+              data-meta="4,8 м.п. · эмаль · кварц · 32 дня" data-price="612 000 ₽"
+              data-text="Светлые фасады до потолка, остров с варочной панелью и вытяжка в коробе. Технику встроили полностью.">
+        <img src="img/kitchen-hero.svg" alt="Светлая кухня с островом" width="640" height="480" loading="lazy">
+        <span class="work__info"><strong>Кухня с островом на Пресне</strong><em>4,8 м.п. · эмаль</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="dark"
+              data-img="img/kitchen-dark.svg" data-title="Графитовая кухня в лофте"
+              data-meta="3,6 м.п. · эмаль · керамика · 28 дней" data-price="486 000 ₽"
+              data-text="Матовый графит с латунной фурнитурой и керамической столешницей под бетон. Открытые полки из дуба.">
+        <img src="img/kitchen-dark.svg" alt="Тёмная кухня в лофте" width="640" height="480" loading="lazy">
+        <span class="work__info"><strong>Графитовая кухня в лофте</strong><em>3,6 м.п. · эмаль</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="dark"
+              data-img="img/kitchen-wood.svg" data-title="Дубовая кухня за городом"
+              data-meta="5,2 м.п. · массив · массив · 41 день" data-price="758 000 ₽"
+              data-text="Массив дуба с натуральным маслом и столешница из цельной доски. Мойка врезана в дерево с пропиткой.">
+        <img src="img/kitchen-wood.svg" alt="Кухня из массива дуба" width="640" height="480" loading="lazy">
+        <span class="work__info"><strong>Дубовая кухня за городом</strong><em>5,2 м.п. · массив</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="light"
+              data-img="img/kitchen-compact.svg" data-title="Компактная кухня в студии"
+              data-meta="2,4 м.п. · ЛДСП · ЛДСП · 21 день" data-price="184 000 ₽"
+              data-text="Всё необходимое на двух с половиной метрах: посудомойка на 45 см, скрытая ручка-профиль, антресоли под потолок.">
+        <img src="img/kitchen-compact.svg" alt="Компактная кухня в студии" width="640" height="480" loading="lazy">
+        <span class="work__info"><strong>Компактная кухня в студии</strong><em>2,4 м.п. · ЛДСП</em></span>
+      </button>
+
+      <button class="work reveal work--wide" type="button" data-cat="dark"
+              data-img="img/kitchen-island.svg" data-title="Кухня-столовая с барной стойкой"
+              data-meta="6,1 м.п. · шпон · кварц · 36 дней" data-price="694 000 ₽"
+              data-text="Шпон ореха и кварцевая столешница, переходящая в барную стойку на четыре места. Подсветка рабочей зоны в профиле.">
+        <img src="img/kitchen-island.svg" alt="Кухня-столовая со стойкой" width="640" height="480" loading="lazy">
+        <span class="work__info"><strong>Кухня-столовая с барной стойкой</strong><em>6,1 м.п. · шпон</em></span>
+      </button>
+    </div>
+
+    <p class="works__empty" id="worksEmpty" hidden>В этой категории пока нет проектов.</p>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="section section--tint" id="reviews">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">05</span>
+      <div>
+        <p class="eyebrow">Отзывы</p>
+        <h2 class="section__title">Что говорят заказчики</h2>
+      </div>
+      <p class="section__sub">Средняя оценка 4,9 из 5 по 312 отзывам на картах и в профильных сообществах.</p>
+    </header>
+
+    <div class="quotes">
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Конструктор на сайте не игрушка: то, что я собрал вечером, замерщик открыл у себя и мы правили уже готовый проект. Сэкономили встречу.</blockquote>
+        <figcaption><span class="ava" data-initials="ВЛ" data-hue="160"></span><div><strong>Владимир Л.</strong><em>кухня 4,8 м.п., эмаль</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Просили сдвинуть розетки — сделали за свой счёт, потому что это была их ошибка в проекте. Спорить не пришлось вообще.</blockquote>
+        <figcaption><span class="ava" data-initials="НК" data-hue="35"></span><div><strong>Наталья К.</strong><em>кухня 3,6 м.п., шпон</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Через два года подтянули петли по гарантии, приехали через день после звонка. Кухня как новая, фасады не повело.</blockquote>
+        <figcaption><span class="ava" data-initials="СГ" data-hue="205"></span><div><strong>Сергей Г.</strong><em>кухня 5,2 м.п., массив</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Понравилось, что сразу сказали: массив у плиты без вытяжки поведёт. Могли бы промолчать и продать дороже, но отговорили.</blockquote>
+        <figcaption><span class="ava" data-initials="ЕМ" data-hue="15"></span><div><strong>Елена М.</strong><em>кухня 4,2 м.п., эмаль</em></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВОПРОСЫ ============ -->
+<section class="section" id="faq">
+  <div class="container faq__wrap">
+    <header class="section__head section__head--stack reveal">
+      <span class="section__num">06</span>
+      <div>
+        <p class="eyebrow">Частые вопросы</p>
+        <h2 class="section__title">Что спрашивают<br>перед заказом</h2>
+      </div>
+      <p class="section__sub">Не нашли свой вопрос — задайте его замерщику, это ни к чему не обязывает.</p>
+      <a class="btn btn--outline" href="#lead">Задать вопрос</a>
+    </header>
+
+    <div class="accordion" id="accordion">
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Цена из конструктора окончательная?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Это честная предварительная цена по погонным метрам: фасады, корпуса, столешница и фурнитура. Не входят техника, мойка, смеситель и нестандартные решения вроде скрытых дверей или гнутых фасадов. После замера цифра меняется обычно в пределах десяти процентов — и мы объясняем каждый пункт.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Сколько ждать кухню?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>В среднем месяц от подписания договора: три-пять дней на проект, восемнадцать-двадцать пять на производство, день-два на сборку. Массив и сложная покраска добавляют одну-две недели. Точный срок фиксируем в договоре вместе с датой.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Вы работаете с моей техникой?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Да, проектируем под уже купленную технику — присылайте модели, мы возьмём размеры из паспортов. Если техника ещё не куплена, подскажем габариты под планировку, чтобы потом не пришлось перепиливать корпус.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Что с гарантией?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Пять лет на корпуса и фурнитуру, два года на покраску фасадов. Гарантия покрывает и работу: если петля разболталась или фасад просел, приезжаем и настраиваем бесплатно. Не покрываем механические повреждения и последствия протечек сверху.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Можно посмотреть материалы вживую?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Замерщик привозит образцы фасадов и кусочки столешниц с собой — цвет на экране и цвет при вашем освещении отличаются всегда. Можно и приехать на производство: покажем цех и кухни в сборке перед отгрузкой.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Как устроена оплата?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Аванс сорок процентов после того, как вы утвердили проект, — раньше денег не берём. Ещё сорок перед отгрузкой с производства, остаток двадцать — после сборки и приёмки. Оплата картой, переводом или по счёту для юридических лиц.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЗАЯВКА ============ -->
+<section class="section section--dark lead" id="lead">
+  <div class="container lead__inner">
+    <div class="lead__text reveal">
+      <p class="eyebrow">Бесплатный замер</p>
+      <h2 class="section__title">Приедем с образцами<br>и рулеткой</h2>
+      <p class="lead__desc">Замерщик работает по Москве и области в пределах 40 км от МКАД.
+        Привезёт образцы фасадов и столешниц, снимет размеры и посчитает точную стоимость.</p>
+      <ul class="lead__list">
+        <li>Замер занимает 40–60 минут</li>
+        <li>Проект и смету присылаем за 3–5 дней</li>
+        <li>Правки в проект — бесплатно и без ограничений</li>
+      </ul>
+      <div class="lead__contact">
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <span>ежедневно 9:00 — 21:00</span>
+      </div>
+    </div>
+
+    <form class="form reveal" id="leadForm" novalidate>
+      <div class="field">
+        <label for="l-name">Как к вам обращаться <span aria-hidden="true">*</span></label>
+        <input type="text" id="l-name" name="name" autocomplete="name" placeholder="Владимир" maxlength="60" required>
+        <p class="field__err" data-err-for="l-name"></p>
+      </div>
+      <div class="field">
+        <label for="l-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="l-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="l-phone"></p>
+      </div>
+      <div class="field field--half">
+        <label for="l-length">Длина кухни, м.п.</label>
+        <input type="number" id="l-length" name="length" min="1" max="20" step="0.1" placeholder="4.4" inputmode="decimal">
+        <p class="field__err" data-err-for="l-length"></p>
+      </div>
+      <div class="field field--half">
+        <label for="l-mat">Материал фасадов</label>
+        <select id="l-mat" name="material">
+          <option value="">Пока не определились</option>
+          <option>ЛДСП</option>
+          <option>Эмаль</option>
+          <option>Шпон</option>
+          <option>Массив дуба</option>
+        </select>
+      </div>
+      <div class="field" id="l-config-field" hidden>
+        <label for="l-config">Ваша сборка из конструктора</label>
+        <input type="text" id="l-config" name="config" readonly>
+      </div>
+      <div class="field">
+        <label for="l-note">Комментарий</label>
+        <textarea id="l-note" name="note" rows="3" maxlength="500" placeholder="Например: техника уже куплена, пришлю модели"></textarea>
+      </div>
+
+      <!-- Ловушка для спам-ботов: человек это поле не видит, а бот заполняет -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="l-company">Не заполняйте это поле</label>
+        <input type="text" id="l-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="l-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных и с <a href="#privacy">политикой конфиденциальности</a></span>
+      </label>
+      <p class="field__err" data-err-for="l-agree"></p>
+
+      <button class="btn btn--solid btn--full magnetic" type="submit" id="leadSubmit">Вызвать замерщика</button>
+      <p class="form__note">Перезвоним в течение 15 минут в рабочее время. Данные не передаём третьим лицам.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ КОНТАКТЫ ============ -->
+<section class="section" id="contacts">
+  <div class="container">
+    <div class="contacts">
+      <div class="contacts__col reveal">
+        <h3>Производство</h3>
+        <p>Московская обл., Мытищи,<br>Силикатная ул., 19, корп. 4</p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Связь</h3>
+        <p><a href="tel:+74951234567">+7 (495) 123-45-67</a><br><a href="mailto:hi@fasad-kitchen.ru">hi@fasad-kitchen.ru</a></p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Часы</h3>
+        <p>Пн — Сб: 9:00 — 21:00<br>Вс: по договорённости</p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Соцсети</h3>
+        <div class="socials">
+          <a href="#tg" aria-label="Telegram">TG</a>
+          <a href="#vk" aria-label="ВКонтакте">VK</a>
+          <a href="#wa" aria-label="WhatsApp">WA</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="map reveal" role="img" aria-label="Схема расположения производства">
+      <div class="map__grid" aria-hidden="true"></div>
+      <div class="map__pin" aria-hidden="true"></div>
+      <p class="map__hint">Здесь размещается карта.<br><span>Вставьте iframe Яндекс.Карт или 2ГИС в файле index.html</span></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo__text">ФАСАД<em>кухни на заказ</em></span>
+      <p>Кухни на заказ по вашим размерам. Своё производство, договор и гарантия пять лет.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Навигация в подвале">
+      <a href="#studio">Конструктор</a>
+      <a href="#materials">Материалы</a>
+      <a href="#works">Проекты</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#lead">Замер</a>
+      <a href="login/">Вход в кабинет</a>
+      <a href="#privacy">Политика конфиденциальности</a>
+    </nav>
+    <p class="footer__copy">© <span id="year">2026</span> ФАСАД. Все права защищены.</p>
+  </div>
+</footer>
+
+<!-- ============ МОДАЛЬНОЕ ОКНО ============ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
+    <p class="eyebrow">Бесплатно и без обязательств</p>
+    <h2 class="modal__title" id="modalTitle">Вызвать замерщика</h2>
+    <p class="modal__sub">Оставьте телефон — перезвоним и согласуем удобное время.</p>
+
+    <form class="form form--modal" id="quickForm" novalidate>
+      <div class="field">
+        <label for="q-name">Имя <span aria-hidden="true">*</span></label>
+        <input type="text" id="q-name" name="name" autocomplete="name" maxlength="60" required>
+        <p class="field__err" data-err-for="q-name"></p>
+      </div>
+      <div class="field">
+        <label for="q-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="q-phone"></p>
+      </div>
+      <div class="field" id="q-config-field" hidden>
+        <label for="q-config">Ваша сборка</label>
+        <input type="text" id="q-config" name="config" readonly>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="q-company">Не заполняйте это поле</label>
+        <input type="text" id="q-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+      <label class="check">
+        <input type="checkbox" id="q-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+      <p class="field__err" data-err-for="q-agree"></p>
+      <button class="btn btn--solid btn--full" type="submit">Перезвоните мне</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ ЛАЙТБОКС ПРОЕКТОВ ============ -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__overlay" data-close-lightbox></div>
+  <div class="lightbox__box" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <button class="lightbox__close" type="button" data-close-lightbox aria-label="Закрыть">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" id="lbPrev" aria-label="Предыдущий проект">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" id="lbNext" aria-label="Следующий проект">›</button>
+    <img id="lbImg" src="" alt="" width="640" height="480">
+    <div class="lightbox__caption">
+      <h3 id="lbTitle"></h3>
+      <p class="lightbox__meta" id="lbMeta"></p>
+      <p id="lbText"></p>
+      <p class="lightbox__price" id="lbPrice"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ УВЕДОМЛЕНИЯ ============ -->
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<button class="to-top" type="button" id="toTop" aria-label="Наверх" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 8-1.4 1.4L13 7.8V20h-2V7.8L5.4 13.4 4 12z"/></svg>
+</button>
+
+<script src="js/kitchen3d.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

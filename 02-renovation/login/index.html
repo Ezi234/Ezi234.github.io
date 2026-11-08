@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Страница грузит только собственные файлы, сетевых запросов нет вовсе -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f3ee">
+<title>ПОРЯДОК — вход в кабинет заказчика</title>
+<meta name="description" content="Вход в кабинет заказчика ремонта с двухфакторной защитой: пароль и одноразовый код из приложения на телефоне.">
+<link rel="icon" href="../img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body data-store="poryadok-2fa-secret" data-issuer="ПОРЯДОК" data-account="client@poryadok.ru">
+
+<div class="deco" aria-hidden="true">
+  <span class="deco__paper"></span>
+  <span class="deco__blob deco__blob--clay"></span>
+  <span class="deco__blob deco__blob--pine"></span>
+</div>
+
+<div class="page">
+
+  <header class="top">
+    <a class="brand" href="../">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="5" y="5" width="22" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M5 13h22M13 13v14" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span><b>ПОРЯДОК</b><em>кабинет заказчика</em></span>
+    </a>
+    <div class="top__side">
+      <p class="demo"><span class="demo__dot"></span>Демо: код проверяется в браузере</p>
+      <a class="back" href="../">На сайт</a>
+    </div>
+  </header>
+
+  <main class="stage">
+
+    <section class="card">
+      <ol class="steps">
+        <li class="steps__item is-active" data-step="1"><span>1</span>Пароль</li>
+        <li class="steps__item" data-step="2"><span>2</span>Код</li>
+        <li class="steps__item" data-step="3"><span>3</span>Готово</li>
+      </ol>
+
+      <div class="art" id="art">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <rect class="art__sheet" x="12" y="12" width="96" height="96" rx="10"/>
+          <path class="art__grid" d="M12 36h96M12 60h96M12 84h96M36 12v96M60 12v96M84 12v96"/>
+          <path class="art__shackle" d="M47 58V47a13 13 0 0 1 26 0v11"/>
+          <rect class="art__body" x="38" y="58" width="44" height="34" rx="7"/>
+          <circle class="art__hole" cx="60" cy="72" r="4.5"/>
+          <path class="art__pin" d="M60 76v7"/>
+          <path class="art__scanline" d="M16 60h88"/>
+          <path class="art__check" d="M46 74l10 10 20-22"/>
+        </svg>
+      </div>
+
+      <div class="step" id="stepLogin">
+        <h1 class="card__title">Кабинет заказчика</h1>
+        <p class="card__sub">Смета, этапы и фотоотчёт — по паролю и коду.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Почта</label>
+            <input id="email" name="email" type="email" autocomplete="username" placeholder="client@poryadok.ru" maxlength="120" required>
+            <p class="field__err" id="emailErr"></p>
+          </div>
+
+          <div class="field pass">
+            <label for="password">Пароль</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Не короче 10 символов" maxlength="128" required>
+            <button class="pass__eye" id="togglePass" type="button" aria-pressed="false" aria-label="Показать пароль">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5c-5 0-9 4.5-10 7 1 2.5 5 7 10 7s9-4.5 10-7c-1-2.5-5-7-10-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+            </button>
+            <div class="meter"><span id="meterBar"></span></div>
+            <p class="meter__text" id="meterText">Надёжность пароля</p>
+            <p class="field__err" id="passErr"></p>
+          </div>
+
+          <button class="btn" id="loginBtn" type="submit">Продолжить</button>
+        </form>
+      </div>
+
+      <div class="step" id="step2fa" hidden>
+        <h2 class="card__title">Код из приложения</h2>
+        <p class="card__sub">Шесть цифр с телефона. Каждый код живёт 30 секунд.</p>
+
+        <form id="codeForm" novalidate>
+          <div class="cells" id="cells">
+            <input class="cell" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Цифра 1">
+            <input class="cell" inputmode="numeric" maxlength="1" aria-label="Цифра 2">
+            <input class="cell" inputmode="numeric" maxlength="1" aria-label="Цифра 3">
+            <span class="cells__gap" aria-hidden="true"></span>
+            <input class="cell" inputmode="numeric" maxlength="1" aria-label="Цифра 4">
+            <input class="cell" inputmode="numeric" maxlength="1" aria-label="Цифра 5">
+            <input class="cell" inputmode="numeric" maxlength="1" aria-label="Цифра 6">
+          </div>
+
+          <div class="tries" id="tries" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="code__status" id="codeStatus" role="status">Осталось попыток: 5</p>
+
+          <button class="btn" id="verifyBtn" type="submit">Войти</button>
+          <button class="link" id="backBtn" type="button">Ввести другую почту</button>
+        </form>
+      </div>
+
+      <div class="step" id="stepDone" hidden>
+        <h2 class="card__title">Доступ открыт</h2>
+        <p class="card__sub">Смета, график работ и фотоотчёт — в кабинете.</p>
+        <dl class="session" id="session"></dl>
+        <button class="btn btn--ghost" id="restartBtn" type="button">Пройти ещё раз</button>
+      </div>
+
+      <ul class="badges">
+        <li><b>TOTP</b> RFC 6238</li>
+        <li><b>5 попыток</b> подряд</li>
+        <li><b>Код</b> одноразовый</li>
+      </ul>
+    </section>
+
+    <aside class="phone">
+      <span class="phone__notch"></span>
+      <div class="phone__screen">
+        <h2 class="app__title">Ключ</h2>
+
+        <div class="app__row">
+          <div class="app__acc">
+            <strong id="appIssuer">ПОРЯДОК</strong>
+            <span id="appAccount">client@poryadok.ru</span>
+          </div>
+          <svg class="app__ring" viewBox="0 0 40 40" aria-hidden="true">
+            <circle class="app__ringBg" cx="20" cy="20" r="16"/>
+            <circle class="app__ringFg" id="ring" cx="20" cy="20" r="16"/>
+          </svg>
+        </div>
+
+        <button class="app__code" id="appCode" type="button">
+          <span class="app__digits" id="appDigits">— — —</span>
+          <span class="app__hint">нажмите, чтобы подставить</span>
+        </button>
+        <p class="app__timer"><span id="appSeconds">30</span> с до нового кода</p>
+        <p class="app__note">Код нужен только для входа. Никому его не диктуйте — ни по телефону, ни в переписке.</p>
+
+        <details class="app__setup">
+          <summary>Подключить свой телефон</summary>
+          <p>Откройте Яндекс Ключ, Google Authenticator или 2FAS, выберите «Ввести ключ вручную», тип «по времени» и вставьте:</p>
+          <code class="app__secret" id="secretKey"></code>
+          <div class="app__actions">
+            <button class="chip" id="copySecret" type="button">Скопировать</button>
+            <button class="chip" id="newSecret" type="button">Новый ключ</button>
+          </div>
+        </details>
+      </div>
+    </aside>
+
+  </main>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="js/totp.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

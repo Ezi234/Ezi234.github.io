@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Политика безопасности: страница грузит только собственные файлы.
+     Единственное исключение — карта Яндекса во фрейме (frame-src), и то
+     лишь после нажатия «Показать карту». Яндекс открывается в России без VPN.
+     Директиву frame-ancestors браузер принимает лишь из HTTP-заголовка,
+     поэтому защиту от встраивания в чужой iframe настраиваем на сервере:
+     Content-Security-Policy: frame-ancestors 'none'   (см. README) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-src https://yandex.ru https://yandex.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>БРИТВА №9 — барбершоп в центре города</title>
+<meta name="description" content="Барбершоп БРИТВА №9: мужские стрижки, оформление бороды, королевское бритьё опасной бритвой. Запись онлайн за минуту.">
+<meta name="theme-color" content="#0b0b0d">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ezi234.github.io/01-barbershop/">
+<meta property="og:title" content="БРИТВА №9 — барбершоп в центре города">
+<meta property="og:description" content="Мужские стрижки, борода, королевское бритьё. Запись онлайн за минуту.">
+<meta property="og:image" content="https://ezi234.github.io/01-barbershop/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="img/hero-chair.webp" type="image/webp">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к основному содержанию</a>
+
+<!-- Полоса прогресса чтения страницы -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============ ШАПКА ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="logo" href="#hero" aria-label="БРИТВА №9 — на главную">
+      <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <path d="M4 24 L20 4 l8 0 -16 20 z" fill="currentColor"/>
+        <path d="M4 24 l8 0 4 4 -12 0 z" fill="currentColor" opacity=".55"/>
+      </svg>
+      <span class="logo__text">БРИТВА<span class="logo__num">№9</span></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#about">О нас</a></li>
+        <li><a class="nav__link" href="#services">Услуги</a></li>
+        <li><a class="nav__link" href="#masters">Мастера</a></li>
+        <li><a class="nav__link" href="#gallery">Работы</a></li>
+        <li><a class="nav__link" href="#reviews">Отзывы</a></li>
+        <li><a class="nav__link" href="#contacts">Контакты</a></li>
+      </ul>
+      <!-- Кнопка записи внутри выдвижного меню: на телефоне она заменяет
+           ту, что в шапке, чтобы бургер всегда помещался на экране -->
+      <button class="btn btn--gold btn--full nav__cta" type="button" data-open-booking>Записаться</button>
+      <a class="nav__phone" href="tel:+74951234567">+7 (495) 123-45-67</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+74951234567">+7 (495) 123-45-67</a>
+      <button class="btn btn--gold btn--sm magnetic" type="button" data-open-booking>Записаться</button>
+      <button class="burger" type="button" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- Затемнение под выдвижным меню на телефоне: нажатие по нему закрывает меню -->
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<main id="main">
+
+<!-- ============ ГЛАВНЫЙ ЭКРАН ============ -->
+<section class="hero" id="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <span class="orb orb--gold"></span>
+    <span class="orb orb--wine"></span>
+    <span class="orb orb--teal"></span>
+    <span class="hero__grain"></span>
+  </div>
+  <span class="hero__spot" id="heroSpot" aria-hidden="true"></span>
+
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="eyebrow eyebrow--line reveal">Барбершоп на Пятницкой · с 2014 года</p>
+
+      <h1 class="hero__title" id="heroTitle">
+        <span class="line"><span>Стрижка,</span></span>
+        <span class="line"><span>после которой</span></span>
+        <span class="line"><span class="accent">оборачиваются</span></span>
+      </h1>
+
+      <p class="hero__text-lead reveal">Мастера с опытом от 6 лет, японская сталь, горячее полотенце и виски за счёт заведения. Запись занимает меньше минуты.</p>
+
+      <div class="hero__cta reveal">
+        <button class="btn btn--gold btn--lg magnetic" type="button" data-open-booking>Записаться онлайн</button>
+        <a class="btn btn--ghost btn--lg" href="#services">Услуги и цены</a>
+      </div>
+
+      <dl class="hero__stats reveal">
+        <div class="stat"><dt>лет на рынке</dt><dd data-count="11">0</dd></div>
+        <div class="stat"><dt>довольных клиентов</dt><dd data-count="14000" data-suffix="+">0</dd></div>
+        <div class="stat"><dt>средняя оценка</dt><dd data-count="4.9" data-decimals="1">0</dd></div>
+      </dl>
+    </div>
+
+    <div class="hero__visual" id="heroVisual">
+      <figure class="scene" data-depth="0.02">
+        <img src="img/hero-chair.webp" alt="Красное барберское кресло в тёмном зале с картинами в золочёных рамах" width="1000" height="1200" fetchpriority="high">
+        <figcaption class="scene__cap"><span>Зал №1</span> Пятницкая, 27</figcaption>
+      </figure>
+
+      <div class="float float--rating" data-depth="0.08">
+        <span class="float__stars" aria-hidden="true">★★★★★</span>
+        <strong>4.9 из 5</strong>
+        <span class="float__note">840 отзывов на картах</span>
+      </div>
+
+      <!-- Карточка свободного окна — тоже кнопка: сразу открывает запись к этому мастеру -->
+      <button class="float float--slot" type="button" data-depth="0.12" data-open-booking data-master="Илья Ковалёв" aria-label="Записаться на сегодня, 19:00, к Илье Ковалёву">
+        <span class="float__pulse" aria-hidden="true"></span>
+        <span class="float__slot-text">
+          <strong>Есть окно сегодня</strong>
+          <span>19:00 · Илья Ковалёв</span>
+        </span>
+        <span class="float__arrow" aria-hidden="true">→</span>
+      </button>
+
+      <!-- Барберпол: полосы крутятся бесконечно -->
+      <div class="pole" data-depth="0.16" aria-hidden="true">
+        <span class="pole__cap"></span>
+        <span class="pole__tube"><i></i></span>
+        <span class="pole__cap"></span>
+      </div>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#about" aria-label="Листать вниз"><span></span></a>
+</section>
+
+<!-- ============ БЕГУЩАЯ СТРОКА ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>фейд</span><i>✦</i><span>андеркат</span><i>✦</i><span>борода</span><i>✦</i>
+    <span>опасная бритва</span><i>✦</i><span>горячее полотенце</span><i>✦</i><span>камуфляж седины</span><i>✦</i>
+    <span>детская стрижка</span><i>✦</i><span>укладка</span><i>✦</i><span>виски за счёт заведения</span><i>✦</i>
+    <span>фейд</span><i>✦</i><span>андеркат</span><i>✦</i><span>борода</span><i>✦</i>
+    <span>опасная бритва</span><i>✦</i><span>горячее полотенце</span><i>✦</i><span>камуфляж седины</span><i>✦</i>
+    <span>детская стрижка</span><i>✦</i><span>укладка</span><i>✦</i><span>виски за счёт заведения</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ============ О БАРБЕРШОПЕ ============ -->
+<section class="about" id="about">
+  <div class="container about__inner">
+    <figure class="about__photo reveal">
+      <img src="img/about.webp" alt="Барберское кресло с латунной отделкой и зеркало с подсветкой" width="900" height="1125" loading="lazy">
+      <figcaption class="about__badge">
+        <strong>11</strong>
+        <span>лет стрижём<br>на Пятницкой</span>
+      </figcaption>
+    </figure>
+
+    <div class="about__body">
+      <p class="eyebrow eyebrow--line reveal">О барбершопе</p>
+      <h2 class="section__title reveal">Не парикмахерская, а&nbsp;мужской клуб</h2>
+      <p class="about__lead reveal">Четыре кресла, винтажная латунь и никакой очереди. Сюда приходят за стрижкой, а остаются поговорить: кофе, виски и музыка — по вашему вкусу.</p>
+
+      <div class="features__grid">
+        <article class="feature feature--gold reveal">
+          <span class="feature__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 15 9 22 9.5 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.5 9 9z"/></svg></span>
+          <h3>Только сильные мастера</h3>
+          <p>Каждый барбер проходит проверку стрижкой вживую. Стажёров на клиентах не тренируем.</p>
+        </article>
+        <article class="feature feature--wine reveal">
+          <span class="feature__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7zm0 4.5A2.5 2.5 0 1 0 12 11.5 2.5 2.5 0 0 0 12 6.5z"/></svg></span>
+          <h3>Две минуты от метро</h3>
+          <p>Центр города, вход со двора, своя парковка на четыре машины. Не опоздаете.</p>
+        </article>
+        <article class="feature feature--teal reveal">
+          <span class="feature__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1 3 5v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V5zm-1 15-4-4 1.4-1.4L11 13.2l5.6-5.6L18 9z"/></svg></span>
+          <h3>Стерильный инструмент</h3>
+          <p>Автоклав, одноразовые лезвия и воротнички. Санитарные нормы — не формальность.</p>
+        </article>
+        <article class="feature feature--gold reveal">
+          <span class="feature__icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 10.6 4 2.4-.8 1.3-4.2-2.6V6h1z"/></svg></span>
+          <h3>Работаем без опозданий</h3>
+          <p>Записались на 18:00 — сядете в кресло в 18:00. За задержку дольше 10 минут дарим уход.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ УСЛУГИ ============ -->
+<section class="section" id="services">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">01</span>
+      <div>
+        <p class="eyebrow">Прайс-лист</p>
+        <h2 class="section__title">Услуги</h2>
+      </div>
+      <p class="section__sub">Цена финальная: консультация, мытьё головы и укладка уже включены.</p>
+    </header>
+
+    <div class="services">
+      <article class="service tilt reveal" data-accent="gold">
+        <div class="service__top">
+          <h3 class="service__name">Мужская стрижка</h3>
+          <span class="service__price">2 000 ₽</span>
+        </div>
+        <p class="service__desc">Разбираем форму головы и тип волос, подбираем стрижку под образ жизни, а не под картинку из интернета.</p>
+        <span class="service__time">60 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Мужская стрижка">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="service service--featured tilt reveal" data-accent="gold">
+        <span class="service__badge">Хит</span>
+        <div class="service__top">
+          <h3 class="service__name">Стрижка + борода</h3>
+          <span class="service__price">3 200 ₽</span>
+        </div>
+        <p class="service__desc">Полный образ за один визит. Контур бороды под форму лица, горячее полотенце и уход в подарок.</p>
+        <span class="service__time">90 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Стрижка + борода">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="service tilt reveal" data-accent="wine">
+        <div class="service__top">
+          <h3 class="service__name">Оформление бороды</h3>
+          <span class="service__price">1 500 ₽</span>
+        </div>
+        <p class="service__desc">Моделирование, окантовка опасной бритвой, камуфляж седины по желанию и питательное масло.</p>
+        <span class="service__time">45 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Оформление бороды">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="service tilt reveal" data-accent="wine">
+        <div class="service__top">
+          <h3 class="service__name">Королевское бритьё</h3>
+          <span class="service__price">1 800 ₽</span>
+        </div>
+        <p class="service__desc">Классика жанра: опасная бритва, два горячих полотенца, массаж лица и афтершейв. Ритуал, а не процедура.</p>
+        <span class="service__time">50 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Королевское бритьё">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="service tilt reveal" data-accent="teal">
+        <div class="service__top">
+          <h3 class="service__name">Отец и сын</h3>
+          <span class="service__price">3 000 ₽</span>
+        </div>
+        <p class="service__desc">Две стрижки подряд в соседних креслах. Для мальчиков до 12 лет — мультики и никакой спешки.</p>
+        <span class="service__time">90 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Отец и сын">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+
+      <article class="service tilt reveal" data-accent="teal">
+        <div class="service__top">
+          <h3 class="service__name">Камуфляж седины</h3>
+          <span class="service__price">1 200 ₽</span>
+        </div>
+        <p class="service__desc">Мягкое тонирование без резкой границы. Седина уходит в тень, цвет выглядит своим.</p>
+        <span class="service__time">40 минут</span>
+        <button class="service__btn" type="button" data-open-booking data-service="Камуфляж седины">Записаться <span aria-hidden="true">→</span></button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ МАСТЕРА ============ -->
+<section class="section section--alt" id="masters">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">02</span>
+      <div>
+        <p class="eyebrow">Команда</p>
+        <h2 class="section__title">Мастера</h2>
+      </div>
+      <p class="section__sub">Можно записаться к конкретному барберу — или доверить выбор администратору.</p>
+    </header>
+
+    <div class="masters">
+      <article class="master reveal">
+        <div class="master__photo">
+          <img src="img/master-1.webp" alt="Барбер Илья Ковалёв с ножницами в руках" width="600" height="800" loading="lazy">
+          <span class="master__ribbon">9 лет</span>
+          <span class="master__role">Топ-барбер</span>
+        </div>
+        <h3 class="master__name">Илья Ковалёв</h3>
+        <p class="master__desc">Фейды любой сложности и классика на пробор. Ведёт мастер-классы для барберов.</p>
+        <button class="master__btn" type="button" data-open-booking data-master="Илья Ковалёв">Записаться к мастеру</button>
+      </article>
+
+      <article class="master reveal">
+        <div class="master__photo">
+          <img src="img/master-2.webp" alt="Барбер Артём Гордеев держит ножницы" width="600" height="800" loading="lazy">
+          <span class="master__ribbon">7 лет</span>
+          <span class="master__role">Барбер</span>
+        </div>
+        <h3 class="master__name">Артём Гордеев</h3>
+        <p class="master__desc">Специалист по бороде и опасной бритве. Знает, что делать с жёстким волосом.</p>
+        <button class="master__btn" type="button" data-open-booking data-master="Артём Гордеев">Записаться к мастеру</button>
+      </article>
+
+      <article class="master reveal">
+        <div class="master__photo">
+          <img src="img/master-3.webp" alt="Барбер Марат Сафин с машинкой для стрижки" width="600" height="800" loading="lazy">
+          <span class="master__ribbon">6 лет</span>
+          <span class="master__role">Барбер</span>
+        </div>
+        <h3 class="master__name">Марат Сафин</h3>
+        <p class="master__desc">Текстурные стрижки и работа машинкой. Справится с кудрями, сединой и тонкими волосами.</p>
+        <button class="master__btn" type="button" data-open-booking data-master="Марат Сафин">Записаться к мастеру</button>
+      </article>
+
+      <article class="master reveal">
+        <div class="master__photo">
+          <img src="img/master-4.webp" alt="Барбер Денис Лапин в рабочем фартуке в зале барбершопа" width="600" height="800" loading="lazy">
+          <span class="master__ribbon">6 лет</span>
+          <span class="master__role">Детский барбер</span>
+        </div>
+        <h3 class="master__name">Денис Лапин</h3>
+        <p class="master__desc">Детские стрижки и первый визит в барбершоп. Терпение уровня «бог».</p>
+        <button class="master__btn" type="button" data-open-booking data-master="Денис Лапин">Записаться к мастеру</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ГАЛЕРЕЯ ============ -->
+<section class="section" id="gallery">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">03</span>
+      <div>
+        <p class="eyebrow">Портфолио</p>
+        <h2 class="section__title">Наши работы</h2>
+      </div>
+      <p class="section__sub">Отфильтруйте по типу услуги и нажмите на карточку, чтобы рассмотреть.</p>
+    </header>
+
+    <div class="filters reveal" role="group" aria-label="Фильтр работ">
+      <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Все <span class="filter__count">8</span></button>
+      <button class="filter" type="button" data-filter="fade" aria-pressed="false">Фейды <span class="filter__count">3</span></button>
+      <button class="filter" type="button" data-filter="beard" aria-pressed="false">Борода <span class="filter__count">2</span></button>
+      <button class="filter" type="button" data-filter="classic" aria-pressed="false">Классика <span class="filter__count">2</span></button>
+      <button class="filter" type="button" data-filter="kids" aria-pressed="false">Дети <span class="filter__count">1</span></button>
+    </div>
+
+    <div class="gallery" id="galleryGrid">
+      <button class="shot reveal" type="button" data-cat="fade" data-img="img/cut-fade.webp" data-service="Мужская стрижка" data-label="Skin fade" data-master="Илья Ковалёв" data-time="60 минут" data-text="Максимально короткий переход в ноль с чистой окантовкой. Держит форму три недели.">
+        <img src="img/cut-fade.webp" alt="Барбер делает стрижку skin fade машинкой" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Фейд</span><strong>Skin fade</strong><small>Илья Ковалёв · 60 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="beard" data-img="img/cut-beard.webp" data-service="Оформление бороды" data-label="Борода + контур" data-master="Артём Гордеев" data-time="45 минут" data-text="Моделирование под форму лица и окантовка опасной бритвой. Финиш — питательное масло.">
+        <img src="img/cut-beard.webp" alt="Мужчина с оформленной густой бородой и фейдом" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Борода</span><strong>Борода + контур</strong><small>Артём Гордеев · 45 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="classic" data-img="img/cut-classic.webp" data-service="Мужская стрижка" data-label="Классика на пробор" data-master="Илья Ковалёв" data-time="60 минут" data-text="Строгий пробор с укладкой на матовую пасту. Вариант под офис и под вечер.">
+        <img src="img/cut-classic.webp" alt="Классическая мужская стрижка с пробором" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Классика</span><strong>Классика на пробор</strong><small>Илья Ковалёв · 60 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="fade" data-img="img/cut-lowfade.webp" data-service="Мужская стрижка" data-label="Low fade" data-master="Марат Сафин" data-time="60 минут" data-text="Мягкий низкий переход, который прощает отросшие пару недель.">
+        <img src="img/cut-lowfade.webp" alt="Мужчина со стрижкой low fade и текстурным верхом" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Фейд</span><strong>Low fade</strong><small>Марат Сафин · 60 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="kids" data-img="img/cut-kids.webp" data-label="Детская стрижка" data-master="Денис Лапин" data-time="40 минут" data-text="Первый визит в барбершоп: мультики, машинка потише и никакой спешки.">
+        <img src="img/cut-kids.webp" alt="Мальчик в накидке в кресле барбершопа" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Дети</span><strong>Детская стрижка</strong><small>Денис Лапин · 40 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="beard" data-img="img/cut-shave.webp" data-service="Королевское бритьё" data-label="Королевское бритьё" data-master="Артём Гордеев" data-time="50 минут" data-text="Два горячих полотенца, опасная бритва, массаж лица и афтершейв.">
+        <img src="img/cut-shave.webp" alt="Бритьё опасной бритвой с пеной" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Борода</span><strong>Королевское бритьё</strong><small>Артём Гордеев · 50 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="classic" data-img="img/cut-undercut.webp" data-service="Мужская стрижка" data-label="Андеркат" data-master="Илья Ковалёв" data-time="60 минут" data-text="Резкий контраст верха и висков. Требует укладки, зато выглядит дорого.">
+        <img src="img/cut-undercut.webp" alt="Стрижка андеркат с выбритым пробором" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Классика</span><strong>Андеркат</strong><small>Илья Ковалёв · 60 мин</small></span>
+      </button>
+      <button class="shot reveal" type="button" data-cat="fade" data-img="img/cut-crop.webp" data-service="Мужская стрижка" data-label="Textured crop" data-master="Марат Сафин" data-time="60 минут" data-text="Рваная текстура сверху и аккуратный фейд по бокам. Универсальный вариант.">
+        <img src="img/cut-crop.webp" alt="Текстурная стрижка crop в профиль" width="600" height="750" loading="lazy">
+        <span class="shot__cap"><span class="shot__tag">Фейд</span><strong>Textured crop</strong><small>Марат Сафин · 60 мин</small></span>
+      </button>
+    </div>
+
+    <p class="gallery__empty" id="galleryEmpty" hidden>В этой категории пока нет работ.</p>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="section section--alt" id="reviews">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">04</span>
+      <div>
+        <p class="eyebrow">Отзывы</p>
+        <h2 class="section__title">Что говорят клиенты</h2>
+      </div>
+      <p class="section__sub">Средняя оценка 4,9 из 5 по 840 отзывам на картах.</p>
+    </header>
+
+    <div class="slider reveal" id="slider" tabindex="0" aria-roledescription="карусель" aria-label="Отзывы клиентов">
+      <div class="slider__viewport">
+        <ul class="slider__track" id="sliderTrack">
+          <li class="review">
+            <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+            <blockquote>Хожу третий год и ни разу не пожалел. Илья с первого раза понял, что мне нужно, и с тех пор я даже не объясняю — просто сажусь в кресло.</blockquote>
+            <div class="review__author"><span class="review__ava" data-initials="СВ" data-hue="38"></span><div><strong>Сергей В.</strong><span>клиент с 2022 года</span></div></div>
+          </li>
+          <li class="review">
+            <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+            <blockquote>Привёл сына, семь лет, до этого стрижка была кошмаром для всей семьи. Денис так его заболтал, что ребёнок теперь сам просится.</blockquote>
+            <div class="review__author"><span class="review__ava" data-initials="АМ" data-hue="176"></span><div><strong>Алексей М.</strong><span>клиент с 2023 года</span></div></div>
+          </li>
+          <li class="review">
+            <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+            <blockquote>Королевское бритьё — это отдельный вид отдыха. Уходишь оттуда спокойнее, чем после выходных. Стоит своих денег до последнего рубля.</blockquote>
+            <div class="review__author"><span class="review__ava" data-initials="ДК" data-hue="352"></span><div><strong>Дмитрий К.</strong><span>клиент с 2021 года</span></div></div>
+          </li>
+          <li class="review">
+            <div class="review__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+            <blockquote>Записался онлайн в 23:40, утром пришло подтверждение. Пришёл к 12:00 — в 12:00 сел в кресло. Мелочь, а уважение к времени чувствуется.</blockquote>
+            <div class="review__author"><span class="review__ava" data-initials="ПЖ" data-hue="266"></span><div><strong>Павел Ж.</strong><span>первый визит</span></div></div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="slider__ctrl">
+        <button class="slider__arrow" type="button" id="prevBtn" aria-label="Предыдущий отзыв">‹</button>
+        <div class="slider__dots" id="sliderDots" role="tablist" aria-label="Выбор отзыва"></div>
+        <button class="slider__arrow" type="button" id="nextBtn" aria-label="Следующий отзыв">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЗАПИСЬ ============ -->
+<section class="section booking" id="booking">
+  <div class="booking__bg" aria-hidden="true"></div>
+  <div class="container booking__inner">
+    <div class="booking__aside reveal">
+      <span class="section__num">05</span>
+      <p class="eyebrow">Онлайн-запись</p>
+      <h2 class="section__title">Займите кресло</h2>
+      <p class="booking__text">Оставьте заявку — администратор перезвонит в течение 15 минут и подтвердит время. Никаких рассылок и звонков «просто так».</p>
+      <ul class="booking__list">
+        <li>Отмена и перенос — бесплатно за 2 часа</li>
+        <li>Первый визит: скидка 15 % на уход</li>
+        <li>Оплата картой, наличными или переводом</li>
+      </ul>
+      <div class="booking__contact">
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <span>ежедневно 10:00 — 22:00</span>
+      </div>
+    </div>
+
+    <form class="form reveal" id="bookingForm" novalidate>
+      <p class="form__title">Заявка на визит</p>
+
+      <div class="field field--half">
+        <label for="f-name">Как вас зовут <span aria-hidden="true">*</span></label>
+        <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Иван" maxlength="60" required>
+        <p class="field__err" data-err-for="f-name"></p>
+      </div>
+
+      <div class="field field--half">
+        <label for="f-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="f-phone"></p>
+      </div>
+
+      <div class="field">
+        <label for="f-service">Услуга</label>
+        <select id="f-service" name="service">
+          <option value="Мужская стрижка">Мужская стрижка — 2 000 ₽</option>
+          <option value="Стрижка + борода">Стрижка + борода — 3 200 ₽</option>
+          <option value="Оформление бороды">Оформление бороды — 1 500 ₽</option>
+          <option value="Королевское бритьё">Королевское бритьё — 1 800 ₽</option>
+          <option value="Отец и сын">Отец и сын — 3 000 ₽</option>
+          <option value="Камуфляж седины">Камуфляж седины — 1 200 ₽</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="f-master">Мастер</label>
+        <select id="f-master" name="master">
+          <option value="">Любой свободный</option>
+          <option value="Илья Ковалёв">Илья Ковалёв</option>
+          <option value="Артём Гордеев">Артём Гордеев</option>
+          <option value="Марат Сафин">Марат Сафин</option>
+          <option value="Денис Лапин">Денис Лапин</option>
+        </select>
+      </div>
+
+      <div class="field field--half">
+        <label for="f-date">Дата <span aria-hidden="true">*</span></label>
+        <input type="date" id="f-date" name="date" required>
+        <p class="field__err" data-err-for="f-date"></p>
+      </div>
+
+      <div class="field field--half">
+        <label for="f-time">Время <span aria-hidden="true">*</span></label>
+        <select id="f-time" name="time" required>
+          <option value="">Выберите</option>
+          <option>10:00</option><option>11:00</option><option>12:00</option>
+          <option>13:00</option><option>14:00</option><option>15:00</option>
+          <option>16:00</option><option>17:00</option><option>18:00</option>
+          <option>19:00</option><option>20:00</option><option>21:00</option>
+        </select>
+        <p class="field__err" data-err-for="f-time"></p>
+      </div>
+
+      <div class="field">
+        <label for="f-note">Комментарий</label>
+        <textarea id="f-note" name="note" rows="3" maxlength="500" placeholder="Например: нужно успеть до 19:30"></textarea>
+      </div>
+
+      <!-- Ловушка для спам-ботов: человек это поле не видит, а бот заполняет -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="f-company">Не заполняйте это поле</label>
+        <input type="text" id="f-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="f-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных и с <a href="#privacy" data-open-privacy>политикой конфиденциальности</a></span>
+      </label>
+      <p class="field__err" data-err-for="f-agree"></p>
+
+      <button class="btn btn--gold btn--full" type="submit" id="submitBtn">Отправить заявку</button>
+      <p class="form__note">Нажимая кнопку, вы соглашаетесь с условиями. Мы не передаём данные третьим лицам.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ КОНТАКТЫ ============ -->
+<section class="section section--alt" id="contacts">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">06</span>
+      <div>
+        <p class="eyebrow">Как добраться</p>
+        <h2 class="section__title">Контакты</h2>
+      </div>
+      <p class="section__sub">Вход со двора, первый этаж. Своя парковка на четыре машины.</p>
+    </header>
+
+    <div class="contacts">
+      <div class="contacts__info reveal">
+        <div class="contact">
+          <h3>Адрес</h3>
+          <p>г. Москва, ул. Пятницкая, 27, стр. 1<br>вход со двора, 1 этаж · м. Новокузнецкая</p>
+        </div>
+        <div class="contact">
+          <h3>Телефон</h3>
+          <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+        </div>
+        <div class="contact">
+          <h3>Почта</h3>
+          <p><a href="mailto:hi@britva9.ru">hi@britva9.ru</a></p>
+        </div>
+        <div class="contact">
+          <h3>Часы работы</h3>
+          <p>Пн — Вс: 10:00 — 22:00<br>без выходных и перерывов</p>
+        </div>
+        <div class="socials">
+          <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram (откроется в новой вкладке)">TG</a>
+          <a href="https://vk.com/" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте (откроется в новой вкладке)">VK</a>
+          <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp (откроется в новой вкладке)">WA</a>
+        </div>
+      </div>
+
+      <!-- Карта грузится только по нажатию: до этого страница не делает
+           ни одного стороннего запроса, а посетитель не отдаёт данные Яндексу -->
+      <div class="map reveal" id="map"
+           data-map-src="https://yandex.ru/map-widget/v1/?ll=37.628905%2C55.741349&amp;z=16&amp;pt=37.628905%2C55.741349%2Cpm2rdl&amp;lang=ru_RU">
+        <div class="map__grid" aria-hidden="true">
+          <span class="map__street map__street--a"></span>
+          <span class="map__street map__street--b"></span>
+          <span class="map__street map__street--c"></span>
+          <span class="map__river"></span>
+        </div>
+        <div class="map__pin" aria-hidden="true"></div>
+        <div class="map__panel">
+          <strong>Пятницкая, 27, стр. 1</strong>
+          <span>2 минуты пешком от м. Новокузнецкая</span>
+          <div class="map__actions">
+            <button class="btn btn--gold btn--sm" type="button" id="mapLoad">Показать карту</button>
+            <a class="btn btn--ghost btn--sm" href="https://yandex.ru/maps/?pt=37.628905,55.741349&amp;z=17&amp;l=map" target="_blank" rel="noopener noreferrer">Маршрут в Яндекс Картах</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="logo" href="#hero" aria-label="БРИТВА №9 — наверх">
+          <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <path d="M4 24 L20 4 l8 0 -16 20 z" fill="currentColor"/>
+            <path d="M4 24 l8 0 4 4 -12 0 z" fill="currentColor" opacity=".55"/>
+          </svg>
+          <span class="logo__text">БРИТВА<span class="logo__num">№9</span></span>
+        </a>
+        <p>Барбершоп для тех, кто ценит своё время и свою голову.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Навигация в подвале">
+        <p class="footer__head">Разделы</p>
+        <a href="#about">О нас</a>
+        <a href="#services">Услуги</a>
+        <a href="#masters">Мастера</a>
+        <a href="#gallery">Работы</a>
+        <a href="#booking">Запись</a>
+      </nav>
+
+      <div class="footer__col">
+        <p class="footer__head">Контакты</p>
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <a href="mailto:hi@britva9.ru">hi@britva9.ru</a>
+        <span>Пятницкая, 27, стр. 1</span>
+        <span>ежедневно 10:00 — 22:00</span>
+      </div>
+
+      <div class="footer__col footer__col--cta">
+        <p class="footer__head">Онлайн-запись</p>
+        <span>Перезвоним за 15 минут и подберём время.</span>
+        <button class="btn btn--gold btn--sm" type="button" data-open-booking>Записаться</button>
+        <a class="footer__login" href="login/">Вход в кабинет →</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© <span id="year">2026</span> БРИТВА №9. Все права защищены.</p>
+      <a href="#privacy" data-open-privacy>Политика конфиденциальности</a>
+      <p class="footer__credit">Фото: Unsplash</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ МОДАЛЬНОЕ ОКНО ЗАПИСИ ============ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
+    <p class="eyebrow">Ответим за 15 минут</p>
+    <h2 class="modal__title" id="modalTitle">Быстрая запись</h2>
+    <p class="modal__sub">Оставьте телефон — перезвоним и подберём удобное время.</p>
+
+    <form class="form form--modal" id="quickForm" novalidate>
+      <div class="field">
+        <label for="q-name">Имя <span aria-hidden="true">*</span></label>
+        <input type="text" id="q-name" name="name" autocomplete="name" maxlength="60" required>
+        <p class="field__err" data-err-for="q-name"></p>
+      </div>
+      <div class="field">
+        <label for="q-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="q-phone"></p>
+      </div>
+      <div class="field">
+        <label for="q-service">Услуга</label>
+        <select id="q-service" name="service">
+          <option value="">Определимся по телефону</option>
+          <option>Мужская стрижка</option>
+          <option>Стрижка + борода</option>
+          <option>Оформление бороды</option>
+          <option>Королевское бритьё</option>
+          <option>Отец и сын</option>
+          <option>Камуфляж седины</option>
+        </select>
+      </div>
+      <div class="field" id="q-master-field" hidden>
+        <label for="q-master">Мастер</label>
+        <input type="text" id="q-master" name="master" readonly>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="q-company">Не заполняйте это поле</label>
+        <input type="text" id="q-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+      <label class="check">
+        <input type="checkbox" id="q-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+      <p class="field__err" data-err-for="q-agree"></p>
+      <button class="btn btn--gold btn--full" type="submit">Перезвоните мне</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ============ -->
+<div class="modal" id="privacy" hidden>
+  <div class="modal__overlay" data-close-privacy></div>
+  <div class="modal__box modal__box--wide" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+    <button class="modal__close" type="button" data-close-privacy aria-label="Закрыть">×</button>
+    <p class="eyebrow">Документы</p>
+    <h2 class="modal__title" id="privacyTitle">Политика конфиденциальности</h2>
+    <div class="policy">
+      <p>Мы собираем только то, что вы сами указали в форме записи: имя, телефон, выбранную услугу, мастера, дату, время и комментарий.</p>
+      <p>Эти данные нужны, чтобы администратор перезвонил и подтвердил визит. Мы не используем их для рассылок и не передаём третьим лицам, кроме случаев, предусмотренных законом.</p>
+      <p>Сайт не ставит рекламных и аналитических cookie. Карта Яндекса загружается только после нажатия кнопки «Показать карту».</p>
+      <p>Чтобы удалить свои данные, напишите на <a href="mailto:hi@britva9.ru">hi@britva9.ru</a> — сделаем в течение 3 рабочих дней.</p>
+      <p class="policy__note">Это демонстрационный текст. Перед запуском сайта замените его документом, составленным по 152-ФЗ.</p>
+    </div>
+    <button class="btn btn--ghost btn--full" type="button" data-close-privacy>Понятно</button>
+  </div>
+</div>
+
+<!-- ============ ЛАЙТБОКС ГАЛЕРЕИ ============ -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__overlay" data-close-lightbox></div>
+  <div class="lightbox__box" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <button class="lightbox__close" type="button" data-close-lightbox aria-label="Закрыть">×</button>
+    <div class="lightbox__media">
+      <img class="lightbox__shot" id="lbShot" src="img/cut-fade.webp" alt="" width="600" height="750" loading="lazy">
+      <button class="lightbox__nav lightbox__nav--prev" type="button" id="lbPrev" aria-label="Предыдущая работа">‹</button>
+      <button class="lightbox__nav lightbox__nav--next" type="button" id="lbNext" aria-label="Следующая работа">›</button>
+    </div>
+    <div class="lightbox__caption">
+      <p class="lightbox__count" id="lbCount"></p>
+      <h3 id="lbTitle"></h3>
+      <p class="lightbox__meta" id="lbMeta"></p>
+      <p class="lightbox__text" id="lbText"></p>
+      <button class="btn btn--gold" type="button" data-open-booking id="lbBook">Записаться на такую</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ УВЕДОМЛЕНИЯ ============ -->
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<button class="to-top" type="button" id="toTop" aria-label="Наверх" hidden>↑</button>
+
+<script src="js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Страница грузит только собственные файлы. frame-ancestors работает
+     лишь из HTTP-заголовка — настройка сервера описана в README -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>КОНТУР — каркасные дома под ключ с 3D-конструктором</title>
+<meta name="description" content="Каркасные дома под ключ за один сезон. Соберите свой дом в 3D: этажность, площадь, отделка и кровля — цена считается сразу.">
+<meta name="theme-color" content="#0d1420">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ezi234.github.io/04-houses/">
+<meta property="og:title" content="КОНТУР — каркасные дома под ключ">
+<meta property="og:description" content="Соберите дом в 3D, поменяйте отделку и кровлю, узнайте цену сразу.">
+<meta property="og:image" content="https://ezi234.github.io/04-houses/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к основному содержанию</a>
+
+<!-- Полоса прогресса чтения страницы -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- ============ ШАПКА ============ -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a class="logo" href="#hero" aria-label="КОНТУР — на главную">
+      <svg class="logo__mark" viewBox="0 0 34 34" aria-hidden="true" focusable="false">
+        <path d="M3 16 L17 4 l14 12" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M6.5 14 v16 h21 v-16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+        <rect x="14" y="21" width="6" height="9" fill="currentColor" opacity=".55"/>
+      </svg>
+      <span class="logo__text">КОНТУР<em>дома под ключ</em></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="#studio">Конструктор</a></li>
+        <li><a class="nav__link" href="#packages">Комплектации</a></li>
+        <li><a class="nav__link" href="#process">Этапы</a></li>
+        <li><a class="nav__link" href="#works">Проекты</a></li>
+        <li><a class="nav__link" href="#faq">Вопросы</a></li>
+      </ul>
+      <a class="btn btn--solid nav__cta" href="#lead">Обсудить проект</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="header__phone" href="tel:+74951234567">+7 (495) 123-45-67</a>
+      <a class="btn btn--solid btn--sm magnetic" href="#lead">Обсудить проект</a>
+      <button class="burger" type="button" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
+<section class="hero" id="hero">
+  <div class="hero__stars" aria-hidden="true"></div>
+  <div class="hero__aurora" aria-hidden="true"><span></span><span></span></div>
+
+  <div class="container hero__inner">
+    <p class="eyebrow eyebrow--line reveal">Строим в Подмосковье с 2009 года</p>
+
+    <h1 class="hero__title" id="heroTitle">
+      <span class="line"><span>Дом, в котором</span></span>
+      <span class="line"><span><span class="mark">свет горит</span> уже этой осенью</span></span>
+    </h1>
+
+    <p class="hero__lead reveal">
+      Каркасный дом под ключ за один сезон. Соберите свой прямо здесь: этажность,
+      площадь, отделка и кровля — цена появится сразу, без звонков и переписки.
+    </p>
+
+    <div class="hero__cta reveal">
+      <a class="btn btn--solid btn--lg magnetic" href="#studio">Собрать свой дом</a>
+      <a class="btn btn--outline btn--lg" href="#works">Смотреть построенные</a>
+    </div>
+
+    <ul class="hero__trust reveal">
+      <li><b>184</b> дома построено</li>
+      <li><b>1 сезон</b> от котлована до ключей</li>
+      <li><b>10 лет</b> гарантии на каркас</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 3D-КОНСТРУКТОР ============ -->
+<section class="studio" id="studio">
+  <div class="stage">
+    <canvas id="scene" tabindex="0"
+            aria-label="Трёхмерная модель дома. Перетаскивайте мышью или используйте стрелки на клавиатуре, чтобы обойти дом."></canvas>
+
+    <!-- Запасной вариант, если WebGL недоступен -->
+    <div class="stage__fallback" id="sceneFallback" hidden>
+      <img src="img/house-hero.svg" alt="Каркасный дом с террасой вечером" width="640" height="440">
+      <p>Ваш браузер не поддерживает трёхмерную графику — показываем изображение.</p>
+    </div>
+
+    <p class="stage__hint" id="viewHint"><span aria-hidden="true">⟲</span> Потяните, чтобы обойти дом</p>
+
+    <!-- Панель настроек поверх сцены -->
+    <form class="panel" id="configForm">
+      <p class="panel__eyebrow">Конструктор</p>
+      <h2 class="panel__title">Соберите свой дом</h2>
+
+      <div class="panel__row">
+        <div class="panel__label"><span>Этажность</span></div>
+        <div class="chips" role="radiogroup" aria-label="Этажность">
+          <label class="chip"><input type="radio" name="floors" value="1" data-rate="34000"><span>Один этаж<em>34 000 ₽/м²</em></span></label>
+          <label class="chip"><input type="radio" name="floors" value="1.5" data-rate="38000" checked><span>С мансардой<em>38 000 ₽/м²</em></span></label>
+          <label class="chip"><input type="radio" name="floors" value="2" data-rate="42000"><span>Два этажа<em>42 000 ₽/м²</em></span></label>
+        </div>
+      </div>
+
+      <div class="panel__row">
+        <div class="panel__label">
+          <label for="area">Площадь дома</label>
+          <output id="areaOut" for="area">120 м²</output>
+        </div>
+        <input type="range" id="area" name="area" min="60" max="240" step="5" value="120" class="range">
+        <div class="range__ticks" aria-hidden="true"><span>60 м²</span><span>150 м²</span><span>240 м²</span></div>
+      </div>
+
+      <div class="panel__row">
+        <div class="panel__label"><span>Отделка фасада</span><output id="wallName">Тёплый дуб</output></div>
+        <div class="swatches" role="radiogroup" aria-label="Отделка фасада">
+          <label class="swatch"><input type="radio" name="wall" value="#9c6f42" data-name="Тёплый дуб" data-add="0" checked><span data-sw="#9c6f42"></span></label>
+          <label class="swatch"><input type="radio" name="wall" value="#e6e1d6" data-name="Скандинавский белый" data-add="1200"><span data-sw="#e6e1d6"></span></label>
+          <label class="swatch"><input type="radio" name="wall" value="#3c4a44" data-name="Тёмная хвоя" data-add="1600"><span data-sw="#3c4a44"></span></label>
+          <label class="swatch"><input type="radio" name="wall" value="#252b33" data-name="Графитовый планкен" data-add="2400"><span data-sw="#252b33"></span></label>
+          <label class="swatch"><input type="radio" name="wall" value="#8d4a3a" data-name="Обожжённое дерево" data-add="2800"><span data-sw="#8d4a3a"></span></label>
+        </div>
+      </div>
+
+      <div class="panel__row">
+        <div class="panel__label"><span>Кровля</span><output id="roofName">Графит</output></div>
+        <div class="swatches" role="radiogroup" aria-label="Кровля">
+          <label class="swatch"><input type="radio" name="roof" value="#2b3138" data-name="Графит" data-add="0" checked><span data-sw="#2b3138"></span></label>
+          <label class="swatch"><input type="radio" name="roof" value="#5c3a2e" data-name="Тёмный терракот" data-add="900"><span data-sw="#5c3a2e"></span></label>
+          <label class="swatch"><input type="radio" name="roof" value="#33453c" data-name="Хвойный" data-add="900"><span data-sw="#33453c"></span></label>
+          <label class="swatch"><input type="radio" name="roof" value="#7b7f84" data-name="Серебро" data-add="1500"><span data-sw="#7b7f84"></span></label>
+        </div>
+      </div>
+
+      <div class="panel__row">
+        <label class="toggle">
+          <input type="checkbox" name="terrace" id="terrace" checked>
+          <span class="toggle__box" aria-hidden="true"></span>
+          <span class="toggle__text">Терраса под навесом<em>+ 240 000 ₽</em></span>
+        </label>
+      </div>
+    </form>
+
+    <!-- Итог поверх сцены -->
+    <div class="price" aria-live="polite">
+      <span class="price__label">Дом под ключ</span>
+      <p class="price__sum"><span id="sum">0</span> <em>₽</em></p>
+      <p class="price__note" id="priceNote">120 м² · с мансардой · тёплый дуб</p>
+      <div class="price__row">
+        <div><span>Срок</span><strong id="term">0</strong></div>
+        <div><span>За м²</span><strong id="perSqm">0</strong></div>
+      </div>
+      <button class="btn btn--solid btn--full magnetic" type="button" id="orderBtn" data-open-lead>Получить смету</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ БЕГУЩАЯ СТРОКА ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>фундамент</span><i>◆</i><span>каркас</span><i>◆</i><span>кровля</span><i>◆</i>
+    <span>окна</span><i>◆</i><span>утепление</span><i>◆</i><span>фасад</span><i>◆</i>
+    <span>инженерия</span><i>◆</i><span>отделка</span><i>◆</i><span>ключи</span><i>◆</i>
+    <span>фундамент</span><i>◆</i><span>каркас</span><i>◆</i><span>кровля</span><i>◆</i>
+    <span>окна</span><i>◆</i><span>утепление</span><i>◆</i><span>фасад</span><i>◆</i>
+    <span>инженерия</span><i>◆</i><span>отделка</span><i>◆</i><span>ключи</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ============ КОМПЛЕКТАЦИИ ============ -->
+<section class="section" id="packages">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">01</span>
+      <div>
+        <p class="eyebrow">Что входит</p>
+        <h2 class="section__title">Три комплектации</h2>
+      </div>
+      <p class="section__sub">Отличаются степенью готовности. В любой из них каркас, кровля и окна уже есть.</p>
+    </header>
+
+    <div class="packs">
+      <article class="pack pack--a tilt reveal">
+        <span class="pack__index">01</span>
+        <h3>Тёплый контур</h3>
+        <p class="pack__price"><span>от</span> 26 000 ₽<em>/м²</em></p>
+        <p class="pack__desc">Дом, который можно закрыть на зиму и спокойно отделывать своими силами весной.</p>
+        <ul>
+          <li>Свайно-винтовой фундамент</li>
+          <li>Каркас из сухой строганой доски</li>
+          <li>Кровля с гидро- и пароизоляцией</li>
+          <li>Окна и входная дверь</li>
+          <li>Утепление 200 мм</li>
+        </ul>
+        <button class="pack__btn" type="button" data-open-lead data-config="Комплектация «Тёплый контур»">Обсудить</button>
+      </article>
+
+      <article class="pack pack--b tilt reveal">
+        <span class="pack__badge">Берут чаще всего</span>
+        <span class="pack__index">02</span>
+        <h3>Предчистовая</h3>
+        <p class="pack__price"><span>от</span> 38 000 ₽<em>/м²</em></p>
+        <p class="pack__desc">Всё, что прячется в стенах, уже сделано. Остаётся выбрать краску и плитку.</p>
+        <ul>
+          <li>Всё из «Тёплого контура»</li>
+          <li>Фасадная отделка на выбор</li>
+          <li>Электрика и разводка воды</li>
+          <li>Отопление с котлом</li>
+          <li>Стяжка полов и стены под покраску</li>
+        </ul>
+        <button class="pack__btn" type="button" data-open-lead data-config="Комплектация «Предчистовая»">Обсудить</button>
+      </article>
+
+      <article class="pack pack--c tilt reveal">
+        <span class="pack__index">03</span>
+        <h3>Под ключ</h3>
+        <p class="pack__price"><span>от</span> 52 000 ₽<em>/м²</em></p>
+        <p class="pack__desc">Заезжаете с чемоданом. Мы сдаём дом с чистовой отделкой и работающей техникой.</p>
+        <ul>
+          <li>Всё из «Предчистовой»</li>
+          <li>Чистовая отделка по проекту</li>
+          <li>Сантехника и радиаторы</li>
+          <li>Межкомнатные двери</li>
+          <li>Уборка и вывоз мусора</li>
+        </ul>
+        <button class="pack__btn" type="button" data-open-lead data-config="Комплектация «Под ключ»">Обсудить</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЭТАПЫ ============ -->
+<section class="section section--deep" id="process">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">02</span>
+      <div>
+        <p class="eyebrow">Как строим</p>
+        <h2 class="section__title">Сезон от эскиза до ключей</h2>
+      </div>
+      <p class="section__sub">Каждый этап закрывается актом и фотоотчётом. Оплата идёт следом за работой, а не вперёд неё.</p>
+    </header>
+
+    <ol class="timeline" id="timeline">
+      <span class="timeline__rail" aria-hidden="true"><i id="timelineFill"></i></span>
+
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Этап 01</span>
+        <h3>Участок и проект</h3>
+        <p>Выезжаем на участок, смотрим грунт, подъезд и коммуникации. Готовим планировки и смету по позициям.</p>
+        <span class="step__time">7–14 дней</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Этап 02</span>
+        <h3>Фундамент</h3>
+        <p>Свайно-винтовой или лента — зависит от грунта, а не от того, что нам удобнее. Заключение по грунту отдаём вам.</p>
+        <span class="step__time">3–7 дней</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Этап 03</span>
+        <h3>Каркас и кровля</h3>
+        <p>Сухая строганая доска камерной сушки, обработка антисептиком. Дом встаёт под крышу за две-три недели.</p>
+        <span class="step__time">14–21 день</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Этап 04</span>
+        <h3>Контур и инженерия</h3>
+        <p>Окна, утепление, фасад, электрика и вода. С этого момента внутри можно работать в любую погоду.</p>
+        <span class="step__time">21–30 дней</span>
+      </li>
+      <li class="step reveal">
+        <span class="step__dot" aria-hidden="true"></span>
+        <span class="step__num">Этап 05</span>
+        <h3>Отделка и сдача</h3>
+        <p>Чистовая отделка, уборка, обход с вами по списку. Паспорт дома и гарантийный талон на десять лет.</p>
+        <span class="step__time">30–45 дней</span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ ПРОЕКТЫ ============ -->
+<section class="section" id="works">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">03</span>
+      <div>
+        <p class="eyebrow">Портфолио</p>
+        <h2 class="section__title">Построенные дома</h2>
+      </div>
+      <p class="section__sub">Нажмите на карточку, чтобы посмотреть площадь, комплектацию и срок.</p>
+    </header>
+
+    <div class="filters reveal" role="group" aria-label="Фильтр проектов">
+      <button class="filter is-active" type="button" data-filter="all">Все</button>
+      <button class="filter" type="button" data-filter="one">Одноэтажные</button>
+      <button class="filter" type="button" data-filter="attic">С мансардой</button>
+      <button class="filter" type="button" data-filter="two">Двухэтажные</button>
+    </div>
+
+    <div class="works" id="worksGrid">
+      <button class="work reveal work--wide" type="button" data-cat="attic"
+              data-img="img/house-hero.svg" data-title="Дом с мансардой в Истре"
+              data-meta="142 м² · предчистовая · 96 дней" data-price="5 396 000 ₽"
+              data-text="Тёплый дуб на фасаде, графитовая кровля и терраса под общим навесом. Панорамное окно во фронтоне мансарды.">
+        <img src="img/house-hero.svg" alt="Дом с мансардой вечером" width="640" height="440" loading="lazy">
+        <span class="work__info"><strong>Дом с мансардой в Истре</strong><em>142 м² · предчистовая</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="one"
+              data-img="img/house-white.svg" data-title="Одноэтажный в Дмитрове"
+              data-meta="96 м² · под ключ · 78 дней" data-price="4 992 000 ₽"
+              data-text="Скандинавский белый планкен, большие окна в пол и плоская терраса вдоль всего фасада.">
+        <img src="img/house-white.svg" alt="Белый одноэтажный дом" width="640" height="440" loading="lazy">
+        <span class="work__info"><strong>Одноэтажный в Дмитрове</strong><em>96 м² · под ключ</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="two"
+              data-img="img/house-dark.svg" data-title="Двухэтажный в Апрелевке"
+              data-meta="188 м² · предчистовая · 118 дней" data-price="7 896 000 ₽"
+              data-text="Графитовый планкен и кровля в цвет. Второй свет в гостиной, отдельный вход в котельную.">
+        <img src="img/house-dark.svg" alt="Тёмный двухэтажный дом" width="640" height="440" loading="lazy">
+        <span class="work__info"><strong>Двухэтажный в Апрелевке</strong><em>188 м² · предчистовая</em></span>
+      </button>
+
+      <button class="work reveal" type="button" data-cat="two"
+              data-img="img/house-barn.svg" data-title="Барнхаус на Новой Риге"
+              data-meta="164 м² · под ключ · 126 дней" data-price="8 528 000 ₽"
+              data-text="Крутая двускатка, вертикальный планкен и панорамное остекление во фронтоне на два этажа.">
+        <img src="img/house-barn.svg" alt="Барнхаус с панорамным остеклением" width="640" height="440" loading="lazy">
+        <span class="work__info"><strong>Барнхаус на Новой Риге</strong><em>164 м² · под ключ</em></span>
+      </button>
+
+      <button class="work reveal work--wide" type="button" data-cat="attic"
+              data-img="img/house-winter.svg" data-title="Зимний дом в Наро-Фоминске"
+              data-meta="128 м² · под ключ · 104 дня" data-price="6 656 000 ₽"
+              data-text="Утепление 250 мм и тёплые полы: заехали в ноябре и первую зиму прожили без единой доработки.">
+        <img src="img/house-winter.svg" alt="Дом зимой со снегом на кровле" width="640" height="440" loading="lazy">
+        <span class="work__info"><strong>Зимний дом в Наро-Фоминске</strong><em>128 м² · под ключ</em></span>
+      </button>
+    </div>
+
+    <p class="works__empty" id="worksEmpty" hidden>В этой категории пока нет проектов.</p>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="section section--deep" id="reviews">
+  <div class="container">
+    <header class="section__head reveal">
+      <span class="section__num">04</span>
+      <div>
+        <p class="eyebrow">Отзывы</p>
+        <h2 class="section__title">Что говорят хозяева</h2>
+      </div>
+      <p class="section__sub">Средняя оценка 4,9 из 5 по 168 отзывам на картах и профильных форумах.</p>
+    </header>
+
+    <div class="quotes">
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Заехали в октябре, как и обещали в марте. Зиму прожили — по счётчику газа вышло меньше, чем нам обещали конкуренты.</blockquote>
+        <figcaption><span class="ava" data-initials="АР">АР</span><div><strong>Андрей Р.</strong><em>142 м², Истра</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Грунт оказался хуже, чем думали, и фундамент пришлось менять на ленту. Пересчитали честно, показали заключение и не стали накручивать.</blockquote>
+        <figcaption><span class="ava" data-initials="МТ">МТ</span><div><strong>Марина Т.</strong><em>96 м², Дмитров</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Фотоотчёт каждую пятницу — я был в командировке полсезона и всё равно видел каждую стойку каркаса. Ни разу не пришлось звонить и выяснять.</blockquote>
+        <figcaption><span class="ava" data-initials="ДС">ДС</span><div><strong>Дмитрий С.</strong><em>188 м², Апрелевка</em></div></figcaption>
+      </figure>
+      <figure class="quote reveal">
+        <div class="quote__stars" aria-label="Оценка 5 из 5">★★★★★</div>
+        <blockquote>Через два года повело одну доску на фасаде — приехали и поменяли по гарантии. Без экспертиз и разговоров, кто виноват.</blockquote>
+        <figcaption><span class="ava" data-initials="ЕК">ЕК</span><div><strong>Елена К.</strong><em>128 м², Наро-Фоминск</em></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВОПРОСЫ ============ -->
+<section class="section" id="faq">
+  <div class="container faq__wrap">
+    <header class="section__head section__head--stack reveal">
+      <span class="section__num">05</span>
+      <div>
+        <p class="eyebrow">Частые вопросы</p>
+        <h2 class="section__title">Что спрашивают<br>перед стройкой</h2>
+      </div>
+      <p class="section__sub">Не нашли свой вопрос — задайте его прорабу, это ни к чему не обязывает.</p>
+      <a class="btn btn--outline" href="#lead">Задать вопрос</a>
+    </header>
+
+    <div class="accordion" id="accordion">
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">В каркасном доме правда можно жить зимой?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Да, если утепление и пароизоляция сделаны правильно. Мы кладём двести миллиметров минеральной ваты в стены и двести пятьдесят в кровлю, обязательно с вентиляционным зазором. Проблемы у каркасников начинаются не от технологии, а от экономии на пароизоляции и на сушке доски.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Цена из конструктора — окончательная?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Это честная предварительная цена по площади и комплектации. Не входят подключение к сетям, ландшафт, забор и мебель. После выезда на участок цифра может измениться — чаще всего из-за грунта под фундамент. Разницу всегда показываем расчётом, а не словами.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Что если сорвёте срок?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>В договоре прописан штраф за каждый день просрочки по нашей вине. Отдельно оговорены погодные простои: если неделю льёт и кровлю крыть нельзя, срок сдвигается, и это тоже написано заранее, а не объявляется постфактум.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Можно строить по своему проекту?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Можно. Проверим конструктив и посчитаем по вашим чертежам. Если увидим решения, которые в каркасе плохо себя ведут, скажем прямо и предложим замену — но настаивать не будем, дом ваш.</p></div></div>
+      </div>
+      <div class="acc">
+        <h3><button class="acc__head" type="button" aria-expanded="false">Как устроена оплата?<span class="acc__icon" aria-hidden="true"></span></button></h3>
+        <div class="acc__body"><div><p>Платежи привязаны к этапам: фундамент, каркас с кровлей, контур, отделка. Вы принимаете этап, подписываете акт и только потом платите за него. Аванс есть только на закупку материала под конкретный этап, и он подтверждается накладными.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ЗАЯВКА ============ -->
+<section class="section section--deep lead" id="lead">
+  <div class="container lead__inner">
+    <div class="lead__text reveal">
+      <p class="eyebrow">Бесплатный выезд</p>
+      <h2 class="section__title">Приедем на участок<br>и посчитаем</h2>
+      <p class="lead__desc">Работаем по Московской области в пределах 90 км от МКАД.
+        Выезд, замер участка и смета — бесплатно, даже если вы решите строить не с нами.</p>
+      <ul class="lead__list">
+        <li>Смотрим грунт, подъезд и коммуникации</li>
+        <li>Смету присылаем за 7–14 дней</li>
+        <li>Никаких звонков «просто напомнить»</li>
+      </ul>
+      <div class="lead__contact">
+        <a href="tel:+74951234567">+7 (495) 123-45-67</a>
+        <span>ежедневно 9:00 — 21:00</span>
+      </div>
+    </div>
+
+    <form class="form reveal" id="leadForm" novalidate>
+      <div class="field">
+        <label for="l-name">Как к вам обращаться <span aria-hidden="true">*</span></label>
+        <input type="text" id="l-name" name="name" autocomplete="name" placeholder="Андрей" maxlength="60" required>
+        <p class="field__err" data-err-for="l-name"></p>
+      </div>
+      <div class="field">
+        <label for="l-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="l-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="l-phone"></p>
+      </div>
+      <div class="field field--half">
+        <label for="l-area">Площадь, м²</label>
+        <input type="number" id="l-area" name="area" min="30" max="600" step="1" placeholder="120" inputmode="numeric">
+        <p class="field__err" data-err-for="l-area"></p>
+      </div>
+      <div class="field field--half">
+        <label for="l-pack">Комплектация</label>
+        <select id="l-pack" name="package">
+          <option value="">Пока не определились</option>
+          <option>Тёплый контур</option>
+          <option>Предчистовая</option>
+          <option>Под ключ</option>
+        </select>
+      </div>
+      <div class="field" id="l-config-field" hidden>
+        <label for="l-config">Ваша сборка из конструктора</label>
+        <input type="text" id="l-config" name="config" readonly>
+      </div>
+      <div class="field">
+        <label for="l-note">Комментарий</label>
+        <textarea id="l-note" name="note" rows="3" maxlength="500" placeholder="Например: участок в Истринском районе, газ по границе"></textarea>
+      </div>
+
+      <!-- Ловушка для спам-ботов: человек это поле не видит, а бот заполняет -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="l-company">Не заполняйте это поле</label>
+        <input type="text" id="l-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="check">
+        <input type="checkbox" id="l-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных и с <a href="#privacy">политикой конфиденциальности</a></span>
+      </label>
+      <p class="field__err" data-err-for="l-agree"></p>
+
+      <button class="btn btn--solid btn--full magnetic" type="submit" id="leadSubmit">Отправить заявку</button>
+      <p class="form__note">Перезвоним в течение 15 минут в рабочее время. Данные не передаём третьим лицам.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ КОНТАКТЫ ============ -->
+<section class="section" id="contacts">
+  <div class="container">
+    <div class="contacts">
+      <div class="contacts__col reveal">
+        <h3>Офис и производство</h3>
+        <p>Московская обл., Красногорск,<br>Заводская ул., 12, строение 3</p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Связь</h3>
+        <p><a href="tel:+74951234567">+7 (495) 123-45-67</a><br><a href="mailto:hi@kontur-dom.ru">hi@kontur-dom.ru</a></p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Часы</h3>
+        <p>Пн — Сб: 9:00 — 21:00<br>Вс: выезд по договорённости</p>
+      </div>
+      <div class="contacts__col reveal">
+        <h3>Соцсети</h3>
+        <div class="socials">
+          <a href="#tg" aria-label="Telegram">TG</a>
+          <a href="#vk" aria-label="ВКонтакте">VK</a>
+          <a href="#yt" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="map reveal" role="img" aria-label="Схема расположения офиса">
+      <div class="map__grid" aria-hidden="true"></div>
+      <div class="map__pin" aria-hidden="true"></div>
+      <p class="map__hint">Здесь размещается карта.<br><span>Вставьте iframe Яндекс.Карт или 2ГИС в файле index.html</span></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ ПОДВАЛ ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <span class="logo__text">КОНТУР<em>дома под ключ</em></span>
+      <p>Каркасные дома в Московской области. Договор, фотоотчёт по этапам и десять лет гарантии на каркас.</p>
+    </div>
+    <nav class="footer__nav" aria-label="Навигация в подвале">
+      <a href="#studio">Конструктор</a>
+      <a href="#packages">Комплектации</a>
+      <a href="#works">Проекты</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#lead">Заявка</a>
+      <a href="login/">Вход в кабинет</a>
+      <a href="#privacy">Политика конфиденциальности</a>
+    </nav>
+    <p class="footer__copy">© <span id="year">2026</span> КОНТУР. Все права защищены.</p>
+  </div>
+</footer>
+
+<!-- ============ МОДАЛЬНОЕ ОКНО ============ -->
+<div class="modal" id="modal" hidden>
+  <div class="modal__overlay" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
+    <p class="eyebrow">Бесплатно и без обязательств</p>
+    <h2 class="modal__title" id="modalTitle">Получить смету</h2>
+    <p class="modal__sub">Оставьте телефон — перезвоним и обсудим участок.</p>
+
+    <form class="form form--modal" id="quickForm" novalidate>
+      <div class="field">
+        <label for="q-name">Имя <span aria-hidden="true">*</span></label>
+        <input type="text" id="q-name" name="name" autocomplete="name" maxlength="60" required>
+        <p class="field__err" data-err-for="q-name"></p>
+      </div>
+      <div class="field">
+        <label for="q-phone">Телефон <span aria-hidden="true">*</span></label>
+        <input type="tel" id="q-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 (___) ___-__-__" maxlength="18" required>
+        <p class="field__err" data-err-for="q-phone"></p>
+      </div>
+      <div class="field" id="q-config-field" hidden>
+        <label for="q-config">Ваша сборка</label>
+        <input type="text" id="q-config" name="config" readonly>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="q-company">Не заполняйте это поле</label>
+        <input type="text" id="q-company" name="company" tabindex="-1" autocomplete="off">
+      </div>
+      <label class="check">
+        <input type="checkbox" id="q-agree" name="agree" required>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+      <p class="field__err" data-err-for="q-agree"></p>
+      <button class="btn btn--solid btn--full" type="submit">Перезвоните мне</button>
+    </form>
+  </div>
+</div>
+
+<!-- ============ ЛАЙТБОКС ПРОЕКТОВ ============ -->
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lightbox__overlay" data-close-lightbox></div>
+  <div class="lightbox__box" role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+    <button class="lightbox__close" type="button" data-close-lightbox aria-label="Закрыть">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" id="lbPrev" aria-label="Предыдущий проект">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" type="button" id="lbNext" aria-label="Следующий проект">›</button>
+    <img id="lbImg" src="" alt="" width="640" height="440">
+    <div class="lightbox__caption">
+      <h3 id="lbTitle"></h3>
+      <p class="lightbox__meta" id="lbMeta"></p>
+      <p id="lbText"></p>
+      <p class="lightbox__price" id="lbPrice"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ УВЕДОМЛЕНИЯ ============ -->
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+
+<button class="to-top" type="button" id="toTop" aria-label="Наверх" hidden>
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l8 8-1.4 1.4L13 7.8V20h-2V7.8L5.4 13.4 4 12z"/></svg>
+</button>
+
+<script src="js/house3d.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

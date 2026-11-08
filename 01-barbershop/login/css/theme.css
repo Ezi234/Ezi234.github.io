@@ -1,0 +1,108 @@
+/* =========================================================
+   БРИТВА №9 — тема входа: тёмный бархат, золото, барберский шест.
+   Каркас и общие анимации — в auth.css.
+   ========================================================= */
+
+:root{
+  --bg:#0b0b0d;
+  --panel:#111116;
+  --panel-2:#17171e;
+  --line:#26262f;
+  --line-2:#33333f;
+  --ink:#f4f1ea;
+  --muted:#9b958a;
+
+  --accent:#e0b64a;
+  --accent-2:#f3d27e;
+  --on-accent:#17120a;
+  --ok:#4caf7d;
+  --bad:#e2624f;
+  --warn:#e8a13c;
+  --glow:rgba(224,182,74,.18);
+  --wine:#a03a45;
+
+  --font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --head:Georgia, "Times New Roman", "PT Serif", serif;
+  --mono:"Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+
+  --r:14px; --r-sm:8px;
+  --shadow:0 30px 70px -34px rgba(0,0,0,.9);
+  --ease:cubic-bezier(.16,1,.3,1);
+
+  --phone-body:linear-gradient(160deg,#1e1e27,#0d0d11);
+  --phone-screen:radial-gradient(120% 70% at 50% 0%, #1a1a21, #0d0d11 70%);
+  --phone-ink:#f4f1ea;
+  --code-bg:rgba(224,182,74,.08);
+}
+
+.brand{ color:var(--accent); }
+.brand b{ color:var(--ink); font-weight:400; letter-spacing:.18em; }
+.card{ border-top:2px solid var(--accent); }
+.card__title{ font-weight:400; letter-spacing:-.01em; }
+.app__title{ font-weight:400; }
+
+/* ---------- фон: тёплый свет и мягкие полосы ---------- */
+.deco__glow{
+  position:absolute; width:760px; height:760px; border-radius:50%; top:-300px; left:50%;
+  transform:translateX(-50%); background:radial-gradient(closest-side, rgba(224,182,74,.14), transparent);
+  animation:pulseGlow 9s ease-in-out infinite;
+}
+@keyframes pulseGlow{ 50%{ opacity:.55; } }
+.deco__stripes{
+  position:absolute; inset:-40% -10%; opacity:.05;
+  background:repeating-linear-gradient(115deg, var(--accent) 0 14px, transparent 14px 44px);
+  animation:stripesDrift 26s linear infinite;
+}
+@keyframes stripesDrift{ to{ transform:translateY(-88px); } }
+.deco__vign{
+  position:absolute; inset:0;
+  background:radial-gradient(120% 80% at 50% 30%, transparent 40%, rgba(0,0,0,.75));
+}
+
+/* ---------- сцена: барберский шест ---------- */
+.art__ring{ fill:none; stroke:rgba(224,182,74,.2); stroke-width:2; animation:breathe 3.4s ease-in-out infinite; }
+@keyframes breathe{ 50%{ stroke:rgba(224,182,74,.5); } }
+
+.art__scan{
+  fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round;
+  stroke-dasharray:52 275; transform-origin:60px 60px; opacity:0; transition:opacity .3s;
+}
+.art.is-scan .art__scan{ opacity:1; animation:spin 1.1s linear infinite; }
+
+.art__glass{ fill:#1a1a21; }
+.art__stripe{ fill:var(--accent); transition:fill .5s; }
+.art__stripe--wine{ fill:var(--wine); transition:fill .5s; }
+.art__stripes{ animation:poleRun 2.6s linear infinite; }
+@keyframes poleRun{ to{ transform:translateY(20px); } }
+
+.art__tube{ fill:none; stroke:var(--accent); stroke-width:2.4; transition:stroke .5s; }
+.art__cap{ fill:var(--accent-2); transition:fill .5s; }
+
+.art__check{
+  fill:none; stroke:var(--ok); stroke-width:6.5; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:64; stroke-dashoffset:64; transition:stroke-dashoffset .6s .5s var(--ease);
+}
+
+.art.is-bad{ animation:shake .45s; }
+.art.is-bad .art__stripe{ fill:var(--bad); }
+.art.is-bad .art__stripe--wine{ fill:#6d2028; }
+.art.is-bad .art__tube{ stroke:var(--bad); }
+.art.is-bad .art__cap{ fill:var(--bad); }
+
+/* доступ открыт: шест раскручивается, ложится бритвенная галочка */
+.art.is-open .art__stripes{ animation-duration:.5s; }
+.art.is-open .art__stripe{ fill:rgba(224,182,74,.28); }
+.art.is-open .art__stripe--wine{ fill:rgba(160,58,69,.28); }
+.art.is-open .art__tube{ stroke:var(--ok); }
+.art.is-open .art__cap{ fill:var(--ok); }
+.art.is-open .art__check{ stroke-dashoffset:0; }
+.art.is-open svg{ animation:okGlow 1.6s .5s ease-out both; }
+@keyframes okGlow{
+  0%{ filter:drop-shadow(0 0 0 rgba(76,175,125,0)); }
+  40%{ filter:drop-shadow(0 0 20px rgba(76,175,125,.65)); }
+  100%{ filter:drop-shadow(0 0 8px rgba(76,175,125,.3)); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .deco__stripes{ animation:none; }
+}

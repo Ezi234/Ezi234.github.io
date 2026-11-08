@@ -1,0 +1,97 @@
+/* =========================================================
+   ФАСАД — тема входа: светлая кухня, латунь, изумруд.
+   Сцена: шкаф, который открывается при верном коде.
+   ========================================================= */
+
+:root{
+  --bg:#eef1f0;
+  --panel:#ffffff;
+  --panel-2:#f4f7f6;
+  --line:#d7dedc;
+  --line-2:#c3ccca;
+  --ink:#10171a;
+  --muted:#66757c;
+
+  --accent:#157a5b;
+  --accent-2:#23a179;
+  --on-accent:#ffffff;
+  --ok:#1f8f63;
+  --bad:#c4563f;
+  --warn:#b98b4a;
+  --glow:rgba(21,122,91,.14);
+  --brass:#b98b4a;
+
+  --font:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --head:Georgia, "Times New Roman", serif;
+  --mono:"Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+
+  --r:16px; --r-sm:10px;
+  --shadow:0 30px 70px -34px rgba(16,23,26,.45);
+  --ease:cubic-bezier(.16,1,.3,1);
+
+  --phone-body:linear-gradient(160deg,#2a3337,#151b1e);
+  --phone-screen:#ffffff;
+  --phone-ink:#10171a;
+  --code-bg:#dff0e9;
+}
+
+.brand{ color:var(--accent); }
+.brand b{ color:var(--ink); font-weight:400; letter-spacing:.16em; }
+.card{ border-top:2px solid var(--accent); }
+.card__title{ font-weight:400; }
+.card__sub{ font-family:var(--head); font-style:italic; }
+.app__title{ font-weight:400; }
+.badges li{ background:#fff; }
+.phone__notch{ background:#0c1113; }
+
+/* ---------- фон: мягкий свет из окна ---------- */
+.deco__light{
+  position:absolute; inset:-20% -10% auto -10%; height:80%;
+  background:linear-gradient(168deg, rgba(255,255,255,.9), rgba(255,255,255,0) 60%);
+  transform:rotate(-6deg);
+}
+.deco__blob{ position:absolute; border-radius:50%; filter:blur(90px); animation:drift 25s ease-in-out infinite; }
+.deco__blob--green{ width:520px; height:520px; background:rgba(35,161,121,.16); top:-190px; right:-130px; }
+.deco__blob--brass{ width:460px; height:460px; background:rgba(185,139,74,.18); bottom:-190px; left:-120px; animation-direction:reverse; animation-duration:30s; }
+@keyframes drift{ 0%,100%{ transform:translate(0,0) scale(1); } 50%{ transform:translate(-46px,32px) scale(1.1); } }
+
+/* ---------- сцена: кухонный шкаф ---------- */
+.art__box{ fill:#e9edeb; stroke:var(--line-2); stroke-width:2; transition:stroke .5s; }
+.art__inside{ fill:#26333a; }
+.art__door rect{ fill:#fbfcfc; stroke:var(--line-2); stroke-width:1.8; transition:fill .5s, stroke .5s; }
+.art__door .art__handle{ fill:var(--brass); stroke:none; transition:opacity .3s; }
+.art__door{ transition:transform .75s var(--ease); }
+.art__door--l{ transform-origin:24px 60px; }
+.art__door--r{ transform-origin:96px 60px; }
+.art__top{ fill:var(--brass); }
+.art__shelf{ stroke:rgba(255,255,255,.22); stroke-width:2; }
+
+.art__light{ fill:rgba(35,161,121,.55); opacity:0; transition:opacity .3s; }
+.art.is-scan .art__light{ opacity:.9; animation:sheen 1.2s linear infinite; }
+@keyframes sheen{ from{ transform:translateX(0); } to{ transform:translateX(120px); } }
+
+.art__check{
+  fill:none; stroke:#4bd79f; stroke-width:6.5; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:56; stroke-dashoffset:56; transition:stroke-dashoffset .6s .55s var(--ease);
+}
+
+.art.is-bad{ animation:shake .45s; }
+.art.is-bad .art__door rect{ stroke:var(--bad); fill:#fdf1ee; }
+.art.is-bad .art__box{ stroke:var(--bad); }
+
+/* верный код — дверцы распахиваются, внутри загорается галочка */
+.art.is-open .art__door--l{ transform:scaleX(.07); }
+.art.is-open .art__door--r{ transform:scaleX(.07); }
+.art.is-open .art__door .art__handle{ opacity:0; }
+.art.is-open .art__box{ stroke:var(--accent); }
+.art.is-open .art__check{ stroke-dashoffset:0; }
+.art.is-open svg{ animation:okGlow 1.6s .5s ease-out both; }
+@keyframes okGlow{
+  0%{ filter:drop-shadow(0 0 0 rgba(31,143,99,0)); }
+  40%{ filter:drop-shadow(0 0 20px rgba(31,143,99,.5)); }
+  100%{ filter:drop-shadow(0 0 8px rgba(31,143,99,.22)); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .deco__blob{ animation:none; }
+}

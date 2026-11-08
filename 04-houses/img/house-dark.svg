@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" width="640" height="440" role="img" aria-label="Тёмный двухэтажный дом вечером">
+  <defs>
+    <linearGradient id="skyH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1220"/>
+      <stop offset="0.55" stop-color="#16243a"/>
+      <stop offset="1" stop-color="#2c3d4f"/>
+    </linearGradient>
+    <linearGradient id="wallH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#39424e"/>
+      <stop offset="1" stop-color="#232a34"/>
+    </linearGradient>
+    <linearGradient id="roofH" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#39424c"/>
+      <stop offset="1" stop-color="#232a32"/>
+    </linearGradient>
+    <radialGradient id="glowH" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffcf7d" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ffcf7d" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cutH"><rect width="640" height="440"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutH)">
+    <rect width="640" height="440" fill="url(#skyH)"/>
+
+    <!-- звёзды -->
+    <g fill="#ffffff">
+      <circle cx="58" cy="42" r="1.5" opacity=".8"/><circle cx="132" cy="26" r="1.1" opacity=".6"/>
+      <circle cx="206" cy="58" r="1.6" opacity=".75"/><circle cx="288" cy="30" r="1.2" opacity=".55"/>
+      <circle cx="372" cy="52" r="1.5" opacity=".7"/><circle cx="454" cy="24" r="1.1" opacity=".6"/>
+      <circle cx="530" cy="46" r="1.4" opacity=".7"/><circle cx="602" cy="34" r="1.2" opacity=".55"/>
+      <circle cx="96" cy="96" r="1.1" opacity=".45"/><circle cx="342" cy="104" r="1.2" opacity=".5"/>
+      <circle cx="486" cy="92" r="1.3" opacity=".5"/><circle cx="244" cy="132" r="1" opacity=".4"/>
+    </g>
+    <!-- луна -->
+    <circle cx="556" cy="76" r="22" fill="#e8eef7" opacity=".9"/>
+    <circle cx="548" cy="70" r="22" fill="#16243a"/>
+
+    <!-- дальний лес -->
+    <g fill="#111c2b">
+      <path d="M0 300 l26 -56 26 56z"/><path d="M40 300 l30 -70 30 70z"/><path d="M92 300 l22 -48 22 48z"/>
+      <path d="M470 300 l24 -52 24 52z"/><path d="M520 300 l32 -74 32 74z"/><path d="M580 300 l26 -56 26 56z"/>
+    </g>
+
+    <!-- земля -->
+    <rect y="300" width="640" height="140" fill="#16221c"/>
+    <path d="M0 300 q160 -14 320 2 t320 -6 v144 H0z" fill="#1b2a22"/>
+
+    <!-- свет из окон на землю -->
+    <ellipse cx="290" cy="352" rx="180" ry="46" fill="url(#glowH)"/>
+
+    <!-- терраса -->
+    <g>
+      <rect x="392" y="286" width="140" height="8" fill="#2c3440"/>
+      <rect x="392" y="294" width="140" height="6" fill="#3f2d1a"/>
+      <rect x="398" y="200" width="9" height="94" fill="#8f98a4"/>
+      <rect x="518" y="200" width="9" height="94" fill="#8f98a4"/>
+      <rect x="386" y="192" width="150" height="10" rx="3" fill="#2e353d"/>
+      <!-- фонарь на террасе -->
+      <rect x="452" y="206" width="18" height="18" rx="3" fill="#ffce7a"/>
+      <circle cx="461" cy="215" r="30" fill="url(#glowH)"/>
+    </g>
+
+    <!-- корпус дома -->
+    <rect x="150" y="196" width="248" height="98" fill="url(#wallH)"/>
+    <g stroke="#1b212a" stroke-width="1.6" opacity=".7">
+      <line x1="150" y1="212" x2="398" y2="212"/><line x1="150" y1="230" x2="398" y2="230"/>
+      <line x1="150" y1="248" x2="398" y2="248"/><line x1="150" y1="266" x2="398" y2="266"/>
+      <line x1="150" y1="284" x2="398" y2="284"/>
+    </g>
+    <rect x="146" y="290" width="256" height="10" fill="#20262c"/>
+
+    <!-- кровля -->
+    <path d="M136 198 L274 108 L412 198 L396 198 L274 118 L152 198z" fill="#4a545f"/>
+    <path d="M274 108 L412 198 L396 198 L274 118z" fill="url(#roofH)"/>
+    <path d="M136 198 L274 108 L274 118 L152 198z" fill="#3a434d"/>
+    <!-- фронтон -->
+    <path d="M164 196 L274 124 L384 196z" fill="#414b58"/>
+    <!-- мансардное окно -->
+    <rect x="248" y="150" width="52" height="36" rx="3" fill="#ffce7a"/>
+    <rect x="244" y="146" width="60" height="44" rx="4" fill="none" stroke="#aab4c0" stroke-width="4"/>
+    <line x1="274" y1="150" x2="274" y2="186" stroke="#aab4c0" stroke-width="3"/>
+    <circle cx="274" cy="168" r="46" fill="url(#glowH)"/>
+
+    <!-- труба -->
+    <rect x="332" y="120" width="26" height="46" fill="#2b323a"/>
+    <rect x="327" y="114" width="36" height="10" rx="2" fill="#39424c"/>
+
+    <!-- окна первого этажа -->
+    <g>
+      <rect x="176" y="222" width="46" height="46" fill="#ffce7a"/>
+      <rect x="172" y="218" width="54" height="54" fill="none" stroke="#aab4c0" stroke-width="4"/>
+      <line x1="199" y1="222" x2="199" y2="268" stroke="#aab4c0" stroke-width="3"/>
+      <circle cx="199" cy="245" r="48" fill="url(#glowH)"/>
+
+      <rect x="326" y="222" width="46" height="46" fill="#ffce7a"/>
+      <rect x="322" y="218" width="54" height="54" fill="none" stroke="#aab4c0" stroke-width="4"/>
+      <line x1="349" y1="222" x2="349" y2="268" stroke="#aab4c0" stroke-width="3"/>
+      <circle cx="349" cy="245" r="48" fill="url(#glowH)"/>
+    </g>
+
+    <!-- дверь и крыльцо -->
+    <rect x="256" y="224" width="40" height="66" rx="2" fill="#2c3440"/>
+    <rect x="252" y="220" width="48" height="70" rx="3" fill="none" stroke="#aab4c0" stroke-width="4"/>
+    <circle cx="290" cy="256" r="3" fill="#e0a458"/>
+    <rect x="244" y="290" width="64" height="7" fill="#3f4750"/>
+    <rect x="238" y="297" width="76" height="7" fill="#343b43"/>
+
+    <!-- ели рядом -->
+    <g>
+      <rect x="100" y="286" width="7" height="18" fill="#3b2c1c"/>
+      <path d="M103 190 l30 46 -60 0z" fill="#1c3527"/>
+      <path d="M103 218 l34 50 -68 0z" fill="#224030"/>
+      <path d="M103 248 l38 42 -76 0z" fill="#1c3527"/>
+    </g>
+    <g>
+      <rect x="556" y="288" width="6" height="16" fill="#3b2c1c"/>
+      <path d="M559 214 l24 38 -48 0z" fill="#1c3527"/>
+      <path d="M559 238 l28 40 -56 0z" fill="#224030"/>
+      <path d="M559 262 l30 34 -60 0z" fill="#1c3527"/>
+    </g>
+
+    <!-- дорожка и фонарь -->
+    <path d="M258 304 l36 0 34 136 -120 0z" fill="#2a3730"/>
+    <rect x="352" y="250" width="5" height="54" fill="#232a32"/>
+    <rect x="345" y="238" width="19" height="16" rx="3" fill="#ffce7a"/>
+    <circle cx="354" cy="246" r="26" fill="url(#glowH)"/>
+  </g>
+</svg>

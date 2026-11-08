@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgK" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f8f7"/>
+      <stop offset="1" stop-color="#e2e9e6"/>
+    </linearGradient>
+    <radialGradient id="glowK" cx="0.82" cy="0.2" r="0.6">
+      <stop offset="0" stop-color="#157a5b" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#157a5b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgK)"/>
+  <rect width="1200" height="630" fill="url(#glowK)"/>
+
+  <g transform="translate(88 88)">
+    <rect x="0" y="0" width="40" height="15" rx="3" fill="none" stroke="#157a5b" stroke-width="4"/>
+    <rect x="0" y="22" width="40" height="15" rx="3" fill="none" stroke="#b98b4a" stroke-width="4"/>
+  </g>
+  <text x="146" y="118" fill="#10171a" font-family="Arial, sans-serif" font-size="32" font-weight="bold" letter-spacing="7">ФАСАД</text>
+
+  <text x="88" y="248" fill="#10171a" font-family="Arial, sans-serif" font-size="52" font-weight="bold">Соберите кухню</text>
+  <text x="88" y="310" fill="#157a5b" font-family="Arial, sans-serif" font-size="52" font-weight="bold">и увидьте её сразу</text>
+  <text x="88" y="368" fill="#66757c" font-family="Arial, sans-serif" font-size="23">3D-конструктор прямо на сайте</text>
+  <text x="88" y="400" fill="#66757c" font-family="Arial, sans-serif" font-size="23">Цена сразу · гарантия 5 лет</text>
+
+  <rect x="88" y="452" width="268" height="60" rx="30" fill="#10171a"/>
+  <text x="222" y="490" fill="#ffffff" font-family="Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle">ОТКРЫТЬ КОНСТРУКТОР</text>
+
+  <g transform="translate(716 132)">
+    <rect width="400" height="330" rx="16" fill="#ffffff" stroke="#d7dedc" stroke-width="3"/>
+    <rect x="26" y="28" width="160" height="86" rx="6" fill="#eee7d8" stroke="#cfc4ac" stroke-width="2"/>
+    <rect x="214" y="28" width="160" height="86" rx="6" fill="#eee7d8" stroke="#cfc4ac" stroke-width="2"/>
+    <rect x="26" y="128" width="348" height="16" rx="4" fill="#e3e0d8"/>
+    <rect x="26" y="148" width="348" height="96" rx="6" fill="#eee7d8" stroke="#cfc4ac" stroke-width="2"/>
+    <rect x="150" y="160" width="100" height="72" rx="4" fill="#2b3033"/>
+    <g fill="#157a5b">
+      <circle cx="60" cy="278" r="18"/>
+    </g>
+    <g fill="#b98b4a"><circle cx="106" cy="278" r="18"/></g>
+    <g fill="#3f7fa8"><circle cx="152" cy="278" r="18"/></g>
+    <g fill="#2f4238"><circle cx="198" cy="278" r="18"/></g>
+    <rect x="236" y="262" width="138" height="32" rx="16" fill="#eef1f0"/>
+    <text x="305" y="284" fill="#66757c" font-family="Arial, sans-serif" font-size="16" text-anchor="middle">4,4 м.п.</text>
+  </g>
+</svg>

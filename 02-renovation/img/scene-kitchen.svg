@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Кухня после ремонта">
+  <defs>
+    <linearGradient id="wallK" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3eee5"/>
+      <stop offset="1" stop-color="#e6dfd2"/>
+    </linearGradient>
+    <linearGradient id="cabK" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c5b4f"/>
+      <stop offset="1" stop-color="#3d4a41"/>
+    </linearGradient>
+    <linearGradient id="floorK" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9a877"/>
+      <stop offset="1" stop-color="#ac8a58"/>
+    </linearGradient>
+    <clipPath id="frameK"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frameK)">
+    <rect width="640" height="480" fill="url(#wallK)"/>
+    <rect width="640" height="40" fill="#faf7f0"/>
+
+    <!-- фартук из плитки «кабанчик» -->
+    <rect x="0" y="196" width="640" height="86" fill="#e9e2d5"/>
+    <g stroke="#d5cbb9" stroke-width="2">
+      <line x1="0" y1="224" x2="640" y2="224"/>
+      <line x1="0" y1="252" x2="640" y2="252"/>
+      <g>
+        <line x1="40" y1="196" x2="40" y2="224"/><line x1="112" y1="196" x2="112" y2="224"/>
+        <line x1="184" y1="196" x2="184" y2="224"/><line x1="256" y1="196" x2="256" y2="224"/>
+        <line x1="328" y1="196" x2="328" y2="224"/><line x1="400" y1="196" x2="400" y2="224"/>
+        <line x1="472" y1="196" x2="472" y2="224"/><line x1="544" y1="196" x2="544" y2="224"/>
+        <line x1="616" y1="196" x2="616" y2="224"/>
+      </g>
+      <g>
+        <line x1="76" y1="224" x2="76" y2="252"/><line x1="148" y1="224" x2="148" y2="252"/>
+        <line x1="220" y1="224" x2="220" y2="252"/><line x1="292" y1="224" x2="292" y2="252"/>
+        <line x1="364" y1="224" x2="364" y2="252"/><line x1="436" y1="224" x2="436" y2="252"/>
+        <line x1="508" y1="224" x2="508" y2="252"/><line x1="580" y1="224" x2="580" y2="252"/>
+      </g>
+      <g>
+        <line x1="40" y1="252" x2="40" y2="282"/><line x1="112" y1="252" x2="112" y2="282"/>
+        <line x1="184" y1="252" x2="184" y2="282"/><line x1="256" y1="252" x2="256" y2="282"/>
+        <line x1="328" y1="252" x2="328" y2="282"/><line x1="400" y1="252" x2="400" y2="282"/>
+        <line x1="472" y1="252" x2="472" y2="282"/><line x1="544" y1="252" x2="544" y2="282"/>
+        <line x1="616" y1="252" x2="616" y2="282"/>
+      </g>
+    </g>
+
+    <!-- верхние шкафы -->
+    <rect x="24" y="74" width="204" height="118" rx="5" fill="url(#cabK)"/>
+    <line x1="126" y1="74" x2="126" y2="192" stroke="#313c34" stroke-width="3"/>
+    <rect x="96" y="126" width="8" height="34" rx="4" fill="#d8c08a"/>
+    <rect x="148" y="126" width="8" height="34" rx="4" fill="#d8c08a"/>
+
+    <rect x="412" y="74" width="204" height="118" rx="5" fill="url(#cabK)"/>
+    <line x1="514" y1="74" x2="514" y2="192" stroke="#313c34" stroke-width="3"/>
+    <rect x="484" y="126" width="8" height="34" rx="4" fill="#d8c08a"/>
+    <rect x="536" y="126" width="8" height="34" rx="4" fill="#d8c08a"/>
+
+    <!-- вытяжка -->
+    <path d="M276 74 h88 v46 l26 26 h-140 l26 -26 z" fill="#b9bcbd"/>
+    <rect x="250" y="146" width="140" height="12" rx="3" fill="#9ea2a3"/>
+    <rect x="300" y="40" width="40" height="36" fill="#b9bcbd"/>
+
+    <!-- подсветка рабочей зоны -->
+    <path d="M24 192 h204 l-16 34 h-172 z" fill="#f8e6b4" opacity="0.5"/>
+    <path d="M412 192 h204 l-16 34 h-172 z" fill="#f8e6b4" opacity="0.5"/>
+
+    <!-- столешница -->
+    <rect x="0" y="282" width="640" height="20" rx="3" fill="#e7e2d8"/>
+    <rect x="0" y="282" width="640" height="6" fill="#f3efe7"/>
+
+    <!-- нижние шкафы -->
+    <rect x="0" y="302" width="640" height="128" fill="url(#cabK)"/>
+    <g stroke="#313c34" stroke-width="3">
+      <line x1="104" y1="302" x2="104" y2="430"/>
+      <line x1="208" y1="302" x2="208" y2="430"/>
+      <line x1="320" y1="302" x2="320" y2="430"/>
+      <line x1="432" y1="302" x2="432" y2="430"/>
+      <line x1="536" y1="302" x2="536" y2="430"/>
+      <line x1="0" y1="352" x2="208" y2="352"/>
+      <line x1="432" y1="352" x2="640" y2="352"/>
+    </g>
+    <g fill="#d8c08a">
+      <rect x="34" y="318" width="40" height="7" rx="3.5"/>
+      <rect x="136" y="318" width="40" height="7" rx="3.5"/>
+      <rect x="34" y="380" width="40" height="7" rx="3.5"/>
+      <rect x="136" y="380" width="40" height="7" rx="3.5"/>
+      <rect x="462" y="318" width="40" height="7" rx="3.5"/>
+      <rect x="566" y="318" width="40" height="7" rx="3.5"/>
+      <rect x="462" y="380" width="40" height="7" rx="3.5"/>
+      <rect x="566" y="380" width="40" height="7" rx="3.5"/>
+    </g>
+
+    <!-- духовой шкаф -->
+    <rect x="232" y="312" width="76" height="60" rx="4" fill="#2f3a33"/>
+    <rect x="240" y="322" width="60" height="34" rx="3" fill="#8fa0a6" opacity="0.75"/>
+    <rect x="240" y="364" width="60" height="6" rx="3" fill="#d8c08a"/>
+
+    <!-- мойка и смеситель -->
+    <rect x="342" y="286" width="78" height="12" rx="4" fill="#c9c4b8"/>
+    <path d="M360 216 v-24 q0 -12 14 -12 q14 0 14 12 v14" stroke="#8d9296" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="356" y="216" width="8" height="66" fill="#8d9296"/>
+
+    <!-- варочная панель -->
+    <rect x="232" y="284" width="76" height="14" rx="3" fill="#2f3a33"/>
+    <g fill="#55635a"><circle cx="252" cy="291" r="5"/><circle cx="288" cy="291" r="5"/></g>
+
+    <!-- пол -->
+    <rect y="430" width="640" height="50" fill="url(#floorK)"/>
+    <g stroke="#8c6d42" stroke-width="1.4" opacity="0.55">
+      <line x1="0" y1="452" x2="640" y2="452"/>
+      <line x1="110" y1="430" x2="96" y2="480"/>
+      <line x1="260" y1="430" x2="246" y2="480"/>
+      <line x1="410" y1="430" x2="396" y2="480"/>
+      <line x1="560" y1="430" x2="546" y2="480"/>
+    </g>
+    <rect y="424" width="640" height="8" fill="#2f3a33"/>
+
+    <!-- посуда и мелочи на столешнице -->
+    <g>
+      <rect x="452" y="252" width="30" height="30" rx="4" fill="#c1553a"/>
+      <rect x="458" y="244" width="18" height="10" rx="3" fill="#a8462f"/>
+      <circle cx="510" cy="268" r="14" fill="#7f8f7c"/>
+      <path d="M498 268 q12 -18 24 0" fill="#93a38f"/>
+      <rect x="548" y="258" width="8" height="24" rx="3" fill="#d8c08a"/>
+      <rect x="562" y="252" width="8" height="30" rx="3" fill="#c9c4b8"/>
+      <ellipse cx="150" cy="278" rx="34" ry="8" fill="#e0d6c2"/>
+      <path d="M124 278 q26 -26 52 0" fill="#efe7d6"/>
+    </g>
+  </g>
+</svg>

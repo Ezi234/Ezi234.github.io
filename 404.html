@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Страница грузит только собственные файлы -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#05070c">
+<title>Страница не найдена</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/404.css">
+</head>
+<body>
+
+<!-- Сцена: герой пробивает стену. Если canvas недоступен,
+     под ним остаётся обычная разметка и страница работает как раньше. -->
+<canvas id="scene" aria-hidden="true"></canvas>
+
+<main class="overlay" id="overlay">
+  <p class="code" aria-hidden="true">404</p>
+  <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Ошибка 404 · страница не найдена</p>
+  <h1>Кажется, эту страницу снесли</h1>
+  <p class="lead">Ссылка устарела или в адресе опечатка. Вернитесь на главную — оттуда открываются все проекты.</p>
+
+  <div class="actions">
+    <a class="btn" href="/">На главную</a>
+    <button class="btn btn--ghost" type="button" id="replay">
+      <span aria-hidden="true">↻</span> Повторить
+    </button>
+  </div>
+
+  <nav class="links" aria-label="Проекты">
+    <span>Или сразу к работам:</span>
+    <a href="/01-barbershop/">Барбершоп</a>
+    <a href="/02-renovation/">Ремонт квартир</a>
+    <a href="/03-kitchens/">Кухни на заказ</a>
+    <a href="/04-houses/">Каркасные дома</a>
+  </nav>
+</main>
+
+<!-- Порядок важен: герой и стена объявляют объекты, режиссура их использует -->
+<script src="/js/404-hero.js" defer></script>
+<script src="/js/404-fx.js" defer></script>
+<script src="/js/404.js" defer></script>
+</body>
+</html>

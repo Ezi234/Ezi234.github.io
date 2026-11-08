@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Служебные файлы в индексе не нужны
+Disallow: /_headers
+Disallow: /dev-server.js
+Disallow: /prepare-deploy.js
+Disallow: /tools/
+
+Sitemap: https://ezi234.github.io/sitemap.xml

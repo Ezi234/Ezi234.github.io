@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgP" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1218"/>
+      <stop offset="1" stop-color="#0a0c10"/>
+    </linearGradient>
+    <radialGradient id="glowP" cx="0.82" cy="0.14" r="0.7">
+      <stop offset="0" stop-color="#5b8cff" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#5b8cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accP" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5b8cff"/>
+      <stop offset="1" stop-color="#8fb0ff"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgP)"/>
+  <rect width="1200" height="630" fill="url(#glowP)"/>
+
+  <!-- левая колонка: всё уже 700 px, чтобы не наезжать на миниатюры -->
+  <rect x="80" y="72" width="170" height="36" rx="18" fill="none" stroke="#242833" stroke-width="2"/>
+  <text x="165" y="96" fill="#5b8cff" font-family="Arial, sans-serif" font-size="14" font-weight="bold" letter-spacing="3" text-anchor="middle">ПОРТФОЛИО</text>
+
+  <text x="80" y="196" fill="#eceef2" font-family="Arial, sans-serif" font-size="48" font-weight="bold">Сайты, которые</text>
+  <text x="80" y="254" fill="#eceef2" font-family="Arial, sans-serif" font-size="48" font-weight="bold">работают, а не</text>
+  <text x="80" y="312" fill="#5b8cff" font-family="Arial, sans-serif" font-size="48" font-weight="bold">просто выглядят</text>
+
+  <text x="80" y="366" fill="#8f95a3" font-family="Arial, sans-serif" font-size="21">Лендинги на чистом коде</text>
+  <text x="80" y="396" fill="#8f95a3" font-family="Arial, sans-serif" font-size="21">без конструкторов и библиотек</text>
+
+  <g font-family="Arial, sans-serif" font-size="17">
+    <rect x="80" y="428" width="160" height="48" rx="9" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <text x="160" y="458" fill="#eceef2" text-anchor="middle">4 готовых сайта</text>
+
+    <rect x="252" y="428" width="168" height="48" rx="9" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <text x="336" y="458" fill="#eceef2" text-anchor="middle">2 с 3D на WebGL</text>
+
+    <rect x="432" y="428" width="164" height="48" rx="9" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <text x="514" y="458" fill="#eceef2" text-anchor="middle">0 зависимостей</text>
+  </g>
+
+  <rect x="80" y="500" width="216" height="54" rx="10" fill="url(#accP)"/>
+  <text x="188" y="534" fill="#08101f" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle">СМОТРЕТЬ РАБОТЫ</text>
+
+  <!-- четыре миниатюры справа, начинаются за пределами текстовой колонки -->
+  <g transform="translate(760 128)">
+    <rect x="0" y="0" width="164" height="180" rx="12" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <rect x="14" y="14" width="136" height="92" rx="7" fill="#1a1a20"/>
+    <path d="M44 106 L82 60 L120 106z" fill="#d4af37" opacity=".7"/>
+    <rect x="14" y="120" width="92" height="10" rx="5" fill="#2b2f3a"/>
+    <rect x="14" y="140" width="120" height="10" rx="5" fill="#1c1f27"/>
+    <rect x="14" y="160" width="64" height="10" rx="5" fill="#5b8cff"/>
+
+    <rect x="180" y="0" width="164" height="180" rx="12" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <rect x="194" y="14" width="136" height="92" rx="7" fill="#efe8db"/>
+    <rect x="210" y="54" width="104" height="40" rx="6" fill="#c1553a" opacity=".85"/>
+    <rect x="194" y="120" width="92" height="10" rx="5" fill="#2b2f3a"/>
+    <rect x="194" y="140" width="120" height="10" rx="5" fill="#1c1f27"/>
+    <rect x="194" y="160" width="64" height="10" rx="5" fill="#5b8cff"/>
+
+    <rect x="0" y="200" width="164" height="180" rx="12" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <rect x="14" y="214" width="136" height="92" rx="7" fill="#e6eae8"/>
+    <rect x="28" y="256" width="108" height="44" rx="5" fill="#157a5b" opacity=".85"/>
+    <rect x="14" y="320" width="92" height="10" rx="5" fill="#2b2f3a"/>
+    <rect x="14" y="340" width="120" height="10" rx="5" fill="#1c1f27"/>
+    <rect x="14" y="360" width="64" height="10" rx="5" fill="#5b8cff"/>
+
+    <rect x="180" y="200" width="164" height="180" rx="12" fill="#12141a" stroke="#242833" stroke-width="2"/>
+    <rect x="194" y="214" width="136" height="92" rx="7" fill="#101a2b"/>
+    <path d="M218 298 V262 L262 230 L306 262 v36z" fill="#8a6444"/>
+    <rect x="250" y="270" width="24" height="28" fill="#ffce7a"/>
+    <rect x="194" y="320" width="92" height="10" rx="5" fill="#2b2f3a"/>
+    <rect x="194" y="340" width="120" height="10" rx="5" fill="#1c1f27"/>
+    <rect x="194" y="360" width="64" height="10" rx="5" fill="#5b8cff"/>
+  </g>
+</svg>

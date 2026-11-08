@@ -1,0 +1,54 @@
+# Настройки для обычного хостинга на Apache: Beget, Timeweb, Reg.ru, Sprinthost и подобных.
+# Это тот же набор, что в _headers для Cloudflare и Netlify: заголовки безопасности,
+# своя страница 404 и кэш картинок. Файл лежит в корне сайта рядом с index.html.
+#
+# Внимание: имя начинается с точки, поэтому Проводник Windows и некоторые
+# файловые менеджеры хостинга его скрывают. Проверьте, что он загрузился.
+
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .css .js .md .txt .xml
+AddType image/webp .webp
+AddType image/svg+xml .svg
+
+# Своя анимированная страница вместо стандартной ошибки хостинга
+ErrorDocument 404 /404.html
+
+# Не показывать список файлов, если в папке нет index.html
+Options -Indexes
+
+<IfModule mod_headers.c>
+  # Что делает каждая строка — подробно в файле _headers
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Content-Security-Policy "frame-ancestors 'none'; require-trusted-types-for 'script'"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set X-Frame-Options "DENY"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+
+  # HSTS включайте, только когда сайт уже открывается по https://
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # Картинки — сутки в кэше, стили и скрипты — час
+  <FilesMatch "\.(webp|jpe?g|png|svg|ico)$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+</IfModule>
+
+# Перенаправление http → https. Включите, когда хостинг выпустит сертификат
+# (в панели обычно кнопка «SSL» или «Let's Encrypt»).
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+# Служебные файлы на хостинг заливать не нужно вовсе (см. ЗАЛИВКА.md, шаг 2).
+# Если всё же попали — сервер их не отдаст.
+<FilesMatch "^(dev-server\.js|prepare-deploy\.js|users\.json)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/(server|tools|\.claude)(/|$)

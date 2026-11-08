@@ -1,0 +1,39 @@
+# Заголовки для Cloudflare Pages и Netlify.
+# Оба читают этот файл автоматически — просто положите его в корень.
+# То, что нельзя выставить из HTML (frame-ancestors, HSTS), задаётся здесь.
+#
+# Что делает каждая строка:
+#   nosniff                 — браузер не угадывает тип файла, картинку не исполнить как скрипт
+#   Referrer-Policy         — чужим сайтам уходит только домен, без полного адреса страницы
+#   frame-ancestors, X-Frame-Options — сайт нельзя встроить в чужую страницу (кликджекинг)
+#   require-trusted-types-for — браузер запрещает вставку HTML строкой: главная дорога XSS закрыта
+#   Permissions-Policy      — камера, микрофон, геолокация и оплата отключены на уровне браузера
+#   HSTS                    — только HTTPS, даже если набрать адрес с http://
+#   Cross-Origin-Opener-Policy — открытое из сайта окно не получит доступ к нашей вкладке
+#   X-Permitted-Cross-Domain-Policies — старые плагины не читают данные сайта
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Content-Security-Policy: frame-ancestors 'none'; require-trusted-types-for 'script'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  X-Permitted-Cross-Domain-Policies: none
+
+# Картинки и шрифты меняются редко — держим их в кэше сутки.
+# Дольше ставить не стоит: после замены фото клиент увидит старое.
+/img/*
+  Cache-Control: public, max-age=86400
+
+/*/img/*
+  Cache-Control: public, max-age=86400
+
+# Стили и скрипты — час. Хватает, чтобы страница не тянула их при каждом клике,
+# и мало, чтобы правки доехали до посетителя в тот же день.
+/*/css/*
+  Cache-Control: public, max-age=3600
+
+/*/js/*
+  Cache-Control: public, max-age=3600

@@ -1,0 +1,701 @@
+/* =========================================================
+   ФАСАД — скрипты
+   Чистый JavaScript, без библиотек и внешних запросов.
+   Трёхмерная сцена живёт в отдельном файле kitchen3d.js.
+
+   Принципы безопасности, заложенные в код:
+   · нет inline-обработчиков (onclick=...) — всё через addEventListener,
+     благодаря чему работает строгий Content-Security-Policy;
+   · пользовательские данные попадают на страницу только через textContent;
+   · скрытое поле-ловушка (honeypot) отсекает спам-ботов;
+   · значения обрезаются по длине, телефон приводится к цифрам;
+   · нет eval, new Function и innerHTML с данными пользователя.
+   ========================================================= */
+'use strict';
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia('(hover: hover)').matches;
+
+  /* ---------------------------------------------------------
+     0. Мелочи
+     --------------------------------------------------------- */
+  document.querySelectorAll('[data-hue]').forEach(function (el) {
+    el.style.setProperty('--h', el.dataset.hue);
+  });
+
+  // Цвета образцов задаются из data-атрибутов, а не через style="" в разметке:
+  // строгий Content-Security-Policy блокирует inline-стили, а стили,
+  // выставленные из JavaScript, под запрет не попадают.
+  document.querySelectorAll('[data-sw]').forEach(function (el) {
+    el.style.setProperty('--sw', el.dataset.sw);
+  });
+
+  var yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  var heroTitle = document.getElementById('heroTitle');
+  if (heroTitle) requestAnimationFrame(function () { heroTitle.classList.add('is-in'); });
+
+  function spaced(value) {
+    return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
+  // Русское склонение: 1 день, 2 дня, 5 дней
+  function plural(n, one, few, many) {
+    var abs = Math.abs(n);
+    var t10 = abs % 10;
+    var t100 = abs % 100;
+    if (t100 >= 11 && t100 <= 14) return many;
+    if (t10 === 1) return one;
+    if (t10 >= 2 && t10 <= 4) return few;
+    return many;
+  }
+
+  /* ---------------------------------------------------------
+     1. Навигация: активный пункт по позиции прокрутки
+     --------------------------------------------------------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav__link'));
+  var navTargets = navLinks.map(function (link) {
+    return { link: link, section: document.querySelector(link.getAttribute('href')) };
+  }).filter(function (pair) { return pair.section !== null; });
+
+  function spy(y) {
+    var pos = y + 160;
+    var current = -1;
+    navTargets.forEach(function (pair, i) {
+      if (pair.section.offsetTop <= pos) current = i;
+    });
+    navTargets.forEach(function (pair, i) {
+      pair.link.classList.toggle('is-active', i === current);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     2. Прокрутка: шапка, прогресс, кнопка «наверх», таймлайн
+     --------------------------------------------------------- */
+  var header = document.getElementById('header');
+  var progressBar = document.getElementById('progressBar');
+  var toTop = document.getElementById('toTop');
+  var timeline = document.getElementById('timeline');
+  var timelineFill = document.getElementById('timelineFill');
+  var lastY = window.scrollY;
+  var ticking = false;
+
+  function onScrollFrame() {
+    var y = window.scrollY;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    header.classList.toggle('is-stuck', y > 30);
+    if (y > 420 && y > lastY + 6) header.classList.add('is-hidden');
+    else if (y < lastY - 6) header.classList.remove('is-hidden');
+    lastY = y;
+
+    if (progressBar) {
+      var read = docHeight > 0 ? (y / docHeight) * 100 : 0;
+      progressBar.style.width = Math.min(100, Math.max(0, read)).toFixed(2) + '%';
+    }
+    if (toTop) toTop.hidden = y < 700;
+
+    if (timeline && timelineFill) {
+      var rect = timeline.getBoundingClientRect();
+      var start = window.innerHeight * 0.75;
+      var progress = (start - rect.top) / (rect.height * 0.85);
+      timelineFill.style.height = Math.max(0, Math.min(1, progress)) * 100 + '%';
+    }
+
+    spy(y);
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(onScrollFrame);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+  onScrollFrame();
+
+  if (toTop) {
+    toTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     3. Мобильное меню
+     --------------------------------------------------------- */
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('nav');
+
+  function closeNav() {
+    nav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Открыть меню');
+    document.body.classList.remove('is-locked');
+  }
+
+  if (burger && nav) {
+    burger.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+      document.body.classList.toggle('is-locked', open);
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('.nav__link, .nav__cta')) closeNav();
+    });
+  }
+
+  /* ---------------------------------------------------------
+     4. Появление блоков при прокрутке
+     --------------------------------------------------------- */
+  var revealItems = document.querySelectorAll('.reveal');
+
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    revealItems.forEach(function (el, i) {
+      el.style.transitionDelay = (i % 3) * 80 + 'ms';
+      revealObserver.observe(el);
+    });
+  } else {
+    revealItems.forEach(function (el) { el.classList.add('is-visible'); });
+  }
+
+  /* ---------------------------------------------------------
+     5. Счётчики
+     --------------------------------------------------------- */
+  function runCounter(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var duration = 1500;
+    var start = performance.now();
+    function tick(now) {
+      var p = Math.min((now - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = spaced(Math.round(target * eased)) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var counters = document.querySelectorAll('[data-count]');
+  if ('IntersectionObserver' in window && counters.length) {
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        runCounter(entry.target);
+        countObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function (el) { countObserver.observe(el); });
+  } else {
+    counters.forEach(function (el) {
+      el.textContent = spaced(el.dataset.count) + (el.dataset.suffix || '');
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6. Магнитные кнопки
+     --------------------------------------------------------- */
+  if (!reduceMotion && canHover) {
+    document.querySelectorAll('.magnetic').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var box = btn.getBoundingClientRect();
+        var dx = (e.clientX - box.left - box.width / 2) * 0.2;
+        var dy = (e.clientY - box.top - box.height / 2) * 0.3;
+        btn.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  /* ---------------------------------------------------------
+     7. Трёхмерный конструктор кухни
+     --------------------------------------------------------- */
+  var configForm = document.getElementById('configForm');
+  var lastConfig = '';
+
+  if (configForm) {
+    var canvas = document.getElementById('scene');
+    var fallback = document.getElementById('sceneFallback');
+    var hint = document.getElementById('viewHint');
+    var sumEl = document.getElementById('sum');
+    var sumBox = document.querySelector('.panel__sum');
+    var sumNote = document.getElementById('sumNote');
+    var facadeName = document.getElementById('facadeName');
+    var lengthInput = document.getElementById('length');
+    var lengthOut = document.getElementById('lengthOut');
+    var tagLength = document.getElementById('tagLength');
+    var orderBtn = document.getElementById('orderBtn');
+
+    var scene = null;
+    var shownSum = 0;
+    var firstPaint = true;
+
+    function picked(name) {
+      return configForm.querySelector('input[name="' + name + '"]:checked');
+    }
+
+    function colors() {
+      return {
+        facade: picked('facade').value,
+        top: picked('top').value,
+        metal: picked('metal').value
+      };
+    }
+
+    // Сцена запускается сразу, а сам рендер простаивает, пока канвас
+    // за пределами экрана — так на слабых машинах не тратится время впустую.
+    function startScene() {
+      if (scene || !canvas) return;
+      scene = KitchenScene.init(canvas, colors());
+      if (!scene) {
+        // WebGL недоступен — показываем статичную картинку и прячем подсказки
+        canvas.hidden = true;
+        if (hint) hint.hidden = true;
+        if (fallback) fallback.hidden = false;
+      }
+    }
+    startScene();
+
+    // Подсказка «потяните» исчезает после первого взаимодействия
+    if (canvas && hint) {
+      ['pointerdown', 'keydown'].forEach(function (evt) {
+        canvas.addEventListener(evt, function () { hint.classList.add('is-gone'); }, { once: true });
+      });
+    }
+
+    function animateSum(value) {
+      if (firstPaint || reduceMotion) {
+        sumEl.textContent = spaced(value);
+        shownSum = value;
+        firstPaint = false;
+        return;
+      }
+      var start = shownSum;
+      var t0 = performance.now();
+      function tick(now) {
+        var p = Math.min((now - t0) / 420, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        sumEl.textContent = spaced(Math.round(start + (value - start) * eased));
+        if (p < 1) requestAnimationFrame(tick);
+        else shownSum = value;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function render(changedColors) {
+      var mat = picked('mat');
+      var top = picked('top');
+      var metal = picked('metal');
+      var facade = picked('facade');
+      var length = parseFloat(lengthInput.value);
+
+      var perMeter = Number(mat.dataset.price) + Number(top.dataset.price) + Number(metal.dataset.price);
+      var total = Math.round(perMeter * length / 1000) * 1000;
+
+      // Подписи
+      var lengthText = length.toFixed(1).replace('.', ',');
+      lengthOut.textContent = lengthText + ' м.п.';
+      tagLength.textContent = lengthText;
+      facadeName.textContent = facade.dataset.name;
+      sumNote.textContent = mat.parentElement.querySelector('span').firstChild.textContent.trim().toLowerCase() +
+        ' · ' + top.dataset.name.toLowerCase() + ' · ' + metal.dataset.name.toLowerCase();
+
+      if (!firstPaint && !reduceMotion && sumBox) {
+        sumBox.classList.remove('is-flash');
+        void sumBox.offsetWidth;              // перезапуск анимации
+        sumBox.classList.add('is-flash');
+      }
+      animateSum(total);
+
+      // Заливаем пройденную часть ползунка
+      var pct = (length - lengthInput.min) / (lengthInput.max - lengthInput.min) * 100;
+      lengthInput.style.background =
+        'linear-gradient(90deg, var(--emerald) 0%, var(--emerald) ' + pct + '%, var(--line) ' + pct + '%, var(--line) 100%)';
+
+      lastConfig = mat.parentElement.querySelector('span').firstChild.textContent.trim() +
+        ' · ' + facade.dataset.name +
+        ' · столешница ' + top.dataset.name +
+        ' · фурнитура ' + metal.dataset.name +
+        ' · ' + lengthText + ' м.п. · ' + spaced(total) + ' ₽';
+      if (orderBtn) orderBtn.dataset.config = lastConfig;
+
+      // Держим сборку в форме заявки всегда актуальной, а не по фокусу:
+      // менеджер должен увидеть ровно то, что человек собрал в конструкторе
+      var leadField = document.getElementById('l-config-field');
+      var leadInput = document.getElementById('l-config');
+      if (leadField && leadInput) {
+        leadInput.value = lastConfig;
+        leadField.hidden = false;
+      }
+
+      if (changedColors && scene) KitchenScene.setColors(colors());
+    }
+
+    configForm.addEventListener('change', function (e) {
+      if (!e.target.matches('input')) return;
+      var isColor = ['facade', 'top', 'metal'].indexOf(e.target.name) !== -1;
+      render(isColor);
+    });
+    lengthInput.addEventListener('input', function () { render(false); });
+
+    // После успешной отправки форма сбрасывается и стирает поле сборки —
+    // возвращаем его на место, чтобы вторая заявка тоже несла конфигурацию
+    var leadFormEl = document.getElementById('leadForm');
+    if (leadFormEl) {
+      leadFormEl.addEventListener('reset', function () {
+        setTimeout(function () { render(false); }, 0);
+      });
+    }
+
+    render(false);
+  }
+
+  /* ---------------------------------------------------------
+     8. Фильтр проектов
+     --------------------------------------------------------- */
+  var filters = document.querySelectorAll('.filter');
+  var works = document.querySelectorAll('.work');
+  var worksEmpty = document.getElementById('worksEmpty');
+
+  filters.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var cat = btn.dataset.filter;
+      filters.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      var visible = 0;
+      works.forEach(function (work) {
+        var match = cat === 'all' || work.dataset.cat === cat;
+        work.classList.toggle('is-hidden', !match);
+        if (match) visible++;
+      });
+      if (worksEmpty) worksEmpty.hidden = visible > 0;
+    });
+  });
+
+  /* ---------------------------------------------------------
+     9. Лайтбокс проектов
+     --------------------------------------------------------- */
+  var lightbox = document.getElementById('lightbox');
+  var lbIndex = 0;
+  var lbReturnFocus = null;
+
+  function visibleWorks() {
+    return Array.prototype.filter.call(works, function (w) {
+      return !w.classList.contains('is-hidden');
+    });
+  }
+
+  function closeLightbox() {
+    if (!lightbox || lightbox.hidden) return;
+    lightbox.hidden = true;
+    document.body.classList.remove('is-locked');
+    if (lbReturnFocus) lbReturnFocus.focus();
+  }
+
+  if (lightbox) {
+    var lbImg = document.getElementById('lbImg');
+    var lbTitle = document.getElementById('lbTitle');
+    var lbMeta = document.getElementById('lbMeta');
+    var lbText = document.getElementById('lbText');
+    var lbPrice = document.getElementById('lbPrice');
+
+    function showWork(list, index) {
+      if (!list.length) return;
+      lbIndex = (index + list.length) % list.length;
+      var work = list[lbIndex];
+      lbImg.src = work.dataset.img;
+      lbImg.alt = work.dataset.title;
+      // textContent, а не innerHTML — данные не могут стать разметкой
+      lbTitle.textContent = work.dataset.title;
+      lbMeta.textContent = work.dataset.meta;
+      lbText.textContent = work.dataset.text;
+      lbPrice.textContent = work.dataset.price;
+    }
+
+    function openLightbox(work) {
+      var list = visibleWorks();
+      lbReturnFocus = work;
+      lightbox.hidden = false;
+      document.body.classList.add('is-locked');
+      showWork(list, list.indexOf(work));
+      document.getElementById('lbNext').focus();
+    }
+
+    works.forEach(function (work) {
+      work.addEventListener('click', function () { openLightbox(work); });
+    });
+    lightbox.querySelectorAll('[data-close-lightbox]').forEach(function (el) {
+      el.addEventListener('click', closeLightbox);
+    });
+    document.getElementById('lbPrev').addEventListener('click', function () { showWork(visibleWorks(), lbIndex - 1); });
+    document.getElementById('lbNext').addEventListener('click', function () { showWork(visibleWorks(), lbIndex + 1); });
+
+    document.addEventListener('keydown', function (e) {
+      if (lightbox.hidden) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showWork(visibleWorks(), lbIndex - 1);
+      if (e.key === 'ArrowRight') showWork(visibleWorks(), lbIndex + 1);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     10. Аккордеон вопросов
+     --------------------------------------------------------- */
+  document.querySelectorAll('.acc__head').forEach(function (head) {
+    head.addEventListener('click', function () {
+      var item = head.closest('.acc');
+      var willOpen = !item.classList.contains('is-open');
+      document.querySelectorAll('.acc').forEach(function (other) {
+        other.classList.remove('is-open');
+        other.querySelector('.acc__head').setAttribute('aria-expanded', 'false');
+      });
+      item.classList.toggle('is-open', willOpen);
+      head.setAttribute('aria-expanded', String(willOpen));
+    });
+  });
+
+  /* ---------------------------------------------------------
+     11. Модальное окно (с ловушкой фокуса)
+     --------------------------------------------------------- */
+  var modal = document.getElementById('modal');
+  var modalBox = modal ? modal.querySelector('.modal__box') : null;
+  var lastFocused = null;
+
+  function openModal(config) {
+    closeLightbox();
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add('is-locked');
+
+    var configField = document.getElementById('q-config-field');
+    var configInput = document.getElementById('q-config');
+    if (config && configField && configInput) {
+      configInput.value = config;
+      configField.hidden = false;
+    } else if (configField) {
+      configField.hidden = true;
+    }
+
+    var first = modalBox.querySelector('input:not([readonly]):not([type="hidden"])');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.classList.remove('is-locked');
+    if (lastFocused) lastFocused.focus();
+  }
+
+  document.querySelectorAll('[data-open-lead]').forEach(function (btn) {
+    btn.addEventListener('click', function () { openModal(btn.dataset.config); });
+  });
+
+  if (modal) {
+    modal.querySelectorAll('[data-close-modal]').forEach(function (el) {
+      el.addEventListener('click', closeModal);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (modal.hidden) return;
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key !== 'Tab') return;
+      var focusable = modalBox.querySelectorAll('a[href], button, input:not([type="hidden"]), select, textarea');
+      var list = Array.prototype.filter.call(focusable, function (el) {
+        return !el.disabled && el.offsetParent !== null;
+      });
+      if (!list.length) return;
+      var firstEl = list[0];
+      var lastEl = list[list.length - 1];
+      if (e.shiftKey && document.activeElement === firstEl) { e.preventDefault(); lastEl.focus(); }
+      else if (!e.shiftKey && document.activeElement === lastEl) { e.preventDefault(); firstEl.focus(); }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     12. Уведомления
+     --------------------------------------------------------- */
+  var toastBox = document.getElementById('toasts');
+
+  function toast(message, type) {
+    var el = document.createElement('div');
+    el.className = 'toast' + (type === 'error' ? ' toast--error' : '');
+    el.textContent = message;               // textContent, а не innerHTML — защита от XSS
+    toastBox.appendChild(el);
+    setTimeout(function () {
+      el.classList.add('is-out');
+      setTimeout(function () { el.remove(); }, 300);
+    }, 5000);
+  }
+
+  /* ---------------------------------------------------------
+     13. Маска телефона
+     --------------------------------------------------------- */
+  function maskPhone(input) {
+    function format() {
+      var digits = input.value.replace(/\D/g, '');
+      // Ведущие 8 или 7 — код страны, а не первая цифра номера
+      var head = digits.charAt(0);
+      if (head === '8' || head === '7') digits = digits.slice(1);
+      digits = digits.slice(0, 10);
+      if (!digits.length) { input.value = ''; return; }
+      var out = '+7 (' + digits.slice(0, 3);
+      if (digits.length >= 4) out += ') ' + digits.slice(3, 6);
+      if (digits.length >= 7) out += '-' + digits.slice(6, 8);
+      if (digits.length >= 9) out += '-' + digits.slice(8, 10);
+      input.value = out;
+    }
+    input.addEventListener('input', format);
+  }
+  document.querySelectorAll('input[type="tel"]').forEach(maskPhone);
+
+  /* ---------------------------------------------------------
+     14. Проверка и отправка форм
+     --------------------------------------------------------- */
+  function showError(field, message) {
+    var wrap = field.closest('.field') || field.closest('.check');
+    if (wrap) wrap.classList.add('is-invalid');
+    var err = document.querySelector('[data-err-for="' + field.id + '"]');
+    if (err) { err.textContent = message; err.classList.add('is-shown'); }
+    field.setAttribute('aria-invalid', 'true');
+  }
+
+  function clearError(field) {
+    var wrap = field.closest('.field') || field.closest('.check');
+    if (wrap) wrap.classList.remove('is-invalid');
+    var err = document.querySelector('[data-err-for="' + field.id + '"]');
+    if (err) { err.textContent = ''; err.classList.remove('is-shown'); }
+    field.removeAttribute('aria-invalid');
+  }
+
+  function validate(form) {
+    var ok = true;
+    var firstBad = null;
+    function fail(el, msg) { showError(el, msg); ok = false; if (!firstBad) firstBad = el; }
+
+    var name = form.querySelector('input[name="name"]');
+    if (name) {
+      clearError(name);
+      var nameVal = name.value.trim();
+      if (nameVal.length < 2) fail(name, 'Введите имя — минимум 2 символа');
+      else if (!/^[А-Яа-яЁёA-Za-z\s'-]+$/.test(nameVal)) fail(name, 'В имени допустимы только буквы, пробел и дефис');
+    }
+
+    var phone = form.querySelector('input[name="phone"]');
+    if (phone) {
+      clearError(phone);
+      if (phone.value.replace(/\D/g, '').length !== 11) fail(phone, 'Телефон должен содержать 11 цифр');
+    }
+
+    var length = form.querySelector('input[name="length"][type="number"]');
+    if (length) {
+      clearError(length);
+      if (length.value !== '') {
+        var v = Number(length.value);
+        if (!Number.isFinite(v) || v < 1 || v > 20) fail(length, 'Укажите длину от 1 до 20 м.п.');
+      }
+    }
+
+    var agree = form.querySelector('input[name="agree"]');
+    if (agree) {
+      clearError(agree);
+      if (!agree.checked) fail(agree, 'Без согласия мы не сможем принять заявку');
+    }
+
+    if (firstBad) firstBad.focus();
+    return ok;
+  }
+
+  function collect(form) {
+    // Собираем и очищаем данные. Наружу уходят только эти поля.
+    var data = {};
+    new FormData(form).forEach(function (value, key) {
+      if (key === 'company') return;                    // honeypot не отправляем
+      data[key] = String(value).trim().slice(0, 500);   // обрезаем аномально длинные значения
+    });
+    if (data.phone) data.phone = data.phone.replace(/\D/g, '');
+    return data;
+  }
+
+  function handleSubmit(form, successText) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var honeypot = form.querySelector('input[name="company"]');
+      if (honeypot && honeypot.value !== '') {
+        toast('Заявка отклонена системой защиты.', 'error');
+        return;
+      }
+      if (!validate(form)) {
+        toast('Проверьте отмеченные поля.', 'error');
+        return;
+      }
+
+      var data = collect(form);
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Отправляем…';
+
+      /* ------------------------------------------------------------------
+         ЗДЕСЬ ПОДКЛЮЧАЕТСЯ ОТПРАВКА НА СЕРВЕР.
+         Демоверсия просто имитирует задержку сети.
+
+         fetch('/api/lead', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify(data)
+         })
+
+         Важно: проверку данных обязательно продублировать на сервере —
+         валидация в браузере защищает от опечаток, а не от злоумышленника.
+         ------------------------------------------------------------------ */
+      console.info('Заявка готова к отправке:', data);
+
+      setTimeout(function () {
+        btn.disabled = false;
+        btn.textContent = label;
+        form.reset();
+        form.querySelectorAll('[aria-invalid]').forEach(clearError);
+        toast(successText);
+        if (modal && !modal.hidden) closeModal();
+      }, 900);
+    });
+
+    form.addEventListener('input', function (e) {
+      if (e.target.matches('input, select, textarea')) clearError(e.target);
+    });
+  }
+
+  var leadForm = document.getElementById('leadForm');
+  if (leadForm) handleSubmit(leadForm, 'Заявка принята! Перезвоним в течение 15 минут и согласуем замер.');
+
+  var quickForm = document.getElementById('quickForm');
+  if (quickForm) handleSubmit(quickForm, 'Спасибо! Перезвоним вам в ближайшее время.');
+
+  /* ---------------------------------------------------------
+     15. Плавная прокрутка с учётом высоты шапки
+     --------------------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var id = link.getAttribute('href');
+      if (id === '#' || id.length < 2) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      var offset = header.offsetHeight + 16;
+      var top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  });
+
+});

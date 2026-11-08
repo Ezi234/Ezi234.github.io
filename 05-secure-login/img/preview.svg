@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480">
+  <defs>
+    <radialGradient id="oa" cx="22%" cy="18%" r="58%">
+      <stop offset="0" stop-color="#5de0ff" stop-opacity=".34"/><stop offset="1" stop-color="#5de0ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ob" cx="86%" cy="88%" r="62%">
+      <stop offset="0" stop-color="#8b7bff" stop-opacity=".42"/><stop offset="1" stop-color="#8b7bff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#5de0ff" stroke-opacity=".08"/>
+    </pattern>
+    <linearGradient id="scan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5de0ff" stop-opacity="0"/><stop offset="1" stop-color="#5de0ff" stop-opacity=".16"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="480" fill="#060912"/>
+  <rect width="640" height="480" fill="url(#grid)"/>
+  <rect width="640" height="480" fill="url(#oa)"/>
+  <rect width="640" height="480" fill="url(#ob)"/>
+  <rect y="120" width="640" height="90" fill="url(#scan)"/>
+  <rect y="209" width="640" height="1.5" fill="#5de0ff" fill-opacity=".45"/>
+
+  <!-- кольцо сканера -->
+  <circle cx="320" cy="170" r="92" fill="none" stroke="#5de0ff" stroke-opacity=".16" stroke-width="2"/>
+  <circle cx="320" cy="170" r="92" fill="none" stroke="#5de0ff" stroke-width="3.5" stroke-linecap="round"
+          stroke-dasharray="96 482" transform="rotate(-70 320 170)" filter="url(#glow)"/>
+  <circle cx="320" cy="170" r="108" fill="none" stroke="#8b7bff" stroke-opacity=".22" stroke-width="1.5" stroke-dasharray="2 9"/>
+
+  <!-- щит с галочкой -->
+  <path d="M320 98 262 121v45c0 38 25 66 58 77 33-11 58-39 58-77v-45z"
+        fill="#3ee6a0" fill-opacity=".1" stroke="#3ee6a0" stroke-width="4" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M292 170l19 19 38-41" fill="none" stroke="#3ee6a0" stroke-width="9"
+        stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- шесть ячеек кода, «волна» после верного ввода -->
+  <g font-family="ui-monospace, Consolas, 'Courier New', monospace" font-size="30" font-weight="700" fill="#eaf2ff" text-anchor="middle">
+    <rect x="130" y="300" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-width="2"/>
+    <text x="156" y="342">4</text>
+    <rect x="194" y="294" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-width="2" filter="url(#glow)"/>
+    <text x="220" y="336">8</text>
+    <rect x="258" y="290" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-width="2" filter="url(#glow)"/>
+    <text x="284" y="332">2</text>
+    <rect x="330" y="294" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-width="2"/>
+    <text x="356" y="336">9</text>
+    <rect x="394" y="300" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-width="2"/>
+    <text x="420" y="342">1</text>
+    <rect x="458" y="300" width="52" height="62" rx="12" fill="#0b1222" stroke="#3ee6a0" stroke-opacity=".8" stroke-width="2"/>
+    <text x="484" y="342">3</text>
+  </g>
+  <rect x="316" y="328" width="8" height="3" rx="1.5" fill="#56627c"/>
+
+  <text x="320" y="412" text-anchor="middle" font-family="system-ui, 'Segoe UI', Arial, sans-serif"
+        font-size="13" font-weight="700" letter-spacing="3" fill="#8fa0c0">ВХОД С ДВУХФАКТОРНОЙ ЗАЩИТОЙ</text>
+</svg>

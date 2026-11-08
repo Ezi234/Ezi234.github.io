@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Санузел после ремонта">
+  <defs>
+    <linearGradient id="tileB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eae6df"/>
+      <stop offset="1" stop-color="#d9d3c9"/>
+    </linearGradient>
+    <linearGradient id="floorBt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8e8b84"/>
+      <stop offset="1" stop-color="#75736d"/>
+    </linearGradient>
+    <linearGradient id="mirrorB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#cfdbe0"/>
+      <stop offset="1" stop-color="#eef4f6"/>
+    </linearGradient>
+    <clipPath id="frameBt"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frameBt)">
+    <!-- крупноформатная плитка на стене -->
+    <rect width="640" height="480" fill="url(#tileB)"/>
+    <g stroke="#c8c1b5" stroke-width="2">
+      <line x1="0" y1="150" x2="640" y2="150"/>
+      <line x1="0" y1="300" x2="640" y2="300"/>
+      <line x1="160" y1="0" x2="160" y2="400"/>
+      <line x1="320" y1="0" x2="320" y2="400"/>
+      <line x1="480" y1="0" x2="480" y2="400"/>
+    </g>
+    <!-- прожилки «под камень» -->
+    <g stroke="#cdc6ba" stroke-width="1.6" fill="none" opacity="0.9">
+      <path d="M20 60 q60 30 130 -10"/>
+      <path d="M340 40 q50 40 120 6"/>
+      <path d="M180 200 q70 -34 130 6"/>
+      <path d="M500 214 q60 26 120 -14"/>
+      <path d="M40 340 q80 26 130 -16"/>
+    </g>
+
+    <!-- зеркало с подсветкой -->
+    <g>
+      <rect x="176" y="66" width="176" height="132" rx="8" fill="#f4e9c4" opacity="0.45"/>
+      <rect x="184" y="74" width="160" height="116" rx="5" fill="url(#mirrorB)" stroke="#b9b2a5" stroke-width="2"/>
+      <path d="M196 178 l44 -54 30 34 22 -22 30 42 z" fill="#dfe8ec" opacity="0.8"/>
+    </g>
+
+    <!-- раковина с тумбой -->
+    <g>
+      <rect x="168" y="256" width="192" height="72" rx="6" fill="#4c5b4f"/>
+      <line x1="264" y1="256" x2="264" y2="328" stroke="#3d4a41" stroke-width="3"/>
+      <rect x="212" y="286" width="40" height="7" rx="3.5" fill="#d8c08a"/>
+      <rect x="276" y="286" width="40" height="7" rx="3.5" fill="#d8c08a"/>
+      <rect x="160" y="244" width="208" height="14" rx="4" fill="#efece5"/>
+      <ellipse cx="264" cy="242" rx="52" ry="16" fill="#fbfaf7" stroke="#ddd7cb" stroke-width="2"/>
+      <ellipse cx="264" cy="242" rx="34" ry="9" fill="#e7e3da"/>
+      <path d="M264 216 v-24 q0 -10 12 -10 q12 0 12 10 v10" stroke="#8d9296" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <rect x="260" y="212" width="8" height="26" fill="#8d9296"/>
+    </g>
+
+    <!-- подвесной унитаз -->
+    <g>
+      <rect x="440" y="150" width="120" height="80" rx="6" fill="#e4dfd6" stroke="#cdc6ba" stroke-width="2"/>
+      <rect x="472" y="180" width="26" height="20" rx="3" fill="#c9c4b8"/>
+      <rect x="504" y="180" width="26" height="20" rx="3" fill="#c9c4b8"/>
+      <path d="M462 232 h96 q6 44 -22 56 h-52 q-28 -14 -22 -56z" fill="#fbfaf7" stroke="#ddd7cb" stroke-width="2"/>
+      <ellipse cx="510" cy="262" rx="30" ry="17" fill="#eeeae2"/>
+    </g>
+
+    <!-- полотенцесушитель -->
+    <g stroke="#b0b5b8" stroke-width="6" fill="none" stroke-linecap="round">
+      <path d="M60 200 v120"/><path d="M112 200 v120"/>
+      <path d="M60 216 h52"/><path d="M60 248 h52"/>
+      <path d="M60 280 h52"/><path d="M60 312 h52"/>
+    </g>
+    <path d="M64 214 q22 -16 44 0 l0 66 q-22 16 -44 0z" fill="#c1553a" opacity="0.85"/>
+
+    <!-- пол: тёплый пол под плиткой -->
+    <rect y="400" width="640" height="80" fill="url(#floorBt)"/>
+    <g stroke="#615f5a" stroke-width="2" opacity="0.8">
+      <line x1="0" y1="440" x2="640" y2="440"/>
+      <line x1="130" y1="400" x2="118" y2="480"/>
+      <line x1="300" y1="400" x2="288" y2="480"/>
+      <line x1="470" y1="400" x2="458" y2="480"/>
+    </g>
+    <rect y="394" width="640" height="8" fill="#c3bcaf"/>
+
+    <!-- трап и растение -->
+    <rect x="376" y="426" width="30" height="6" rx="3" fill="#a8a49c"/>
+    <g>
+      <path d="M594 400 q-4 -34 -20 -50" stroke="#5f7a53" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M594 400 q8 -32 26 -44" stroke="#5f7a53" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="572" cy="344" rx="17" ry="9" fill="#6f8f60" transform="rotate(-32 572 344)"/>
+      <ellipse cx="622" cy="352" rx="17" ry="9" fill="#6f8f60" transform="rotate(30 622 352)"/>
+      <path d="M576 400 h38 l-6 34 h-26z" fill="#d8c08a"/>
+    </g>
+
+    <!-- аксессуары -->
+    <rect x="196" y="222" width="10" height="22" rx="4" fill="#c1553a"/>
+    <rect x="216" y="228" width="10" height="16" rx="4" fill="#7f8f7c"/>
+    <ellipse cx="332" cy="238" rx="16" ry="6" fill="#e0d6c2"/>
+  </g>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Ванная комната с ванной после ремонта">
+  <defs>
+    <linearGradient id="tileB2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dfe6e8"/>
+      <stop offset="1" stop-color="#cbd5d8"/>
+    </linearGradient>
+    <linearGradient id="floorB2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7e8890"/>
+      <stop offset="1" stop-color="#67717a"/>
+    </linearGradient>
+    <linearGradient id="tubB2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfcfc"/>
+      <stop offset="1" stop-color="#e2e8ea"/>
+    </linearGradient>
+    <clipPath id="cutB2"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutB2)">
+    <rect width="640" height="480" fill="url(#tileB2)"/>
+
+    <!-- вертикальный «кабанчик» -->
+    <g stroke="#b9c5c9" stroke-width="2">
+      <line x1="0" y1="140" x2="640" y2="140"/><line x1="0" y1="280" x2="640" y2="280"/>
+      <g><line x1="80" y1="0" x2="80" y2="140"/><line x1="160" y1="0" x2="160" y2="140"/><line x1="240" y1="0" x2="240" y2="140"/><line x1="320" y1="0" x2="320" y2="140"/><line x1="400" y1="0" x2="400" y2="140"/><line x1="480" y1="0" x2="480" y2="140"/><line x1="560" y1="0" x2="560" y2="140"/></g>
+      <g><line x1="40" y1="140" x2="40" y2="280"/><line x1="120" y1="140" x2="120" y2="280"/><line x1="200" y1="140" x2="200" y2="280"/><line x1="280" y1="140" x2="280" y2="280"/><line x1="360" y1="140" x2="360" y2="280"/><line x1="440" y1="140" x2="440" y2="280"/><line x1="520" y1="140" x2="520" y2="280"/><line x1="600" y1="140" x2="600" y2="280"/></g>
+      <g><line x1="80" y1="280" x2="80" y2="400"/><line x1="160" y1="280" x2="160" y2="400"/><line x1="240" y1="280" x2="240" y2="400"/><line x1="320" y1="280" x2="320" y2="400"/><line x1="400" y1="280" x2="400" y2="400"/><line x1="480" y1="280" x2="480" y2="400"/><line x1="560" y1="280" x2="560" y2="400"/></g>
+    </g>
+
+    <!-- окно с матовым стеклом -->
+    <rect x="452" y="56" width="150" height="128" rx="4" fill="#eef4f5" stroke="#aab8bd" stroke-width="4"/>
+    <line x1="527" y1="56" x2="527" y2="184" stroke="#aab8bd" stroke-width="4"/>
+    <rect x="462" y="66" width="130" height="108" fill="#f6fafb" opacity=".85"/>
+
+    <!-- шкафчик-зеркало -->
+    <rect x="66" y="70" width="160" height="120" rx="6" fill="#eaf0f1" stroke="#b9c5c9" stroke-width="3"/>
+    <rect x="76" y="80" width="140" height="100" rx="3" fill="#cfdbde"/>
+    <path d="M86 172 l38 -48 26 30 20 -20 26 38z" fill="#bccbcf" opacity=".8"/>
+    <rect x="140" y="188" width="12" height="4" rx="2" fill="#3f4a4e"/>
+
+    <!-- раковина на тумбе -->
+    <g>
+      <rect x="62" y="252" width="170" height="76" rx="6" fill="#4a5b62"/>
+      <line x1="147" y1="252" x2="147" y2="328" stroke="#3a494f" stroke-width="3"/>
+      <rect x="96" y="284" width="34" height="6" rx="3" fill="#c9b47a"/>
+      <rect x="164" y="284" width="34" height="6" rx="3" fill="#c9b47a"/>
+      <rect x="54" y="240" width="186" height="14" rx="4" fill="#eef2f3"/>
+      <ellipse cx="147" cy="238" rx="48" ry="15" fill="#fbfcfc" stroke="#d3dcde" stroke-width="2"/>
+      <ellipse cx="147" cy="238" rx="30" ry="8" fill="#e5ecee"/>
+      <path d="M147 214 v-22 q0 -10 12 -10 q12 0 12 10 v10" stroke="#8d9296" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <rect x="143" y="210" width="8" height="24" fill="#8d9296"/>
+    </g>
+
+    <!-- ванна -->
+    <g>
+      <path d="M300 292 h280 q10 0 10 12 v66 q0 26 -26 26 h-248 q-26 0 -26 -26 v-66 q0 -12 10 -12z" fill="url(#tubB2)" stroke="#cdd7da" stroke-width="3"/>
+      <path d="M312 302 h256 v58 q0 16 -16 16 h-224 q-16 0 -16 -16z" fill="#dfe8ea"/>
+      <!-- вода -->
+      <path d="M318 318 h244 v42 q0 10 -12 10 h-220 q-12 0 -12 -10z" fill="#bcd6e0" opacity=".85"/>
+      <path d="M318 318 q60 10 122 0 q62 -10 122 0 v8 q-60 10 -122 0 q-62 -10 -122 0z" fill="#d3e6ec" opacity=".7"/>
+      <!-- смеситель -->
+      <path d="M580 292 v-40 q0 -12 -14 -12 h-16" stroke="#8d9296" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <rect x="572" y="286" width="16" height="10" rx="3" fill="#8d9296"/>
+    </g>
+
+    <!-- полотенцесушитель -->
+    <g stroke="#b0b5b8" stroke-width="6" fill="none" stroke-linecap="round">
+      <path d="M282 100 v100"/><path d="M330 100 v100"/>
+      <path d="M282 116 h48"/><path d="M282 146 h48"/><path d="M282 176 h48"/>
+    </g>
+    <path d="M286 114 q20 -14 40 0 l0 58 q-20 14 -40 0z" fill="#2f6f5e" opacity=".8"/>
+
+    <!-- пол -->
+    <rect y="400" width="640" height="80" fill="url(#floorB2)"/>
+    <g stroke="#565f66" stroke-width="2" opacity=".8">
+      <line x1="0" y1="440" x2="640" y2="440"/>
+      <line x1="132" y1="400" x2="120" y2="480"/><line x1="302" y1="400" x2="290" y2="480"/>
+      <line x1="472" y1="400" x2="460" y2="480"/>
+    </g>
+    <rect y="394" width="640" height="8" fill="#c4ced1"/>
+
+    <!-- коврик и мелочи -->
+    <rect x="330" y="420" width="150" height="30" rx="8" fill="#2f6f5e" opacity=".7"/>
+    <rect x="88" y="212" width="10" height="26" rx="4" fill="#c1553a"/>
+    <rect x="106" y="218" width="10" height="20" rx="4" fill="#2f6f5e"/>
+    <ellipse cx="206" cy="232" rx="16" ry="6" fill="#e0e7e9"/>
+    <g>
+      <path d="M604 400 q-4 -30 -18 -44" stroke="#3f6f4f" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="586" cy="352" rx="16" ry="8" fill="#4f8a63" transform="rotate(-30 586 352)"/>
+      <ellipse cx="622" cy="360" rx="16" ry="8" fill="#4f8a63" transform="rotate(28 622 360)"/>
+      <path d="M588 400 h34 l-5 32 h-24z" fill="#c9b47a"/>
+    </g>
+  </g>
+</svg>

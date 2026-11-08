@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 440" width="640" height="440" role="img" aria-label="Барнхаус с панорамным остеклением вечером">
+  <defs>
+    <linearGradient id="skyBn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a1220"/><stop offset="0.6" stop-color="#182a3e"/><stop offset="1" stop-color="#33465a"/>
+    </linearGradient>
+    <linearGradient id="wallBn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a4450"/><stop offset="1" stop-color="#242c36"/>
+    </linearGradient>
+    <linearGradient id="roofBn" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a545f"/><stop offset="1" stop-color="#242a31"/>
+    </linearGradient>
+    <radialGradient id="glowBn" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffcf7d" stop-opacity="0.5"/><stop offset="1" stop-color="#ffcf7d" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="cutBn"><rect width="640" height="440"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutBn)">
+    <rect width="640" height="440" fill="url(#skyBn)"/>
+
+    <g fill="#ffffff">
+      <circle cx="72" cy="38" r="1.5" opacity=".75"/><circle cx="168" cy="22" r="1.1" opacity=".55"/>
+      <circle cx="262" cy="48" r="1.6" opacity=".7"/><circle cx="392" cy="28" r="1.2" opacity=".5"/>
+      <circle cx="486" cy="44" r="1.4" opacity=".65"/><circle cx="588" cy="20" r="1.2" opacity=".55"/>
+      <circle cx="126" cy="88" r="1" opacity=".4"/><circle cx="452" cy="96" r="1.1" opacity=".45"/>
+    </g>
+
+    <!-- дальний лес -->
+    <g fill="#0f1a26">
+      <path d="M0 296 l30 -62 30 62z"/><path d="M46 296 l26 -48 26 48z"/>
+      <path d="M540 296 l28 -58 28 58z"/><path d="M594 296 l26 -50 26 50z"/>
+    </g>
+
+    <rect y="296" width="640" height="144" fill="#141f1a"/>
+    <path d="M0 296 q160 -12 320 4 t320 -8 v148 H0z" fill="#19271f"/>
+    <ellipse cx="320" cy="352" rx="220" ry="48" fill="url(#glowBn)"/>
+
+    <!-- корпус барнхауса: вытянутый, крутая двускатка -->
+    <path d="M118 292 V176 L320 62 L522 176 v116z" fill="url(#wallBn)"/>
+    <!-- кровля -->
+    <path d="M100 186 L320 50 L540 186 L520 186 L320 68 L120 186z" fill="url(#roofBn)"/>
+    <path d="M320 50 L540 186 L520 186 L320 68z" fill="#2c343d"/>
+
+    <!-- вертикальный планкен -->
+    <g stroke="#1b222a" stroke-width="1.8" opacity=".7">
+      <line x1="146" y1="196" x2="146" y2="292"/><line x1="174" y1="180" x2="174" y2="292"/>
+      <line x1="202" y1="164" x2="202" y2="292"/><line x1="230" y1="148" x2="230" y2="292"/>
+      <line x1="438" y1="196" x2="438" y2="292"/><line x1="466" y1="180" x2="466" y2="292"/>
+      <line x1="494" y1="164" x2="494" y2="292"/>
+    </g>
+
+    <!-- панорамное остекление во фронтоне -->
+    <path d="M256 292 V126 L320 90 L384 126 V292z" fill="#ffce7a"/>
+    <path d="M256 292 V126 L320 90 L384 126 V292z" fill="none" stroke="#e8e2d6" stroke-width="5"/>
+    <g stroke="#e8e2d6" stroke-width="4">
+      <line x1="320" y1="90" x2="320" y2="292"/>
+      <line x1="256" y1="186" x2="384" y2="186"/>
+      <line x1="256" y1="240" x2="384" y2="240"/>
+    </g>
+    <circle cx="320" cy="196" r="92" fill="url(#glowBn)"/>
+
+    <!-- боковые окна -->
+    <rect x="164" y="212" width="46" height="58" fill="#ffce7a"/>
+    <rect x="160" y="208" width="54" height="66" fill="none" stroke="#e8e2d6" stroke-width="4"/>
+    <circle cx="187" cy="240" r="46" fill="url(#glowBn)"/>
+    <rect x="430" y="212" width="46" height="58" fill="#ffce7a"/>
+    <rect x="426" y="208" width="54" height="66" fill="none" stroke="#e8e2d6" stroke-width="4"/>
+    <circle cx="453" cy="240" r="46" fill="url(#glowBn)"/>
+
+    <!-- терраса-настил перед фасадом -->
+    <rect x="236" y="292" width="168" height="10" fill="#5d4326"/>
+    <rect x="228" y="302" width="184" height="8" fill="#43301b"/>
+    <g stroke="#43301b" stroke-width="2">
+      <line x1="266" y1="292" x2="266" y2="302"/><line x1="304" y1="292" x2="304" y2="302"/>
+      <line x1="342" y1="292" x2="342" y2="302"/><line x1="378" y1="292" x2="378" y2="302"/>
+    </g>
+
+    <!-- ели -->
+    <g>
+      <rect x="82" y="278" width="6" height="18" fill="#33261a"/>
+      <path d="M85 196 l26 42 -52 0z" fill="#16301f"/>
+      <path d="M85 222 l30 46 -60 0z" fill="#1c3c28"/>
+      <path d="M85 250 l32 40 -64 0z" fill="#16301f"/>
+    </g>
+    <g>
+      <rect x="576" y="282" width="5" height="14" fill="#33261a"/>
+      <path d="M578.5 216 l22 34 -44 0z" fill="#16301f"/>
+      <path d="M578.5 240 l24 36 -48 0z" fill="#1c3c28"/>
+      <path d="M578.5 262 l26 32 -52 0z" fill="#16301f"/>
+    </g>
+
+    <!-- фонари вдоль дорожки -->
+    <g>
+      <rect x="200" y="258" width="4" height="42" fill="#1c232b"/>
+      <rect x="194" y="248" width="16" height="12" rx="3" fill="#ffce7a"/>
+      <circle cx="202" cy="254" r="22" fill="url(#glowBn)"/>
+      <rect x="440" y="258" width="4" height="42" fill="#1c232b"/>
+      <rect x="434" y="248" width="16" height="12" rx="3" fill="#ffce7a"/>
+      <circle cx="442" cy="254" r="22" fill="url(#glowBn)"/>
+    </g>
+
+    <!-- дорожка -->
+    <path d="M292 310 h56 l40 130 -136 0z" fill="#25332a"/>
+  </g>
+</svg>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Страница грузит только собственные файлы. Скриптов здесь нет вовсе,
+     поэтому script-src закрыт полностью -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0b0c10">
+<title>Портфолио сайтов</title>
+<meta name="description" content="Готовые лендинги: адаптивные, безопасные, с рабочими формами и без внешних зависимостей. Четыре сайта, два с трёхмерным конструктором, и экран входа с двухфакторной защитой.">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ezi234.github.io/">
+<meta property="og:title" content="Сайты, которые работают, а не просто выглядят">
+<meta property="og:description" content="Четыре готовых лендинга на чистом коде и экран входа с двухфакторной защитой. Два сайта с трёхмерным конструктором на WebGL: модель крутится мышью, цена считается на лету.">
+<meta property="og:image" content="https://ezi234.github.io/img/og-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/portfolio.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="badge">Портфолио</span>
+    <h1>Сайты, которые работают,<br>а не просто выглядят</h1>
+    <p class="lead">
+      Адаптивные лендинги на чистом коде: без конструкторов, без тяжёлых библиотек,
+      без внешних запросов. Каждая кнопка нажимается, каждая форма проверяет ввод,
+      каждый экран собран под телефон так же аккуратно, как под десктоп.
+    </p>
+
+    <div class="facts">
+      <div class="fact"><b>4</b> готовых сайта</div>
+      <div class="fact"><b>2</b> с 3D на WebGL</div>
+      <div class="fact"><b>2FA</b> вход по коду с телефона</div>
+      <div class="fact"><b>0</b> внешних зависимостей</div>
+      <div class="fact"><b>375–1920 px</b> проверенная ширина</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="grid">
+
+      <article class="card">
+        <div class="card__shot card__shot--dark">
+          <img src="01-barbershop/img/hero-chair.webp" alt="Красное барберское кресло в тёмном зале" width="1000" height="1200" loading="lazy">
+        </div>
+        <div class="card__body">
+          <p class="card__cat">Барбершоп</p>
+          <h2 class="card__title">БРИТВА №9</h2>
+          <p class="card__desc">
+            Тёмный премиум-лендинг с онлайн-записью. Портфолио с фильтром, слайдер отзывов,
+            модальное окно быстрой записи, маска телефона и защита формы от спам-ботов.
+          </p>
+          <div class="tags">
+            <span class="tag">Онлайн-запись</span>
+            <span class="tag">Фильтр галереи</span>
+            <span class="tag">Слайдер</span>
+            <span class="tag">Валидация форм</span>
+            <span class="tag">Honeypot</span>
+            <span class="tag">Вход с 2FA</span>
+          </div>
+          <div class="card__links">
+            <a class="btn btn--main" href="01-barbershop/">Открыть сайт</a>
+            <a class="btn btn--ghost" href="01-barbershop/README.md">Описание</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__shot card__shot--light">
+          <img src="02-renovation/img/room-after.svg" alt="Гостиная после ремонта" width="640" height="480" loading="lazy">
+        </div>
+        <div class="card__body">
+          <p class="card__cat">Ремонт квартир</p>
+          <h2 class="card__title">ПОРЯДОК</h2>
+          <p class="card__desc">
+            Светлый издательский лендинг с живым калькулятором сметы, перетаскиваемым
+            сравнением «до и после», таймлайном этапов и портфолио с лайтбоксом.
+          </p>
+          <div class="tags">
+            <span class="tag">Калькулятор сметы</span>
+            <span class="tag">До / после</span>
+            <span class="tag">Лайтбокс</span>
+            <span class="tag">Аккордеон</span>
+            <span class="tag">Параллакс</span>
+            <span class="tag">Вход с 2FA</span>
+          </div>
+          <div class="card__links">
+            <a class="btn btn--main" href="02-renovation/">Открыть сайт</a>
+            <a class="btn btn--ghost" href="02-renovation/README.md">Описание</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__shot card__shot--cool">
+          <img src="03-kitchens/img/kitchen-hero.svg" alt="Светлая кухня с островом" width="640" height="480" loading="lazy">
+          <span class="card__badge">3D</span>
+        </div>
+        <div class="card__body">
+          <p class="card__cat">Кухни на заказ</p>
+          <h2 class="card__title">ФАСАД</h2>
+          <p class="card__desc">
+            Настоящий трёхмерный конструктор на WebGL, написанный с нуля без библиотек:
+            кухню можно крутить, перекрашивать фасады и столешницу, цена считается на лету.
+          </p>
+          <div class="tags">
+            <span class="tag">WebGL без библиотек</span>
+            <span class="tag">Конфигуратор</span>
+            <span class="tag">Вход с 2FA</span>
+            <span class="tag">Цена на лету</span>
+            <span class="tag">Лайтбокс</span>
+            <span class="tag">Таймлайн</span>
+          </div>
+          <div class="card__links">
+            <a class="btn btn--main" href="03-kitchens/">Открыть сайт</a>
+            <a class="btn btn--ghost" href="03-kitchens/README.md">Описание</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__shot card__shot--night">
+          <img src="04-houses/img/house-hero.svg" alt="Каркасный дом вечером" width="640" height="440" loading="lazy">
+          <span class="card__badge card__badge--amber">3D</span>
+        </div>
+        <div class="card__body">
+          <p class="card__cat">Каркасные дома</p>
+          <h2 class="card__title">КОНТУР</h2>
+          <p class="card__desc">
+            Вечерняя сцена во всю ширину экрана: дом со светящимися окнами,
+            который пересобирается под этажность, площадь, отделку и террасу.
+          </p>
+          <div class="tags">
+            <span class="tag">WebGL без библиотек</span>
+            <span class="tag">Дом меняет форму</span>
+            <span class="tag">Вход с 2FA</span>
+            <span class="tag">Свет в окнах</span>
+            <span class="tag">Смета на лету</span>
+            <span class="tag">Таймлайн</span>
+          </div>
+          <div class="card__links">
+            <a class="btn btn--main" href="04-houses/">Открыть сайт</a>
+            <a class="btn btn--ghost" href="04-houses/README.md">Описание</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card__shot card__shot--night">
+          <img src="05-secure-login/img/preview.svg" alt="Щит с галочкой и шесть ячеек одноразового кода" width="640" height="480" loading="lazy">
+          <span class="card__badge">2FA</span>
+        </div>
+        <div class="card__body">
+          <p class="card__cat">Вход в личный кабинет</p>
+          <h2 class="card__title">ЦИТАДЕЛЬ</h2>
+          <p class="card__desc">
+            Экран входа с двухфакторной защитой: код из приложения на телефоне,
+            блокировка подбора, защита от повторного кода. Работает с Google
+            Authenticator и Яндекс Ключом, щит и замок анимированы.
+          </p>
+          <div class="tags">
+            <span class="tag">TOTP по RFC 6238</span>
+            <span class="tag">Защита от подбора</span>
+            <span class="tag">Trusted Types</span>
+            <span class="tag">Пример для сервера</span>
+            <span class="tag">Анимация щита</span>
+          </div>
+          <div class="card__links">
+            <a class="btn btn--main" href="05-secure-login/">Открыть демо</a>
+            <a class="btn btn--ghost" href="05-secure-login/README.md">Описание</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <section class="note">
+      <h2>Что входит в каждый сайт</h2>
+      <ul>
+        <li>Адаптив от 375 px: телефон, планшет, десктоп — проверено, а не «должно работать»</li>
+        <li>Формы с проверкой полей, понятными ошибками и маской телефона</li>
+        <li>Защита от спам-ботов и от XSS через пользовательский ввод</li>
+        <li>Content-Security-Policy: страница не грузит ничего со сторонних доменов</li>
+        <li>Заголовки безопасности для хостинга: сайт нельзя встроить в чужую страницу, только HTTPS, вставка HTML строкой запрещена браузером</li>
+        <li>Доступность: навигация с клавиатуры, ловушка фокуса в модальном окне, поддержка режима «уменьшить движение»</li>
+        <li>Инструкция по запуску, настройке и подключению формы к серверу</li>
+        <li>Исходники целиком: <code>html</code> + <code>css</code> + <code>js</code>, без сборки и подписок</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Локальный просмотр: <code>node dev-server.js</code> в папке WebSites</div>
+</footer>
+
+</body>
+</html>

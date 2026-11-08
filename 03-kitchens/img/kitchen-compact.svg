@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Компактная кухня в студии">
+  <defs>
+    <linearGradient id="wCp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eef0ef"/><stop offset="1" stop-color="#dde2e0"/>
+    </linearGradient>
+    <linearGradient id="cCp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f4f4f1"/><stop offset="1" stop-color="#e2e2dc"/>
+    </linearGradient>
+    <linearGradient id="lCp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f4238"/><stop offset="1" stop-color="#22322a"/>
+    </linearGradient>
+    <linearGradient id="fCp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cbb08a"/><stop offset="1" stop-color="#ac9066"/>
+    </linearGradient>
+    <clipPath id="kCp"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#kCp)">
+    <rect width="640" height="480" fill="url(#wCp)"/>
+    <rect width="640" height="30" fill="#f6f8f7"/>
+
+    <!-- ниша под кухню -->
+    <rect x="88" y="40" width="464" height="380" rx="6" fill="#e6eae8"/>
+    <rect x="96" y="48" width="448" height="364" rx="4" fill="#eef1ef"/>
+
+    <!-- фартук -->
+    <rect x="96" y="196" width="448" height="86" fill="#dfe6e2"/>
+    <g stroke="#cbd5cf" stroke-width="2">
+      <line x1="96" y1="224" x2="544" y2="224"/><line x1="96" y1="252" x2="544" y2="252"/>
+      <line x1="152" y1="196" x2="152" y2="282"/><line x1="208" y1="196" x2="208" y2="282"/>
+      <line x1="264" y1="196" x2="264" y2="282"/><line x1="320" y1="196" x2="320" y2="282"/>
+      <line x1="376" y1="196" x2="376" y2="282"/><line x1="432" y1="196" x2="432" y2="282"/>
+      <line x1="488" y1="196" x2="488" y2="282"/>
+    </g>
+
+    <!-- верхние шкафы с антресолями -->
+    <rect x="96" y="48" width="448" height="52" rx="4" fill="url(#cCp)"/>
+    <g stroke="#cfcfc7" stroke-width="2.5">
+      <line x1="208" y1="48" x2="208" y2="100"/><line x1="320" y1="48" x2="320" y2="100"/><line x1="432" y1="48" x2="432" y2="100"/>
+    </g>
+    <rect x="96" y="104" width="448" height="92" rx="4" fill="url(#cCp)"/>
+    <g stroke="#cfcfc7" stroke-width="2.5">
+      <line x1="208" y1="104" x2="208" y2="196"/><line x1="320" y1="104" x2="320" y2="196"/><line x1="432" y1="104" x2="432" y2="196"/>
+    </g>
+    <!-- ручка-профиль вместо накладных ручек -->
+    <g fill="#9aa39d">
+      <rect x="110" y="186" width="84" height="5" rx="2.5"/><rect x="222" y="186" width="84" height="5" rx="2.5"/>
+      <rect x="334" y="186" width="84" height="5" rx="2.5"/><rect x="446" y="186" width="84" height="5" rx="2.5"/>
+    </g>
+
+    <!-- вытяжка встроенная -->
+    <rect x="264" y="168" width="112" height="28" rx="3" fill="#b7bdba"/>
+    <rect x="272" y="160" width="96" height="10" rx="3" fill="#a2a9a5"/>
+
+    <!-- столешница -->
+    <rect x="96" y="282" width="448" height="16" rx="3" fill="#e9e6de"/>
+    <rect x="96" y="282" width="448" height="5" fill="#f3f1ea"/>
+
+    <!-- нижние шкафы -->
+    <rect x="96" y="298" width="448" height="114" fill="url(#lCp)"/>
+    <g stroke="#1a2721" stroke-width="3">
+      <line x1="208" y1="298" x2="208" y2="412"/><line x1="320" y1="298" x2="320" y2="412"/><line x1="432" y1="298" x2="432" y2="412"/>
+      <line x1="96" y1="344" x2="208" y2="344"/><line x1="432" y1="344" x2="544" y2="344"/>
+    </g>
+    <g fill="#9aa39d">
+      <rect x="110" y="306" width="84" height="5" rx="2.5"/><rect x="446" y="306" width="84" height="5" rx="2.5"/>
+      <rect x="110" y="352" width="84" height="5" rx="2.5"/><rect x="446" y="352" width="84" height="5" rx="2.5"/>
+    </g>
+
+    <!-- посудомойка 45 см -->
+    <rect x="216" y="304" width="96" height="102" rx="3" fill="#2a3a32"/>
+    <rect x="226" y="316" width="76" height="10" rx="3" fill="#9aa39d"/>
+    <rect x="226" y="336" width="76" height="58" rx="3" fill="#33463c"/>
+
+    <!-- варочная панель и мойка -->
+    <rect x="330" y="282" width="88" height="12" rx="3" fill="#22282a"/>
+    <g fill="#48555a"><circle cx="352" cy="288" r="4.5"/><circle cx="396" cy="288" r="4.5"/></g>
+    <rect x="126" y="284" width="66" height="10" rx="4" fill="#c6cbc8"/>
+    <path d="M158 226 v-18 q0 -10 12 -10 q12 0 12 10 v10" stroke="#7f8a86" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <rect x="154" y="222" width="8" height="62" fill="#7f8a86"/>
+
+    <!-- холодильник справа -->
+    <rect x="552" y="120" width="80" height="292" rx="5" fill="#c4cac7"/>
+    <line x1="552" y1="216" x2="632" y2="216" stroke="#a9b0ad" stroke-width="3"/>
+    <rect x="560" y="196" width="6" height="34" rx="3" fill="#7f8a86"/>
+    <rect x="560" y="236" width="6" height="34" rx="3" fill="#7f8a86"/>
+
+    <!-- пол -->
+    <rect y="420" width="640" height="60" fill="url(#fCp)"/>
+    <g stroke="#8f7550" stroke-width="1.5" opacity=".55">
+      <line x1="0" y1="448" x2="640" y2="448"/>
+      <line x1="120" y1="420" x2="108" y2="480"/><line x1="290" y1="420" x2="278" y2="480"/>
+      <line x1="460" y1="420" x2="448" y2="480"/>
+    </g>
+    <rect y="412" width="640" height="10" fill="#22322a"/>
+
+    <!-- подсветка рабочей зоны -->
+    <path d="M96 196 h448 l-16 30 h-416z" fill="#f7edc9" opacity=".45"/>
+
+    <!-- мелочи -->
+    <rect x="452" y="252" width="24" height="30" rx="4" fill="#b98b4a"/>
+    <rect x="486" y="258" width="20" height="24" rx="4" fill="#157a5b"/>
+    <ellipse cx="240" cy="276" rx="24" ry="6" fill="#e6e1d6"/>
+    <path d="M218 276 q22 -18 44 0" fill="#f2eee4"/>
+  </g>
+</svg>

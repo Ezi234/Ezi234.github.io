@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Прихожая после ремонта">
+  <defs>
+    <linearGradient id="wallHl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6e8e3"/>
+      <stop offset="1" stop-color="#d5d8d1"/>
+    </linearGradient>
+    <linearGradient id="floorHl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8f8b84"/>
+      <stop offset="1" stop-color="#767269"/>
+    </linearGradient>
+    <linearGradient id="wardHl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4c5b4f"/>
+      <stop offset="1" stop-color="#3a4740"/>
+    </linearGradient>
+    <clipPath id="cutHl"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutHl)">
+    <rect width="640" height="480" fill="url(#wallHl)"/>
+    <rect width="640" height="38" fill="#f2f4f1"/>
+
+    <!-- шкаф-купе во всю стену -->
+    <rect x="24" y="52" width="266" height="356" rx="4" fill="url(#wardHl)"/>
+    <line x1="157" y1="52" x2="157" y2="408" stroke="#2e3a34" stroke-width="4"/>
+    <!-- зеркальная створка -->
+    <rect x="166" y="62" width="114" height="336" rx="3" fill="#cdd6d3" opacity=".9"/>
+    <path d="M176 390 l44 -120 30 66 26 -40 v94z" fill="#b8c4c0" opacity=".7"/>
+    <rect x="146" y="200" width="7" height="62" rx="3.5" fill="#c9b47a"/>
+    <rect x="161" y="200" width="7" height="62" rx="3.5" fill="#c9b47a"/>
+
+    <!-- открытая вешалка -->
+    <rect x="330" y="150" width="230" height="8" rx="4" fill="#c9b47a"/>
+    <g fill="#3f3b33">
+      <rect x="356" y="158" width="6" height="18" rx="3"/>
+      <rect x="414" y="158" width="6" height="18" rx="3"/>
+      <rect x="472" y="158" width="6" height="18" rx="3"/>
+      <rect x="530" y="158" width="6" height="18" rx="3"/>
+    </g>
+    <!-- одежда -->
+    <path d="M340 176 h44 l14 96 h-72z" fill="#c1553a"/>
+    <path d="M400 176 h40 l12 116 h-64z" fill="#3f5a6b"/>
+    <path d="M458 176 h42 l13 84 h-68z" fill="#5f6f5a"/>
+    <path d="M516 176 h38 l11 104 h-60z" fill="#8a7a63"/>
+
+    <!-- полка сверху -->
+    <rect x="322" y="106" width="246" height="12" rx="4" fill="#b48f63"/>
+    <rect x="352" y="74" width="52" height="32" rx="4" fill="#e0d6c2"/>
+    <rect x="418" y="80" width="40" height="26" rx="4" fill="#c1553a"/>
+    <rect x="474" y="70" width="60" height="36" rx="4" fill="#4c5b4f"/>
+
+    <!-- банкетка -->
+    <rect x="344" y="330" width="180" height="20" rx="8" fill="#b48f63"/>
+    <rect x="352" y="318" width="164" height="16" rx="8" fill="#c1553a"/>
+    <rect x="358" y="350" width="12" height="42" rx="4" fill="#5c4630"/>
+    <rect x="498" y="350" width="12" height="42" rx="4" fill="#5c4630"/>
+
+    <!-- зеркало круглое -->
+    <circle cx="596" cy="212" r="44" fill="#cdd6d3" stroke="#c9b47a" stroke-width="5"/>
+    <path d="M566 236 q24 -34 56 -12" stroke="#b8c4c0" stroke-width="8" fill="none" opacity=".7"/>
+
+    <!-- светильник -->
+    <line x1="330" y1="0" x2="330" y2="30" stroke="#3f3b33" stroke-width="3"/>
+    <path d="M306 62 l24 -32 24 32z" fill="#3f3b33"/>
+    <ellipse cx="330" cy="64" rx="24" ry="5" fill="#f5d98f"/>
+    <circle cx="330" cy="70" r="30" fill="#f7dd9a" opacity=".28"/>
+
+    <!-- пол: крупная плитка -->
+    <rect y="408" width="640" height="72" fill="url(#floorHl)"/>
+    <g stroke="#63605a" stroke-width="2" opacity=".8">
+      <line x1="0" y1="440" x2="640" y2="440"/>
+      <line x1="118" y1="408" x2="104" y2="480"/><line x1="278" y1="408" x2="264" y2="480"/>
+      <line x1="438" y1="408" x2="424" y2="480"/><line x1="598" y1="408" x2="584" y2="480"/>
+    </g>
+    <rect y="400" width="640" height="10" fill="#eceee9"/>
+
+    <!-- коврик и обувь -->
+    <rect x="352" y="416" width="164" height="34" rx="6" fill="#4c5b4f" opacity=".75"/>
+    <g fill="#2f2f2f">
+      <path d="M386 404 h30 l4 12 h-38z"/>
+      <path d="M430 404 h30 l4 12 h-38z"/>
+    </g>
+  </g>
+</svg>

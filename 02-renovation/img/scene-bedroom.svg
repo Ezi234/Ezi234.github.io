@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-label="Спальня после ремонта">
+  <defs>
+    <linearGradient id="wallBd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9e4dd"/>
+      <stop offset="1" stop-color="#dcd5cb"/>
+    </linearGradient>
+    <linearGradient id="floorBd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c0a077"/>
+      <stop offset="1" stop-color="#a3835c"/>
+    </linearGradient>
+    <linearGradient id="bedBd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7f8f7c"/>
+      <stop offset="1" stop-color="#67775f"/>
+    </linearGradient>
+    <linearGradient id="panelBd" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b48f63"/>
+      <stop offset="1" stop-color="#94714a"/>
+    </linearGradient>
+    <clipPath id="cutBd"><rect width="640" height="480"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#cutBd)">
+    <rect width="640" height="480" fill="url(#wallBd)"/>
+    <rect width="640" height="42" fill="#f3efe8"/>
+
+    <!-- реечная панель за изголовьем -->
+    <rect x="132" y="60" width="376" height="212" rx="4" fill="url(#panelBd)"/>
+    <g stroke="#7d5e3c" stroke-width="2" opacity=".55">
+      <line x1="160" y1="60" x2="160" y2="272"/><line x1="188" y1="60" x2="188" y2="272"/>
+      <line x1="216" y1="60" x2="216" y2="272"/><line x1="244" y1="60" x2="244" y2="272"/>
+      <line x1="272" y1="60" x2="272" y2="272"/><line x1="300" y1="60" x2="300" y2="272"/>
+      <line x1="328" y1="60" x2="328" y2="272"/><line x1="356" y1="60" x2="356" y2="272"/>
+      <line x1="384" y1="60" x2="384" y2="272"/><line x1="412" y1="60" x2="412" y2="272"/>
+      <line x1="440" y1="60" x2="440" y2="272"/><line x1="468" y1="60" x2="468" y2="272"/>
+    </g>
+    <rect x="132" y="60" width="376" height="8" fill="#8a6842"/>
+
+    <!-- бра по бокам -->
+    <g>
+      <circle cx="106" cy="150" r="17" fill="#f2e6c8"/>
+      <rect x="102" y="150" width="8" height="34" fill="#3f3b33"/>
+      <circle cx="106" cy="150" r="34" fill="#f7dd9a" opacity=".22"/>
+      <circle cx="534" cy="150" r="17" fill="#f2e6c8"/>
+      <rect x="530" y="150" width="8" height="34" fill="#3f3b33"/>
+      <circle cx="534" cy="150" r="34" fill="#f7dd9a" opacity=".22"/>
+    </g>
+
+    <!-- картина -->
+    <rect x="230" y="92" width="88" height="64" rx="3" fill="#f4f0e8" stroke="#c1553a" stroke-width="3"/>
+    <path d="M240 148 l20 -28 14 18 12 -14 20 24z" fill="#c9b596"/>
+    <circle cx="252" cy="112" r="8" fill="#c1553a" opacity=".75"/>
+
+    <rect x="336" y="100" width="60" height="56" rx="3" fill="#f4f0e8" stroke="#4c5b4f" stroke-width="3"/>
+    <path d="M344 148 l16 -22 12 14 10 -10 v18z" fill="#b9c9b4"/>
+
+    <!-- изголовье -->
+    <rect x="176" y="222" width="288" height="76" rx="10" fill="#5f6f5a"/>
+    <g stroke="#4d5a49" stroke-width="2.5">
+      <line x1="248" y1="228" x2="248" y2="292"/><line x1="320" y1="228" x2="320" y2="292"/>
+      <line x1="392" y1="228" x2="392" y2="292"/>
+    </g>
+
+    <!-- кровать -->
+    <rect x="160" y="298" width="320" height="70" rx="10" fill="url(#bedBd)"/>
+    <!-- одеяло -->
+    <path d="M160 330 h320 v38 q-160 14 -320 0z" fill="#efe9dd"/>
+    <path d="M160 330 h320 v10 q-160 12 -320 0z" fill="#e2dacb"/>
+    <!-- подушки -->
+    <rect x="196" y="270" width="94" height="40" rx="12" fill="#f6f2ea"/>
+    <rect x="350" y="270" width="94" height="40" rx="12" fill="#f6f2ea"/>
+    <rect x="268" y="282" width="60" height="30" rx="10" fill="#c1553a"/>
+    <!-- ножки -->
+    <rect x="176" y="368" width="14" height="20" rx="4" fill="#5c4630"/>
+    <rect x="450" y="368" width="14" height="20" rx="4" fill="#5c4630"/>
+
+    <!-- тумбы -->
+    <g>
+      <rect x="72" y="300" width="78" height="70" rx="6" fill="#b48f63"/>
+      <rect x="96" y="322" width="30" height="6" rx="3" fill="#3f3b33"/>
+      <rect x="96" y="348" width="30" height="6" rx="3" fill="#3f3b33"/>
+      <rect x="86" y="284" width="26" height="18" rx="4" fill="#4c5b4f"/>
+      <ellipse cx="132" cy="292" rx="14" ry="6" fill="#e0d6c2"/>
+    </g>
+    <g>
+      <rect x="490" y="300" width="78" height="70" rx="6" fill="#b48f63"/>
+      <rect x="514" y="322" width="30" height="6" rx="3" fill="#3f3b33"/>
+      <rect x="514" y="348" width="30" height="6" rx="3" fill="#3f3b33"/>
+      <rect x="524" y="278" width="20" height="24" rx="4" fill="#c1553a"/>
+    </g>
+
+    <!-- пол -->
+    <rect y="388" width="640" height="92" fill="url(#floorBd)"/>
+    <g stroke="#8a6c46" stroke-width="1.4" opacity=".5">
+      <line x1="0" y1="416" x2="640" y2="416"/><line x1="0" y1="450" x2="640" y2="450"/>
+      <line x1="96" y1="388" x2="76" y2="480"/><line x1="236" y1="388" x2="216" y2="480"/>
+      <line x1="376" y1="388" x2="356" y2="480"/><line x1="516" y1="388" x2="496" y2="480"/>
+    </g>
+    <rect y="380" width="640" height="10" fill="#efe9dd"/>
+
+    <!-- ковёр -->
+    <ellipse cx="320" cy="432" rx="196" ry="34" fill="#d8cdb8" opacity=".8"/>
+    <ellipse cx="320" cy="432" rx="150" ry="24" fill="none" stroke="#4c5b4f" stroke-width="2.5" opacity=".4"/>
+  </g>
+</svg>
